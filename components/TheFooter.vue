@@ -1,0 +1,66 @@
+<template >
+    <div>
+          <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <a href="#" class="footer__logo">
+          <img src="~/assets/img/footer/footer-logo.svg" alt="logo" class="footer__logo-img">
+        </a>
+        <div class="footer__contacts">
+          <div class="footer__nav">
+            <div class="footer__nav-title">Навигация</div>
+            <div class="footer__nav-wrapper">
+              <ul class="footer__nav-left">
+                <li class="footer__nav-item">
+                  <a href="#" class="footer__nav-link">О нас</a>
+                </li>
+                <li class="footer__nav-item">
+                  <a href="#" class="footer__nav-link">Курсы</a>
+                </li>
+                <li class="footer__nav-item">
+                  <a href="#" class="footer__nav-link">Торговля</a>
+                </li>
+              </ul>
+              <ul class="footer__nav-right">
+                <li class="footer__nav-item">
+                  <a href="#" class="footer__nav-link">Инструкция новичка</a>
+                </li>
+                <li class="footer__nav-item">
+                  <a href="#" class="footer__nav-link">Клуб</a>
+                </li>
+                <li class="footer__nav-item">
+                  <a href="#" class="footer__nav-link">Контакты</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer__social">
+            <div class="footer__social-title">Социал</div>
+            <div class="footer__social-wrapper">
+              <div class="footer__social-left">
+                <a href="#" class="footer__social-link okx" style="background-color: #EFEFEF;">
+                  <img src="~/assets/img/footer/okx.svg" alt="okx-image">
+                </a>
+                <a href="#" class="footer__social-link telegram" style="background-color: #52A8E4;">Telegram</a>
+              </div>
+              <div class="footer__social-right">
+                <a href="#" class="footer__social-link binance"
+                  style="background: linear-gradient(95.45deg, #3C3E40 0%, #2F3133 104.2%);">Binance</a>
+                <a href="#" class="footer__social-link youtube" style="background: #EFEFEF;">YouTube</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- //footer__inner -->
+      <div class="footer__mail">@peprosse.com</div>
+    </div><!-- //container -->
+    <div class="advantages__star">
+      <img src="~/assets/img/footer/rhombus1.svg" alt="left-icon">
+    </div>
+    <div class="advantages__rhombus">
+      <img src="~/assets/img/footer/circles.svg" alt="right-icon">
+    </div>
+  </footer><!-- //FOOTER -->
+    </div>
+</template>

@@ -168,7 +168,7 @@
                 </li>
                 <li class="courses__text-item">Торговая стратегия, риск-менеджмент</li>
               </ul>
-              <a href="#" class="courses__btn btn">Подробнее</a>
+              <a href="/academy" class="courses__btn btn">Подробнее</a>
             </div>
           </div>
         </li><!-- //courses__item -->

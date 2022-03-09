@@ -1,6 +1,6 @@
 <template>
       <!-- REGISTER-FORM -->  	
-  <div id="register-form" class="register-form">
+  <div id="register-form" class="register-form active">
     <div id="register-form__overlay"></div>
     <div id="register-form__window">
                 
@@ -9,7 +9,7 @@
           <div class="register-form__title">
             Вход в аккаунт
           </div>
-          <button id="register-form__btn-close"></button>       
+          <button id="register-form__btn-close" @click="$emit('closePop')"></button>       
         </div> 
         <form class="js-form form-register-form" action="mail.php" id="form-register-form">
           <input type="text" class="register-form__input" placeholder="Email /телефон" name="email" required>
@@ -30,3 +30,21 @@
     </div>
   </div><!-- //register-form -->
 </template>
+
+<script>
+
+export default {
+  emits: ['closePop']
+  
+}
+</script>
+<style scoped>
+#register-form input {
+  color: #fff;
+}
+
+#register-form input:focus {
+  border: 1px solid #fff
+}
+
+</style>

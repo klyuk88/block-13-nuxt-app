@@ -1764,7 +1764,7 @@ select {
   background-repeat: no-repeat;
 }
 
-
+/* 
 .video-js {
   width: 100%!important;
   height: 520px!important;
@@ -1779,30 +1779,25 @@ select {
   width: 3em;
   height: 3em;
   line-height: 1;
-  /* border-radius: 50%;
-  position: relative;
-  width: 3em;
-  height: 3em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-color: none;
-  border: none;
   background-color: #fff;
-  line-height: 1;
-  transition: all .2s ease; */
+  transition: all .2s ease;
+  opacity: 0.7;
 }
 
-/* .video-js:hover .vjs-big-play-button {
+.video-js:hover .vjs-big-play-button {
   background: #fff;
   opacity: 0.5;
   transition: all .2s ease;
 
-} */
+}
 
 
 .video-js .vjs-big-play-button .vjs-icon-placeholder::before {
   position: relative;
-  /* color: #000;
-  font-size: 45px; */
-}
+  color: #000;
+  font-size: 40px;
+} */
+/* 
+.course_node_video >>> .vjs-progress-control{
+  pointer-events: none; */
+/* } */

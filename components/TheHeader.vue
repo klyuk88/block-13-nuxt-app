@@ -126,7 +126,7 @@
             <!-- <nuxt-link to="#register" class="registration__link"
               >ВОЙТИ / РЕГИСТРАЦИЯ</nuxt-link
             > -->
-            <a href="!#" class="registration__link" @click.prevent="openRegister">ВОЙТИ / РЕГИСТРАЦИЯ</a>
+            <a href="!#" class="registration__link" @click.prevent="openLogin">ВОЙТИ / РЕГИСТРАЦИЯ</a>
             <!-- <span> / </span> -->
             <!-- <a href="#" class="registration__link">ВОЙТИ</a> -->
           </div>
@@ -134,12 +134,25 @@
         <!-- //Header__inner -->
       </div>
       <!-- //Container -->
+      <div style="text-align: center">
+      <!-- <nuxt-link class="navbar-item" to="/profile">My Profile</nuxt-link>
+      <nuxt-link class="navbar-item" to="/register">Register</nuxt-link>
+      <nuxt-link class="navbar-item" to="/login">Log In</nuxt-link> -->
+      <!-- <a class="navbar-item">Logout</a> -->
+      </div>
+    
     </header>
     <!-- //HEADER -->
 
     <TheRegister
     v-if="popRegister"
     @closePop="closePop"
+    @openLoginPop="openLoginPop"
+    />
+    <TheLogin
+    v-if="popLogin"
+    @closePop="closePop"
+    @openRegisterPop="openRegisterPop"
     />
   </div>
 </template>
@@ -149,28 +162,24 @@ export default {
   data() {
     return {
       popRegister: false,
+      popLogin: false
     };
-  },
-  created() {
-    // if (this.$route.hash === "#register") {
-    //   console.log(this.$route.hash);
-    //   this.popRegister = true;
-    // }
-  },
-
-  watch: {
-    // $route: function (newVal) {
-    //   if (newVal.hash === "#register") {
-    //     this.popRegister = true;
-    //   }
-    // },
   },
   methods: {
     closePop() {
       this.popRegister = false
+      this.popLogin = false
     },
-    openRegister() {
+    openLogin() {
+      this.popLogin = true
+    },
+    openRegisterPop() {
+      this.popLogin = false
       this.popRegister = true
+    },
+    openLoginPop() {
+      this.popLogin = true
+      this.popRegister = false
     }
   }
 };

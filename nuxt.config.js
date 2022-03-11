@@ -23,7 +23,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/vue-plyr', mode: 'client' }
+    { src: '~/plugins/vue-plyr', mode: 'client' },
+    { src: '~/plugins/vue-mask.js', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -33,8 +34,27 @@ export default {
   buildModules: [
   ],
 
+  axios: {
+    baseURL: 'http://localhost:3000'
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'login', method: 'post', propertyName: 'data.token' },
+          user: { url: 'me', method: 'get', propertyName: 'data' },
+          logout: false
+        }
+      }
+    }
+  },
+
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios'],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
+  ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

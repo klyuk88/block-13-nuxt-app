@@ -5,7 +5,7 @@
     <div id="register-form__window">
       <div class="register-form__content">
         <div class="register-form__title-inner">
-          <div class="register-form__title">Регистрация</div>
+          <div class="register-form__title">Вход в аккаунт</div>
           <button
             id="register-form__btn-close"
             @click="$emit('closePop')"
@@ -13,7 +13,6 @@
         </div>
         <form
           class="js-form form-register-form"
-          action="mail.php"
           id="form-register-form"
           @submit.prevent="sendForm"
         >
@@ -23,26 +22,11 @@
               class="register-form__input"
               placeholder="Email"
               name="email"
-              v-model="inputs.email"
               :class="{ error: formErrors.emailError }"
+              v-model="loginInputs.email"
             />
             <span class="form-error" :class="{ active: formErrors.emailError }">
-              {{ formErrors.emailError }}</span
-            >
-          </div>
-          <div class="input-wrap">
-            <input
-              type="tel"
-              class="register-form__input"
-              placeholder="*Телефон"
-              name="phone"
-              v-mask="'+7(###)###-##-##'"
-              v-model="inputs.phone"
-              :class="{ error: formErrors.phoneError }"
-            />
-            <span class="form-error" :class="{ active: formErrors.phoneError }">
-              {{ formErrors.phoneError }}</span
-            >
+              {{ formErrors.emailError }}</span>
           </div>
 
           <div class="input-wrap password-wrap">
@@ -51,8 +35,8 @@
               class="register-form__input"
               placeholder="Пароль"
               name="password"
-              v-model="inputs.password"
               :class="{ error: formErrors.passwordError }"
+              v-model="loginInputs.password"
             />
             <svg
               class="show-password-icon"
@@ -71,17 +55,17 @@
             <span
               class="form-error"
               :class="{ active: formErrors.passwordError }"
-              >{{ formErrors.passwordError }}
-            </span>
+              >{{ formErrors.passwordError }}</span>
           </div>
 
-          <button class="register-form__btn btn" data-submit>
-            Зарегистрироваться
-          </button>
+          <button class="register-form__btn btn">Войти</button>
           <div class="register-form__account-have">
-            <span>Есть аккаунт? </span>
-            <a href="!#" @click.prevent="$emit('openLoginPop')">Войти</a>
+            <span>Нет аккаунта? </span
+            ><a href="!#" @click.prevent="$emit('openRegisterPop')"
+              >Зарегистрироваться</a
+            >
           </div>
+          <a href="#" class="register-form__pass-forget">Забыли пароль?</a>
           <div class="register-form__personal">
             <span>Входя в систему вы соглашаесть с нашими условиями</span>
             <a href="#">Политика конфиденциальности</a>
@@ -97,27 +81,24 @@
 
 <script>
 export default {
-  emits: ["closePop", "openLoginPop"],
+  emits: ["closePop", "openRegisterPop"],
   data() {
     return {
       showPassword: false,
       formErrors: {
         emailError: "",
-        phoneError: "",
         passwordError: "",
       },
       formValidate: {
         email: false,
-        phone: false,
         password: false,
       },
-      inputs: {
+      loginInputs: {
         email: null,
-        phone: null,
         password: null,
       },
       token: "",
-      user: {},
+      user: {}
     };
   },
   methods: {
@@ -125,11 +106,11 @@ export default {
       this.showPassword = !this.showPassword;
     },
     sendForm() {
-      if (this.inputs.email) {
+      if (this.loginInputs.email) {
         const reg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (reg.test(this.inputs.email)) {
+        if (reg.test(this.loginInputs.email)) {
           this.formValidate.email = true;
-          this.formErrors.emailError = "";
+          this.formErrors.emailError = ''
         } else {
           this.formErrors.emailError = "*Введите корректный e-mail";
         }
@@ -137,35 +118,25 @@ export default {
         this.formErrors.emailError = "*Заполните поле";
       }
 
-      if (this.inputs.phone && this.inputs.phone.length === 16) {
-        this.formValidate.phone = true;
-        this.formErrors.phoneError = "";
-      } else {
-        this.formErrors.phoneError = "*Заполните это поле";
-      }
-
-      if (this.inputs.password) {
-        this.formValidate.password = true;
-        this.formErrors.passwordError = "";
+      if (this.loginInputs.password) {
+        this.formValidate.password = true
+        this.formErrors.passwordError = ''
       } else {
         this.formErrors.passwordError = "*Заполните поле";
       }
 
-      if (
-        this.formValidate.email &&
-        this.formValidate.password &&
-        this.formValidate.phone
-      ) {
-        this.token = "1234";
-        this.user = {
-          id: 1,
-          name: "Иван Иванович",
-        };
-        localStorage.setItem("token", this.token);
-        this.inputs.email = null;
-        this.inputs.phone = null;
-        this.inputs.password = null;
+      if(this.formValidate.email && this.formValidate.password) {
+            this.token = '1234'
+            this.user = {
+              id: 1,
+              name: 'Иван Иванович'
+            }
+            localStorage.setItem('token', this.token)
+            this.loginInputs.email = null
+            this.loginInputs.password = null
       }
+
+
 
       // this.token = '1234'
       // localStorage.setItem('token', this.token)

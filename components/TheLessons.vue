@@ -44,7 +44,10 @@
 
               <!-- 3-e состояние плеера с кнопкой снизу, добавляем к плееру кнопку при active -->
               <div class="lessons__btn-bottom-right active">
-                <a href="!#" class="lessons__btn btn" @click.prevent="openRegister"
+                <a
+                  href="!#"
+                  class="lessons__btn btn"
+                  @click.prevent="openRegister"
                   >Смотреть курс</a
                 >
               </div>
@@ -93,9 +96,9 @@
                     <span class="lessons__theme-arrow">
                       <img src="~/assets/img/lessons/lesson-arrow.svg" alt="" />
                     </span>
-                    <span class="lessons__theme-progress"
-                      >{{ percentProgress + '%' }}</span
-                    >
+                    <span class="lessons__theme-progress">{{
+                      percentProgress + "%"
+                    }}</span>
                   </div>
 
                   <div class="lessons__theme-desc">
@@ -137,7 +140,16 @@
       </div>
     </section>
     <!-- //LESSONS -->
-    <TheRegister v-if="popRegister" @closePop="closePop" />
+    <TheRegister
+      v-if="popRegister"
+      @closePop="closePop"
+      @openLoginPop="openLoginPop"
+    />
+    <TheLogin
+      v-if="popLogin"
+      @closePop="closePop"
+      @openRegisterPop="openRegisterPop"
+    />
   </div>
 </template>
 
@@ -147,6 +159,7 @@ export default {
     return {
       options: { quality: { default: "1080p" } },
       popRegister: false,
+      popLogin: false,
       isActive: false,
       idx: 0,
       firstLessonTitle: "",
@@ -178,19 +191,29 @@ export default {
       };
     },
     openRegister() {
-      this.popRegister = true
+      this.popRegister = true;
     },
     closePop() {
-      this.popRegister = false
-    }
+      this.popRegister = false;
+      this.popLogin = false;
+    },
+    openLogin() {
+      this.popLogin = true;
+    },
+    openRegisterPop() {
+      this.popLogin = false;
+      this.popRegister = true;
+    },
+    openLoginPop() {
+      this.popLogin = true;
+      this.popRegister = false;
+    },
   },
   computed: {},
   async mounted() {
-    const res = await fetch("http://localhost:3000/lessons.json");
-    if (res.ok) {
-      const resData = await res.json();
-      this.lessons = resData;
-    }
+    const res = await this.$axios.$get("http://localhost:3000/lessons.json");
+    this.lessons = res;
+
     this.player = this.$refs.plyr.player;
     this.player.source = {
       type: "video",
@@ -205,9 +228,10 @@ export default {
     };
 
     this.player.on("timeupdate", (event) => {
-      this.percentProgress = parseInt(
-        (this.player.currentTime / this.player.media.duration) * 100
-      ) || 0;
+      this.percentProgress =
+        parseInt(
+          (this.player.currentTime / this.player.media.duration) * 100
+        ) || 0;
     });
   },
 };

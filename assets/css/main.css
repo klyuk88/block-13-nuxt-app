@@ -1764,40 +1764,57 @@ select {
   background-repeat: no-repeat;
 }
 
-/* 
-.video-js {
-  width: 100%!important;
-  height: 520px!important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+#register-form input {
+  margin-bottom: 1.1rem;
 }
 
-.video-js .vjs-big-play-button {
+
+#register-form input {
+  color: #fff;
+}
+
+#register-form input:focus {
+  border: 1px solid #fff
+}
+
+
+.password-wrap {
   position: relative;
-  border-radius: 50%;
-  width: 3em;
-  height: 3em;
-  line-height: 1;
-  background-color: #fff;
-  transition: all .2s ease;
-  opacity: 0.7;
 }
 
-.video-js:hover .vjs-big-play-button {
-  background: #fff;
-  opacity: 0.5;
+.show-password-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-100%);
+  cursor: pointer;
   transition: all .2s ease;
-
 }
 
 
-.video-js .vjs-big-play-button .vjs-icon-placeholder::before {
+.input-wrap {
   position: relative;
-  color: #000;
-  font-size: 40px;
-} */
-/* 
-.course_node_video >>> .vjs-progress-control{
-  pointer-events: none; */
-/* } */
+}
+
+#register-form input.error {
+  border: 1px solid #FF4B4B;
+  color: #FF4B4B;
+  margin-bottom: 0.5rem;
+  transition: all .2s ease;
+}
+
+.form-error {
+  display: block;
+  text-align: left;
+  max-height: 0;
+  margin-bottom: 0;
+  color: #FF4B4B;
+  overflow: hidden;
+  transition: all .2s ease;
+}
+
+.form-error.active {
+  max-height: 20px;
+  margin-bottom: 1.5rem;
+}

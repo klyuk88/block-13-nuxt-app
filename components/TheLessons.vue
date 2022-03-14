@@ -8,17 +8,16 @@
           <div class="lessons__left">
             <div class="lessons__left-top">
               <!-- 1-е состояние плеера -->
-              <vue-plyr ref="plyr" :options="options">
-                <video controls crossorigin playsinline data-poster="">
+              <client-only>
+                 <vue-plyr ref="plyr">
+                <video controls crossorigin playsinline>
                   <source size="" src="" type="video/mp4" />
                 </video>
               </vue-plyr>
-              <!-- <div class="lessons__video-btn">
-              <img src="~/assets/img/intro/video-btn.svg" alt="video-btn" />
-            </div> -->
-
+              </client-only>
+             
               <!-- 2-е состояние плеера при добавлении active -->
-              <div class="lessons__overlay">
+              <!-- <div class="lessons__overlay">
                 <div class="lessons__overlay-title">
                   Тизер —Что такое блокчейн?
                 </div>
@@ -40,14 +39,14 @@
                     >
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <!-- 3-e состояние плеера с кнопкой снизу, добавляем к плееру кнопку при active -->
               <div class="lessons__btn-bottom-right active">
                 <a
-                  href="!#"
+                  href="#register"
                   class="lessons__btn btn"
-                  @click.prevent="openRegister"
+                  @click="openRegister"
                   >Смотреть курс</a
                 >
               </div>
@@ -157,7 +156,6 @@
 export default {
   data() {
     return {
-      options: { quality: { default: "1080p" } },
       popRegister: false,
       popLogin: false,
       isActive: false,
@@ -194,19 +192,21 @@ export default {
       this.popRegister = true;
     },
     closePop() {
+      this.$router.push("");
       this.popRegister = false;
       this.popLogin = false;
     },
     openLogin() {
       this.popLogin = true;
     },
-    openRegisterPop() {
+     openRegisterPop() {
       this.popLogin = false;
       this.popRegister = true;
     },
     openLoginPop() {
-      this.popLogin = true;
       this.popRegister = false;
+      this.popLogin = true;
+      
     },
   },
   computed: {},

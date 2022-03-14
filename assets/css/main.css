@@ -32,6 +32,7 @@
 }
 html {
   font-size: 15px;
+  overflow-x: hidden;
 }
 body {
   box-sizing: border-box;
@@ -42,6 +43,7 @@ body {
   font-family: 'Manrope';
   font-size: 1rem;
   font-weight: 500;
+  overflow-x: hidden;
 }
 *,
 *::before,
@@ -1817,4 +1819,12 @@ select {
 .form-error.active {
   max-height: 20px;
   margin-bottom: 1.5rem;
+}
+
+
+.swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: #fff;
+}
+.swiper-pagination .swiper-pagination-bullet {
+  background: #323232;
 }

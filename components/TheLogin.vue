@@ -61,7 +61,7 @@
           <button class="register-form__btn btn">Войти</button>
           <div class="register-form__account-have">
             <span>Нет аккаунта? </span
-            ><a href="!#" @click.prevent="$emit('openRegisterPop')"
+            ><a href="#register" @click="$emit('openRegisterPop')"
               >Зарегистрироваться</a
             >
           </div>

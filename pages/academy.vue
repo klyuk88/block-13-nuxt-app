@@ -97,7 +97,7 @@
               </p>
             </div>
           </div>
-          <div class="advantages__card swiper-slide">
+          <div class="advantages__card">
             <div class="advantages__card-inner">
               <h3 class="advantages__card-title">Название</h3>
               <p class="advantages__card-text">
@@ -108,7 +108,7 @@
               </p>
             </div>
           </div>
-          <div class="advantages__card swiper-slide">
+          <div class="advantages__card">
             <div class="advantages__card-inner">
               <h3 class="advantages__card-title">Название</h3>
               <p class="advantages__card-text">
@@ -117,7 +117,7 @@
               </p>
             </div>
           </div>
-          <div class="advantages__card swiper-slide">
+          <div class="advantages__card">
             <div class="advantages__card-inner">
               <h3 class="advantages__card-title">Название</h3>
               <p class="advantages__card-text">

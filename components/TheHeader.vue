@@ -61,7 +61,7 @@
                   <nuxt-link to="/">Главная</nuxt-link>
                 </li>
                 <li class="header__nav-item">
-                  <a href="#" class="header__nav-link">Инструкция новичка</a>
+                  <nuxt-link to="/beginner" class="header__nav-link">Инструкция новичка</nuxt-link>
                 </li>
                 <li class="header__nav-item">
                   <span>Разделы</span>
@@ -115,7 +115,9 @@
               </ul>
             </div>
             <div class="menu-mobile__registration">
-              <a href="#" class="registration__link">ВОЙТИ / РЕГИСТРАЦИЯ</a>
+              <a href="#login" class="registration__link" @click="openLogin"
+                >ВОЙТИ / РЕГИСТРАЦИЯ</a
+              >
               <!-- <span> / </span>
             <a href="#" class="registration__link"></a> -->
             </div>
@@ -126,7 +128,9 @@
             <!-- <nuxt-link to="#register" class="registration__link"
               >ВОЙТИ / РЕГИСТРАЦИЯ</nuxt-link
             > -->
-            <a href="!#" class="registration__link" @click.prevent="openLogin">ВОЙТИ / РЕГИСТРАЦИЯ</a>
+            <a href="#login" class="registration__link" @click="openLogin"
+              >ВОЙТИ / РЕГИСТРАЦИЯ</a
+            >
             <!-- <span> / </span> -->
             <!-- <a href="#" class="registration__link">ВОЙТИ</a> -->
           </div>
@@ -134,25 +138,18 @@
         <!-- //Header__inner -->
       </div>
       <!-- //Container -->
-      <div style="text-align: center">
-      <!-- <nuxt-link class="navbar-item" to="/profile">My Profile</nuxt-link>
-      <nuxt-link class="navbar-item" to="/register">Register</nuxt-link>
-      <nuxt-link class="navbar-item" to="/login">Log In</nuxt-link> -->
-      <!-- <a class="navbar-item">Logout</a> -->
-      </div>
-    
     </header>
     <!-- //HEADER -->
 
     <TheRegister
-    v-if="popRegister"
-    @closePop="closePop"
-    @openLoginPop="openLoginPop"
+      v-if="popRegister"
+      @closePop="closePop"
+      @openLoginPop="openLoginPop"
     />
     <TheLogin
-    v-if="popLogin"
-    @closePop="closePop"
-    @openRegisterPop="openRegisterPop"
+      v-if="popLogin"
+      @closePop="closePop"
+      @openRegisterPop="openRegisterPop"
     />
   </div>
 </template>
@@ -162,30 +159,49 @@ export default {
   data() {
     return {
       popRegister: false,
-      popLogin: false
+      popLogin: false,
     };
+  },
+  mounted() {
+    if (this.$route.hash == "#login") {
+      this.popLogin = true;
+      this.popRegister = false;
+    } else if (this.$route.hash == "#register") {
+      this.popRegister = true;
+      this.popLogin = false;
+    }
+  },
+
+  watch: {
+    $route: function (newVal) {
+      if (newVal.hash == "#login") {
+        this.popLogin = true;
+      } else if (newVal.hash == "#register") {
+        this.popREgister = true;
+      }
+    },
   },
   methods: {
     closePop() {
-      this.popRegister = false
-      this.popLogin = false
+      this.$router.push("");
+      this.popRegister = false;
+      this.popLogin = false;
     },
     openLogin() {
-      this.popLogin = true
+      this.popLogin = true;
     },
     openRegisterPop() {
-      this.popLogin = false
-      this.popRegister = true
+      this.popLogin = false;
+      this.popRegister = true;
     },
     openLoginPop() {
-      this.popLogin = true
-      this.popRegister = false
-    }
-  }
+      this.popLogin = true;
+      this.popRegister = false;
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 </style>
 

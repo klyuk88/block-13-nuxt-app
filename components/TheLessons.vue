@@ -47,7 +47,7 @@
                   href="#register"
                   class="lessons__btn btn"
                   @click="openRegister"
-                  >Смотреть курс</a
+                  ><span>Смотреть курс</span></a
                 >
               </div>
             </div>
@@ -75,6 +75,7 @@
                 </div>
               </div>
             </div>
+            <!-- lessons__left-bottom -->
           </div>
           <div class="lessons__right">
             <div class="lessons__right-top">

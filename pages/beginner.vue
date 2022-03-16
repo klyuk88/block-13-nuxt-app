@@ -234,7 +234,7 @@ export default {
 
 
 
-<style lang="sass" scoped>
+<style lang="sass">
 .swiper-container
     display: none
     margin-top: 60px

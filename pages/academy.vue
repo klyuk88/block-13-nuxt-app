@@ -18,8 +18,8 @@
                 блокчейн</span
               >
               <div class="intro__btns">
-                <a href="#" class="intro__btn btn">Подробнее</a>
-                <a href="#" class="intro__btn btn">Подробнее</a>
+                <a href="#" class="intro__btn btn"><span>Подробнее</span></a>
+                <a href="#" class="intro__btn btn"><span>Подробнее</span></a>
               </div>
             </div>
           </div>
@@ -160,7 +160,7 @@
             Бесплатное подробное описание как начать свой путь трейдера с
             инструкцией и видео уроками
           </p>
-          <a href="#" class="instruction__btn btn">Начать путь</a>
+          <a href="#" class="instruction__btn btn"><span>Начать путь</span></a>
         </div>
         <div class="instruction__text-large">bloсk13</div>
       </div>

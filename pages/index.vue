@@ -14,7 +14,7 @@
             </div>
             <h1 class="intro__title section-title">Исскуство видеть деньги</h1>
             <span class="intro__subtitle">Бесплатный курс с новым подходом к криптовалюте и блокчейн</span>
-            <a href="#" class="intro__btn btn">Подробнее</a>
+            <a href="#" class="intro__btn btn"><span>Подробнее</span></a>
           </div>
         </div>
       </div>
@@ -144,7 +144,7 @@
                 <li class="courses__text-item">Торговая система</li>
                 <li class="courses__text-item">Закрытый чат для участников </li>
               </ul>
-              <a href="#" class="courses__btn btn">Подробнее</a>
+              <a href="#" class="courses__btn"><span>Подробнее</span></a>
             </div>
           </div>
         </li><!-- //courses__item -->
@@ -168,7 +168,7 @@
                 </li>
                 <li class="courses__text-item">Торговая стратегия, риск-менеджмент</li>
               </ul>
-              <a href="/academy" class="courses__btn btn">Подробнее</a>
+              <a href="/academy" class="courses__btn"><span>Подробнее</span></a>
             </div>
           </div>
         </li><!-- //courses__item -->
@@ -191,7 +191,7 @@
                 <li class="courses__text-item">Перспективные проекты</li>
                 <li class="courses__text-item">Доступ к ACADEMY и LIVE TRADING</li>
               </ul>
-              <a href="#" class="courses__btn btn">Подробнее</a>
+              <a href="#" class="courses__btn"><span>Подробнее</span></a>
             </div>
           </div>
         </li><!-- //courses__item -->
@@ -206,7 +206,7 @@
         <h2 class="instruction__title section-title">инструкция для новичка</h2>
         <p class="instruction__desc">Бесплатное подробное описание как начать свой путь трейдера с инструкцией и видео
           уроками</p>
-        <a href="#" class="instruction__btn btn">Начать путь</a>
+        <a href="#" class="instruction__btn btn"><span>Начать путь</span></a>
       </div>
       <div class="instruction__text-large">bloсk13</div>
     </div>
@@ -233,3 +233,14 @@ export default {
   },
 }
 </script>
+
+<style lang="sass" scoped>
+  .courses__btn
+    text-transform: uppercase
+    font-size: 20px
+    font-weight: 700
+    background: linear-gradient(103.31deg, #B3854D 5.67%, #F3D7AF 28.06%, #C6A47C 85.27%)
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    background-clip: text
+</style>

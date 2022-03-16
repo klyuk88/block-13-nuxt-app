@@ -58,7 +58,7 @@
               >{{ formErrors.passwordError }}</span>
           </div>
 
-          <button class="register-form__btn btn">Войти</button>
+          <button class="register-form__btn btn"><span>Войти</span></button>
           <div class="register-form__account-have">
             <span>Нет аккаунта? </span
             ><a href="#register" @click="$emit('openRegisterPop')"

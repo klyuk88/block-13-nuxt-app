@@ -76,7 +76,7 @@
           </div>
 
           <button class="register-form__btn btn" data-submit>
-            Зарегистрироваться
+            <span>Зарегистрироваться</span>
           </button>
           <div class="register-form__account-have">
             <span>Есть аккаунт? </span>

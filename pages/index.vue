@@ -211,7 +211,6 @@
       <div class="instruction__text-large">bloсk13</div>
     </div>
   </section><!-- //INSTRUCTION -->
- 
 
 
 </div>

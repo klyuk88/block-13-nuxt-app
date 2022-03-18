@@ -6,10 +6,7 @@
       <div class="register-form__content">
         <div class="register-form__title-inner">
           <div class="register-form__title">Вход в аккаунт</div>
-          <button
-            id="register-form__btn-close"
-            @click="$emit('closePop')"
-          ></button>
+          <button id="register-form__btn-close" @click="closeLogin"></button>
         </div>
         <form
           class="js-form form-register-form"
@@ -26,7 +23,8 @@
               v-model="loginInputs.email"
             />
             <span class="form-error" :class="{ active: formErrors.emailError }">
-              {{ formErrors.emailError }}</span>
+              {{ formErrors.emailError }}</span
+            >
           </div>
 
           <div class="input-wrap password-wrap">
@@ -55,13 +53,14 @@
             <span
               class="form-error"
               :class="{ active: formErrors.passwordError }"
-              >{{ formErrors.passwordError }}</span>
+              >{{ formErrors.passwordError }}</span
+            >
           </div>
 
           <button class="register-form__btn btn"><span>Войти</span></button>
           <div class="register-form__account-have">
             <span>Нет аккаунта? </span
-            ><a href="#register" @click="$emit('openRegisterPop')"
+            ><a href="#register" @click="openRegister"
               >Зарегистрироваться</a
             >
           </div>
@@ -81,7 +80,6 @@
 
 <script>
 export default {
-  emits: ["closePop", "openRegisterPop"],
   data() {
     return {
       showPassword: false,
@@ -98,10 +96,20 @@ export default {
         password: null,
       },
       token: "",
-      user: {}
+      user: {},
     };
   },
   methods: {
+    closeLogin() {
+      this.$store.commit("closeLogin");
+      this.$router.push("");
+    },
+    openRegister() {
+      this.$store.commit("openRegister");
+      this.$store.commit("closeLogin");
+
+
+    },
     passwordHide() {
       this.showPassword = !this.showPassword;
     },
@@ -110,7 +118,7 @@ export default {
         const reg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (reg.test(this.loginInputs.email)) {
           this.formValidate.email = true;
-          this.formErrors.emailError = ''
+          this.formErrors.emailError = "";
         } else {
           this.formErrors.emailError = "*Введите корректный e-mail";
         }
@@ -119,24 +127,22 @@ export default {
       }
 
       if (this.loginInputs.password) {
-        this.formValidate.password = true
-        this.formErrors.passwordError = ''
+        this.formValidate.password = true;
+        this.formErrors.passwordError = "";
       } else {
         this.formErrors.passwordError = "*Заполните поле";
       }
 
-      if(this.formValidate.email && this.formValidate.password) {
-            this.token = '1234'
-            this.user = {
-              id: 1,
-              name: 'Иван Иванович'
-            }
-            localStorage.setItem('token', this.token)
-            this.loginInputs.email = null
-            this.loginInputs.password = null
+      if (this.formValidate.email && this.formValidate.password) {
+        this.token = "1234";
+        this.user = {
+          id: 1,
+          name: "Иван Иванович",
+        };
+        localStorage.setItem("token", this.token);
+        this.loginInputs.email = null;
+        this.loginInputs.password = null;
       }
-
-
 
       // this.token = '1234'
       // localStorage.setItem('token', this.token)
@@ -155,6 +161,7 @@ export default {
       //   }
     },
   },
+
 };
 </script>
 <style scoped>

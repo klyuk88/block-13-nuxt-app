@@ -1,11 +1,20 @@
-export const state = () => {
-    token: null
-}
 
-export const mutations = {
+export const state = () => ({
+    popRegisterShow: false,
+    popLoginShow: false
+  })
   
-}
-
-export const actions = {
-    
-}
+  export const mutations = {
+    openLogin(state) {
+        state.popLoginShow = true
+    },
+    closeLogin(state) {
+        state.popLoginShow = false
+    },
+    openRegister(state) {
+        state.popRegisterShow = true
+    },
+    closeRegister(state) {
+        state.popRegisterShow = false
+    },
+  }

@@ -8,7 +8,7 @@
           <div class="register-form__title">Регистрация</div>
           <button
             id="register-form__btn-close"
-            @click="$emit('closePop')"
+            @click="closeRegister"
           ></button>
         </div>
         <form
@@ -80,7 +80,7 @@
           </button>
           <div class="register-form__account-have">
             <span>Есть аккаунт? </span>
-            <a href="#login" @click="$emit('openLoginPop')">Войти</a>
+            <a href="#login" @click="openLogin">Войти</a>
           </div>
           <div class="register-form__personal">
             <span>Входя в систему вы соглашаесть с нашими условиями</span>
@@ -97,7 +97,6 @@
 
 <script>
 export default {
-  emits: ["closePop", "openLoginPop"],
   data() {
     return {
       showPassword: false,
@@ -121,6 +120,10 @@ export default {
     };
   },
   methods: {
+    closeRegister() {
+      this.$store.commit('closeRegister')
+      this.$router.push("")
+    },
     passwordHide() {
       this.showPassword = !this.showPassword;
     },
@@ -183,6 +186,10 @@ export default {
       //       console.log(error);
       //   }
     },
+    openLogin() {
+      this.$store.commit("openLogin");
+      this.$store.commit("closeRegister");
+    }
   },
 };
 </script>

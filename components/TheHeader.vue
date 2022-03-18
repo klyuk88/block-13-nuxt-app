@@ -61,7 +61,9 @@
                   <nuxt-link to="/">Главная</nuxt-link>
                 </li>
                 <li class="header__nav-item">
-                  <nuxt-link to="/beginner" class="header__nav-link">Инструкция новичка</nuxt-link>
+                  <nuxt-link to="/beginner" class="header__nav-link"
+                    >Инструкция новичка</nuxt-link
+                  >
                 </li>
                 <li class="header__nav-item">
                   <span>Разделы</span>
@@ -115,7 +117,7 @@
               </ul>
             </div>
             <div class="menu-mobile__registration">
-              <a href="#login" class="registration__link" @click="openLogin"
+              <a href="#login" class="registration__link" @click="popLoginShow"
                 >ВОЙТИ / РЕГИСТРАЦИЯ</a
               >
               <!-- <span> / </span>
@@ -128,7 +130,7 @@
             <!-- <nuxt-link to="#register" class="registration__link"
               >ВОЙТИ / РЕГИСТРАЦИЯ</nuxt-link
             > -->
-            <a href="#login" class="registration__link" @click="openLogin"
+            <a href="#login" class="registration__link" @click="popLoginShow"
               >ВОЙТИ / РЕГИСТРАЦИЯ</a
             >
             <!-- <span> / </span> -->
@@ -140,63 +142,15 @@
       <!-- //Container -->
     </header>
     <!-- //HEADER -->
-
-    <TheRegister
-      v-if="popRegister"
-      @closePop="closePop"
-      @openLoginPop="openLoginPop"
-    />
-    <TheLogin
-      v-if="popLogin"
-      @closePop="closePop"
-      @openRegisterPop="openRegisterPop"
-    />
+   
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      popRegister: false,
-      popLogin: false,
-    };
-  },
-  mounted() {
-    if (this.$route.hash == "#login") {
-      this.popLogin = true;
-      this.popRegister = false;
-    } else if (this.$route.hash == "#register") {
-      this.popRegister = true;
-      this.popLogin = false;
-    }
-  },
-
-  watch: {
-    $route: function (newVal) {
-      if (newVal.hash == "#login") {
-        this.popLogin = true;
-      } else if (newVal.hash == "#register") {
-        this.popREgister = true;
-      }
-    },
-  },
   methods: {
-    closePop() {
-      this.$router.push("");
-      this.popRegister = false;
-      this.popLogin = false;
-    },
-    openLogin() {
-      this.popLogin = true;
-    },
-    openRegisterPop() {
-      this.popLogin = false;
-      this.popRegister = true;
-    },
-    openLoginPop() {
-      this.popLogin = true;
-      this.popRegister = false;
+    popLoginShow() {
+      this.$store.commit("openLogin");
     },
   },
 };

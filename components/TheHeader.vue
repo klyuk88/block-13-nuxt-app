@@ -72,14 +72,12 @@
                       <nuxt-link to="/academy">Academy</nuxt-link>
                     </li>
                     <li class="header__nav-change-item">
-                      <a href="#" class="header__nav-change-link"
-                        >Live Trading</a
-                      >
+                      <nuxt-link to="/live-trading" class="header__nav-change-link"
+                        >Live Trading</nuxt-link>
                     </li>
                     <li class="header__nav-change-item">
-                      <a href="#" class="header__nav-change-link"
-                        >Privat Club</a
-                      >
+                      <nuxt-link to="/private-club" class="header__nav-change-link"
+                        >Privat Club</nuxt-link>
                     </li>
                   </ul>
                 </li>
@@ -89,52 +87,88 @@
           </div>
 
           <!-- Burger -->
-          <button class="menu" id="toggle">
+          <button class="menu" id="toggle" @click="mobMenuShow">
             <div class="line"></div>
             <div class="line"></div>
             <div class="line"></div>
           </button>
 
           <!-- MOBILE-MENU -->
-          <div class="menu-mobile">
+          <div class="menu-mobile" :class="{ active: mobMenu }">
+            <div class="mobile_menu_header">
+              <img
+                src="~/assets/img/header/bloсk13.svg"
+                alt="block13"
+                class="mobile_menu_header__logo"
+              />
+              <img
+                src="~/assets/img/modal/btn-close.svg"
+                alt=""
+                @click="closeMobMenu"
+              />
+            </div>
             <div class="menu-mobile__wrapper">
               <ul class="menu-mobile__list">
-                <li class="menu-mobile__item">
-                  <a href="#" class="menu-mobile__link">Главная</a>
-                </li>
-                <li class="menu-mobile__item">
-                  <a href="#" class="menu-mobile__link">Инструкция новичка</a>
-                </li>
-                <li class="menu-mobile__item">
-                  <a href="#" class="menu-mobile__link">Privat Club</a>
-                </li>
-                <li class="menu-mobile__item">
-                  <a href="#" class="menu-mobile__link">Academy</a>
-                </li>
-                <li class="menu-mobile__item">
-                  <a href="#" class="menu-mobile__link">Live Trading</a>
+                <li
+                  class="menu-mobile__item"
+                  v-for="(item, index) in menu"
+                  :key="index"
+                >
+                  <nuxt-link
+                    :to="item.slug"
+                    class="menu-mobile__link"
+                    @click="openPage"
+                    >{{ item.title }}
+                    </nuxt-link>
                 </li>
               </ul>
             </div>
-            <div class="menu-mobile__registration">
+
+            <div class="menu-mobile__registration" v-if="!login">
               <a href="#login" class="registration__link" @click="popLoginShow"
-                >ВОЙТИ / РЕГИСТРАЦИЯ</a
-              >
-              <!-- <span> / </span>
-            <a href="#" class="registration__link"></a> -->
+                >ВОЙТИ / РЕГИСТРАЦИЯ
+              </a>
+            </div>
+            <div class="mob_account_wrap" v-if="login">
+              <div class="mob_account_wrap_row">
+                <span>$ 4030</span>
+                <span>/</span>
+                <span><nuxt-link to="/profile">Личный кабинет</nuxt-link></span>
+              </div>
+              <div class="mob_account_wrap_row">
+                <span><a href="#">Пополнить</a></span>
+                <span>/</span>
+                <span><nuxt-link to="/profile/settings">Настройки</nuxt-link></span>
+              </div>
             </div>
             <div class="menu-mobile__overlay"></div>
           </div>
 
-          <div class="header__registration registration">
-            <!-- <nuxt-link to="#register" class="registration__link"
-              >ВОЙТИ / РЕГИСТРАЦИЯ</nuxt-link
-            > -->
+          <div class="header__registration registration" v-if="!login">
             <a href="#login" class="registration__link" @click="popLoginShow"
               >ВОЙТИ / РЕГИСТРАЦИЯ</a
             >
-            <!-- <span> / </span> -->
-            <!-- <a href="#" class="registration__link">ВОЙТИ</a> -->
+          </div>
+          <div class="header_login_info" v-if="login">
+            <div class="header_login_info_wallet">
+              <span class="header_login_info_wallet__count">$ 250</span>
+              <a href="#" class="header_login_info_wallet__pay">Пополнить</a>
+            </div>
+            <li class="header_login_account">
+              <span class="header_login_account__title">МОЙ АККАУНТ <img src="~/assets/img/header/arrow.svg" alt="" class="header_login_account__arrow">
+              </span>
+              <ul class="header_login_account_menu">
+                <li class="header_login_account_item">
+                  <nuxt-link to="/profile">Личный кабинет</nuxt-link>
+                </li>
+                <li class="header_login_account_item">
+                  <nuxt-link to="/profile/settings">Настройки</nuxt-link>
+                </li>
+                <li class="header_login_account_item header_logout_account">
+                  <a href="!#" class="">Выйти из аккаунта</a>
+                </li>
+              </ul>
+            </li>
           </div>
         </div>
         <!-- //Header__inner -->
@@ -142,13 +176,55 @@
       <!-- //Container -->
     </header>
     <!-- //HEADER -->
-   
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      mobMenu: false,
+      menu: [
+        {
+          title: "Главная",
+          slug: "/",
+        },
+        {
+          title: "Инструкция новичка",
+          slug: "/beginner",
+        },
+        {
+          title: "Privat Club",
+          slug: "/private-club",
+        },
+        {
+          title: "Academy",
+          slug: "/academy",
+        },
+        {
+          title: "Live Trading",
+          slug: "/live-trading",
+        },
+      ],
+    };
+  },
+  computed: {
+    login() {
+      return this.$store.state.register.login;
+    },
+  },
   methods: {
+    openPage() {
+      setTimeout(() => {
+        this.mobMenu = false;
+      }, 1000);
+    },
+    mobMenuShow() {
+      this.mobMenu = true;
+    },
+    closeMobMenu() {
+      this.mobMenu = false;
+    },
     popLoginShow() {
       this.$store.commit("openLogin");
     },

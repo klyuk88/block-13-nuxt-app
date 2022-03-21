@@ -140,16 +140,6 @@
       </div>
     </section>
     <!-- //LESSONS -->
-    <TheRegister
-      v-if="popRegister"
-      @closePop="closePop"
-      @openLoginPop="openLoginPop"
-    />
-    <TheLogin
-      v-if="popLogin"
-      @closePop="closePop"
-      @openRegisterPop="openRegisterPop"
-    />
   </div>
 </template>
 
@@ -157,8 +147,6 @@
 export default {
   data() {
     return {
-      popRegister: false,
-      popLogin: false,
       isActive: false,
       idx: 0,
       firstLessonTitle: "",
@@ -171,6 +159,9 @@ export default {
   },
 
   methods: {
+    openRegister() {
+      this.$store.commit('openRegister')
+    },
     openDesc(index) {
       this.idx = index;
       this.lesson = this.lessons.find((item, indx) => indx === index);
@@ -188,26 +179,6 @@ export default {
           },
         ],
       };
-    },
-    openRegister() {
-      this.popRegister = true;
-    },
-    closePop() {
-      this.$router.push("");
-      this.popRegister = false;
-      this.popLogin = false;
-    },
-    openLogin() {
-      this.popLogin = true;
-    },
-     openRegisterPop() {
-      this.popLogin = false;
-      this.popRegister = true;
-    },
-    openLoginPop() {
-      this.popRegister = false;
-      this.popLogin = true;
-      
     },
   },
   computed: {},

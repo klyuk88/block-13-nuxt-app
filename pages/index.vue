@@ -144,7 +144,7 @@
                 <li class="courses__text-item">Торговая система</li>
                 <li class="courses__text-item">Закрытый чат для участников </li>
               </ul>
-              <a href="#" class="courses__btn"><span>Подробнее</span></a>
+              <nuxt-link to="/live-trading" class="courses__btn"><span>Подробнее</span></nuxt-link>
             </div>
           </div>
         </li><!-- //courses__item -->
@@ -168,7 +168,7 @@
                 </li>
                 <li class="courses__text-item">Торговая стратегия, риск-менеджмент</li>
               </ul>
-              <a href="/academy" class="courses__btn"><span>Подробнее</span></a>
+              <nuxt-link to="/academy" class="courses__btn"><span>Подробнее</span></nuxt-link>
             </div>
           </div>
         </li><!-- //courses__item -->
@@ -191,7 +191,7 @@
                 <li class="courses__text-item">Перспективные проекты</li>
                 <li class="courses__text-item">Доступ к ACADEMY и LIVE TRADING</li>
               </ul>
-              <a href="#" class="courses__btn"><span>Подробнее</span></a>
+              <nuxt-link to="/private-club" class="courses__btn"><span>Подробнее</span></nuxt-link>
             </div>
           </div>
         </li><!-- //courses__item -->
@@ -206,7 +206,7 @@
         <h2 class="instruction__title section-title">инструкция для новичка</h2>
         <p class="instruction__desc">Бесплатное подробное описание как начать свой путь трейдера с инструкцией и видео
           уроками</p>
-        <a href="#" class="instruction__btn btn"><span>Начать путь</span></a>
+        <nuxt-link to="/beginner" class="instruction__btn btn"><span>Начать путь</span></nuxt-link>
       </div>
       <div class="instruction__text-large">bloсk13</div>
     </div>

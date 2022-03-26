@@ -72,12 +72,18 @@
                       <nuxt-link to="/academy">Academy</nuxt-link>
                     </li>
                     <li class="header__nav-change-item">
-                      <nuxt-link to="/live-trading" class="header__nav-change-link"
-                        >Live Trading</nuxt-link>
+                      <nuxt-link
+                        to="/live-trading"
+                        class="header__nav-change-link"
+                        >Live Trading</nuxt-link
+                      >
                     </li>
                     <li class="header__nav-change-item">
-                      <nuxt-link to="/private-club" class="header__nav-change-link"
-                        >Privat Club</nuxt-link>
+                      <nuxt-link
+                        to="/private-club"
+                        class="header__nav-change-link"
+                        >Privat Club</nuxt-link
+                      >
                     </li>
                   </ul>
                 </li>
@@ -119,7 +125,7 @@
                     class="menu-mobile__link"
                     @click="openPage"
                     >{{ item.title }}
-                    </nuxt-link>
+                  </nuxt-link>
                 </li>
               </ul>
             </div>
@@ -138,16 +144,12 @@
               <div class="mob_account_wrap_row">
                 <span><a href="#">Пополнить</a></span>
                 <span>/</span>
-                <span><nuxt-link to="/profile/settings">Настройки</nuxt-link></span>
+                <span
+                  ><nuxt-link to="/profile/settings">Настройки</nuxt-link></span
+                >
               </div>
             </div>
             <div class="menu-mobile__overlay"></div>
-          </div>
-
-          <div class="header__registration registration" v-if="!login">
-            <a href="#login" class="registration__link" @click="popLoginShow"
-              >ВОЙТИ / РЕГИСТРАЦИЯ</a
-            >
           </div>
           <div class="header_login_info" v-if="login">
             <div class="header_login_info_wallet">
@@ -155,7 +157,13 @@
               <a href="#" class="header_login_info_wallet__pay">Пополнить</a>
             </div>
             <li class="header_login_account">
-              <span class="header_login_account__title">МОЙ АККАУНТ <img src="~/assets/img/header/arrow.svg" alt="" class="header_login_account__arrow">
+              <span class="header_login_account__title"
+                >МОЙ АККАУНТ
+                <img
+                  src="~/assets/img/header/arrow.svg"
+                  alt=""
+                  class="header_login_account__arrow"
+                />
               </span>
               <ul class="header_login_account_menu">
                 <li class="header_login_account_item">
@@ -165,10 +173,16 @@
                   <nuxt-link to="/profile/settings">Настройки</nuxt-link>
                 </li>
                 <li class="header_login_account_item header_logout_account">
-                  <a href="!#" class="">Выйти из аккаунта</a>
+                  <a href="!#" class="" @click.prevent="logout"
+                    >Выйти из аккаунта</a>
                 </li>
               </ul>
             </li>
+          </div>
+          <div class="header__registration registration" v-else>
+            <a href="#login" class="registration__link" @click="popLoginShow"
+              >ВОЙТИ / РЕГИСТРАЦИЯ</a
+            >
           </div>
         </div>
         <!-- //Header__inner -->
@@ -208,12 +222,18 @@ export default {
       ],
     };
   },
+ 
   computed: {
     login() {
-      return this.$store.state.register.login;
+      return this.$store.state.login.token;
     },
   },
+
   methods: {
+    logout() {
+      this.$store.commit('login/removeToken')
+      this.$router.push('/')
+    },
     openPage() {
       setTimeout(() => {
         this.mobMenu = false;

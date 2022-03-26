@@ -36,6 +36,7 @@
 
 <script>
 export default {
+  middleware: 'secretLock',
   data() {
     return {
       profileTabs: ["Academy", "LIVE TRADING", "PRIVAT CLUB"],

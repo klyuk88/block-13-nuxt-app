@@ -347,8 +347,8 @@ select {
   z-index: 3;
 }
 .header__inner {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   color: #fff;
 }
@@ -1855,4 +1855,17 @@ select {
 }
 .swiper-pagination .swiper-pagination-bullet {
   background: #323232;
+}
+
+
+.header_login_info {
+  justify-self: end;
+}
+
+.header__registration {
+  justify-self: end;
+}
+
+.header-nav {
+  justify-self: center;
 }

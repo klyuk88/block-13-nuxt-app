@@ -60,9 +60,7 @@
           <button class="register-form__btn btn"><span>Войти</span></button>
           <div class="register-form__account-have">
             <span>Нет аккаунта? </span
-            ><a href="#register" @click="openRegister"
-              >Зарегистрироваться</a
-            >
+            ><a href="#register" @click="openRegister">Зарегистрироваться</a>
           </div>
           <a href="#" class="register-form__pass-forget">Забыли пароль?</a>
           <div class="register-form__personal">
@@ -95,8 +93,6 @@ export default {
         email: null,
         password: null,
       },
-      token: "",
-      user: {},
     };
   },
   methods: {
@@ -107,13 +103,11 @@ export default {
     openRegister() {
       this.$store.commit("openRegister");
       this.$store.commit("closeLogin");
-
-
     },
     passwordHide() {
       this.showPassword = !this.showPassword;
     },
-    sendForm() {
+    async sendForm() {
       if (this.loginInputs.email) {
         const reg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (reg.test(this.loginInputs.email)) {
@@ -134,34 +128,21 @@ export default {
       }
 
       if (this.formValidate.email && this.formValidate.password) {
-        this.token = "1234";
-        this.user = {
-          id: 1,
-          name: "Иван Иванович",
-        };
-        localStorage.setItem("token", this.token);
-        this.loginInputs.email = null;
-        this.loginInputs.password = null;
+        try {
+          await this.$axios
+            .$post("auth", this.loginInputs)
+            .then((res) => {
+              this.loginInputs.email = null
+              this.loginInputs.password = null
+              this.$store.commit('login/setToken', res.access.token)
+              this.closeLogin()
+            })
+        } catch (error) {
+          console.log(error);
+        }
       }
-
-      // this.token = '1234'
-      // localStorage.setItem('token', this.token)
-      //   try {
-      //     const res = await this.$axios.post(
-      //       "https://jsonplaceholder.typicode.com/posts",
-      //       {
-      //         title: "foo",
-      //         body: "bar",
-      //         userId: 1,
-      //       }
-      //     );
-      //     console.log(res);
-      //   } catch (error) {
-      //       console.log(error);
-      //   }
     },
   },
-
 };
 </script>
 <style scoped>

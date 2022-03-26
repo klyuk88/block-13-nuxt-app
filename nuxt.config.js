@@ -38,15 +38,16 @@ export default {
     '@nuxtjs/style-resources'
   ],
   axios: {
-    // baseURL: 'http://localhost:3000'
+    baseURL: 'http://176.99.9.44:8086/api', // Used as fallback if no runtime config is provided
   },
+
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
+    'cookie-universal-nuxt'
   ],
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
+  router: {
+    middleware: 'header',
   }
 }

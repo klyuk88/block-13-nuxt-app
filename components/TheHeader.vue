@@ -153,7 +153,7 @@
           </div>
           <div class="header_login_info" v-if="login">
             <div class="header_login_info_wallet">
-              <span class="header_login_info_wallet__count">$ 250</span>
+              <span class="header_login_info_wallet__count">$ {{balance}}</span>
               <a href="#" class="header_login_info_wallet__pay">Пополнить</a>
             </div>
             <li class="header_login_account">
@@ -227,6 +227,9 @@ export default {
     login() {
       return this.$store.state.login.token;
     },
+    balance() {
+      return this.$store.state.login.userBalance
+    }
   },
 
   methods: {

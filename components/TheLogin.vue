@@ -129,14 +129,11 @@ export default {
 
       if (this.formValidate.email && this.formValidate.password) {
         try {
-          await this.$axios
-            .$post("auth", this.loginInputs)
-            .then((res) => {
-              this.loginInputs.email = null
-              this.loginInputs.password = null
-              this.$store.commit('login/setToken', res.access.token)
-              this.closeLogin()
-            })
+          await this.$store.dispatch('login/login', this.loginInputs)
+          await this.$store.dispatch('login/user')
+          this.loginInputs.email = null
+          this.loginInputs.password = null
+          this.closeLogin()
         } catch (error) {
           console.log(error);
         }

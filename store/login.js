@@ -1,7 +1,12 @@
 export const state = () => ({
   token: null,
   user: null,
-  userBalance: null
+  userBalance: null,
+  userEmail: null,
+  error: {
+    message: '',
+    code: null
+  }
 })
 
 export const getters = {
@@ -15,13 +20,52 @@ export const getters = {
     return state.userBalance
   }
 }
-
 export const actions = {
+  async acceptRegister({commit, dispatch}, formData) {
+    try {
+     await this.$axios.$post('auth/registration/accept', formData)
+    
+    } catch (error) {
+      console.log(error.response);
+      commit('setErrorMessage', {
+        message: error.response.data.message,
+        code: error.response.data.code
+      })
+    }
+  },
+  async register({commit, dispatch}, formData) {
+    try {
+     await this.$axios.$post('auth/registration', {
+       'email': formData.email,
+       'phone': formData.phone.replace(/-/g,""),
+       'password': formData.password,
+       'news': formData.news
+     })
+    
+    } catch (error) {
+      console.log('error', error);
+      commit('setErrorMessage', {
+        message: error.response.data.message,
+        code: error.response.data.code
+      })
+    }
+  },
   async login({
-    commit
+    commit, dispatch
   }, formData) {
-    const res = await this.$axios.$post('auth', formData)
-    commit('setToken', res.access.token)
+    try {
+      const res = await this.$axios.$post('auth', formData)
+      commit('setToken', res.access.token)
+      await dispatch('user')
+
+    } catch (error) {
+      console.log(error);
+      commit('setErrorMessage', {
+        message: error.response.data.message,
+        code: error.response.data.code
+      })
+    }
+    
   },
 
   async user({
@@ -39,6 +83,9 @@ export const actions = {
 }
 
 export const mutations = {
+  setUserMail(state, mail) {
+    state.userEmail = mail
+  },
   setUser(state, user) {
     state.user = user
   },
@@ -55,6 +102,8 @@ export const mutations = {
       maxAge: 60 * 60 * 24 * 7
     })
     state.token = token
+    state.error.message = ''
+    state.error.code = null
 
   },
   removeToken(state) {
@@ -63,4 +112,8 @@ export const mutations = {
     this.$cookies.remove('token')
     this.$cookies.remove('balance')
   },
+  setErrorMessage(state, payload) {
+    state.error.code = payload.code
+    state.error.message = payload.message
+  }
 }

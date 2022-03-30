@@ -5,6 +5,9 @@
     <TheFooter />
     <TheRegister v-if="popRegisterShow" />
     <TheLogin v-if="popLoginShow" />
+    <AcceptRegister v-if="acceptRegisterShow" />
+    <SaccessAlert v-if="saccessAlertShow"/>
+    <ForgotPassword v-if="forgotPasswordShow" />
   </div>
 </template>
 
@@ -17,6 +20,15 @@ export default {
     popLoginShow() {
       return this.$store.state.popLoginShow;
     },
+    acceptRegisterShow() {
+      return this.$store.state.acceptRegister
+    },
+    saccessAlertShow() {
+      return this.$store.state.saccessAlert
+    },
+    forgotPasswordShow() {
+      return this.$store.state.forgotPassword
+    }
   },
   watch: {
     $route: function (newVal) {
@@ -30,10 +42,8 @@ export default {
   mounted() {
     if (this.$route.hash == "#login") {
       this.$store.commit("openLogin");
-      // this.$store.commit("closeRegister");
     } else if (this.$route.hash == "#register") {
       this.$store.commit("openRegister");
-      // this.$store.commit("closeLogin");
     }
   },
 };

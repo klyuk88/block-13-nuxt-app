@@ -1694,16 +1694,13 @@ select {
 #register-form input::-webkit-input-placeholder {
   color: #575759;
 }
-#register-form input:first-child {
+/* #register-form input:first-child {
   margin-bottom: 1.1rem;
-}
-#register-form input:last-of-type {
+} */
+/* #register-form input:last-of-type {
   margin-bottom: 1.5rem;
-}
+} */
 #register-form .register-form__title-inner {
-  display: flex;
-  justify-content: space-between;
-  max-width: 334px;
   margin-bottom: 2rem;
   align-items: center;
 }
@@ -1740,6 +1737,7 @@ select {
   color: rgba(255, 255, 255, 0.3);
   font-size: 0.77rem;
   line-height: 1.4;
+  margin-top: 20px;
 }
 #register-form .register-form__personal span {
   margin-bottom: 0px;
@@ -1785,6 +1783,9 @@ select {
   height: 14px;
   outline: none;
   border: none;
+  top: 10px;
+  right: 10px;
+  position: absolute;
 }
 
 
@@ -1795,9 +1796,9 @@ select {
 }
 
 
-#register-form input {
+/* #register-form input {
   margin-bottom: 1.1rem;
-}
+} */
 
 
 #register-form input {
@@ -1868,4 +1869,10 @@ select {
 
 .header-nav {
   justify-self: center;
+}
+
+
+.send_mail_alert {
+  margin-top: 20px;
+  line-height: 1.5;
 }

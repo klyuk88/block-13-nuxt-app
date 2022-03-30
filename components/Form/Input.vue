@@ -1,6 +1,7 @@
 <template>
   <div class="input_wrapper">
     <input
+      :class="{ error: !!error }"
       :type="typeInput"
       :placeholder="placeHolder"
       :value="value"
@@ -23,6 +24,7 @@
         :fill="showPassword ? '#fff' : '#575759'"
       />
     </svg>
+    <span class="form-error" :class="{ active: !!error }">{{ error }}</span>
   </div>
 </template>
 <script>
@@ -31,7 +33,8 @@ export default {
     type: String,
     placeHolder: String,
     value: [String, Number],
-    readOnly: Boolean
+    readOnly: Boolean || false,
+    error: String,
   },
   data() {
     return {
@@ -61,28 +64,36 @@ export default {
 </script>
 <style lang="sass">
 .input_wrapper
+  width: 100%
+  position: relative
+  margin-bottom: 25px
+  input
+    background: #2D2D2F
+    border: 1px solid #8F8F8F
+    border-radius: 18px
+    padding: 20px
+    color: #fff
+    text-transform: uppercase
+    font-size: 14px
     width: 100%
-    position: relative
-    margin-bottom: 30px
-    input
-        background: #2D2D2F
-        border: 1px solid #8F8F8F
-        border-radius: 18px
-        padding: 20px
-        color: #fff
-        text-transform: uppercase
-        font-size: 14px
-        width: 100%
+    transition: all .2s ease
     input::placeholder
-        text-transform: uppercase
-        font-size: 14px
+      text-transform: uppercase
+      font-size: 14px
     input:focus
-        border-color: #fff
+      border-color: #fff
+
+.input_wrapper
+  input.error
+    border: 1px solid #FF4B4B
+    color: #FF4B4B
+    margin-bottom: 0.5rem
+    transition: all .2s ease
 
 .password-icon
-    position: absolute
-    right: 15px
-    cursor: pointer
-    top: 50%
-    transform: translateY(-50%)
+  position: absolute
+  right: 15px
+  cursor: pointer
+  top: 50%
+  transform: translateY(-50%)
 </style>

@@ -9,13 +9,13 @@
             <div class="lessons__left-top">
               <!-- 1-е состояние плеера -->
               <client-only>
-                 <vue-plyr ref="plyr">
-                <video controls crossorigin playsinline>
-                  <source size="" src="" type="video/mp4" />
-                </video>
-              </vue-plyr>
+                <vue-plyr ref="plyr">
+                  <video controls crossorigin playsinline>
+                    <source size="" src="" type="video/mp4" />
+                  </video>
+                </vue-plyr>
               </client-only>
-             
+
               <!-- 2-е состояние плеера при добавлении active -->
               <!-- <div class="lessons__overlay">
                 <div class="lessons__overlay-title">
@@ -141,6 +141,7 @@
     </section>
     <!-- //LESSONS -->
   </div>
+
 </template>
 
 <script>
@@ -155,12 +156,14 @@ export default {
       lesson: {},
       percentProgress: null,
       player: "",
+      link: '',
+      video: null
     };
   },
 
   methods: {
     openRegister() {
-      this.$store.commit('openRegister')
+      this.$store.commit("openRegister");
     },
     openDesc(index) {
       this.idx = index;
@@ -183,6 +186,33 @@ export default {
   },
   computed: {},
   async mounted() {
+    try {
+      // const video = await this.$axios.$get("video/nVtvPQU8gviTrviqz8", {
+      //   headers: {
+      //     Authorization:
+      //       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MjM5ODJlMTZkZGRjZTVjNmExNDk2YTEiLCJleHAiOjE2NDgzOTU1MjcsImlhdCI6MTY0ODMwOTEyN30.4YXg_A6HhBOqWadi67fn5mz2OcR-HxWAo85zKJ53lrw",
+      //     Range: "bytes=0-",
+      //   },
+      // });
+      // let blob = new Blob([video], {type: 'video/mp4'});
+      // this.link = URL.createObjectURL(blob)
+      // this.video = this.$refs.videoTag;
+      // this.video.src = this.link
+      // this.video.src = 'http://localhost:3000/video.mp4'
+      // this.video.play()
+  
+
+      // URL.revokeObjectURL( this.link );
+      // this.video = this.$refs.video
+      // console.log(this.video);
+      // this.video.src = this.link
+      // this.video.load()
+
+
+    } catch (error) {
+      console.log(error);
+    }
+
     const res = await this.$axios.$get("http://localhost:3000/lessons.json");
     this.lessons = res;
 

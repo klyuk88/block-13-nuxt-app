@@ -1,13 +1,182 @@
 <template>
   <div id="beginner-page">
-    <section class="beginner-header">
+    <section
+      class="beginner-header bg-set"
+      :style="{ backgroundImage: `url(${zeusBg})` }"
+    >
+      <!-- <img src="~/assets/img/beginners/zeus.png" alt="" class=""> -->
       <div class="container">
-        <h2 class="beginner-header__title">ИНСТРУКЦИЯ НОВИЧКА</h2>
+        <div class="beginner_content_wrap">
+          <div>
+            <h2 class="beginner-header__title">ИНСТРУКЦИЯ НОВИЧКА</h2>
+          </div>
+          <div>
+            <img src="~/assets/img/beginners/zeus.png" alt="" />
+          </div>
+        </div>
       </div>
     </section>
     <section class="beginner-body">
       <div class="container">
         <div class="beginner-content">
+          <div class="beginner-content-steps">
+            <div class="beginner-content-step">
+              <span class="beginner_step_number first_number">1</span>
+              <div class="beginner-content__title">Первый шаг</div>
+              <div class="beginner-content-steps-item">
+                <h3 class="beginner-content-steps-item__title">
+                  Быть подписанным на Телеграм-канал:
+                </h3>
+                <p class="beginner-content-steps-item__about">
+                  Вас ждут там сливки ценнейшей информации о торговле,
+                  инвестидеи и обучение профессиональному трейдингу. Вы будете в
+                  курсе всех текущих движений на рынке и четко будете понимать,
+                  что происходит в текущий момент времени.
+                </p>
+                <div class="beginner-content-steps-item-btns">
+                  <div class="beginner-content-steps-item-btns__btn-white">
+                    <img src="~/assets/img/beginners/tg-logo.svg" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="beginner-content-step">
+              <span class="beginner_step_number">2</span>
+              <div class="beginner-content__title">Второй шаг</div>
+              <div class="beginner-content-steps-item">
+                <h3 class="beginner-content-steps-item__title">
+                  Зарегистрироваться на одной из бирж:
+                </h3>
+                <p class="beginner-content-steps-item__about">
+                  Диверсифицируйте возможные риски и сделайте аккаунты на 2
+                  биржах сразу: это Binance и OKX. При регистрации по моим
+                  ссылкам вы получите 20% кэшбека на все биржевые комиссии,
+                  который будет приходить вам на счет в USDT. На длинной
+                  дистанции вы сможете сэкономить тысячи долларов комиссионных.
+                </p>
+                <div class="beginner-content-steps-item-btns">
+                  <a href="#" target="_blank">
+                    <div class="beginner-content-steps-item-btns__btn-white">
+                      <img src="~/assets/img/beginners/first-btn.svg" alt="" />
+                    </div>
+                  </a>
+                  <a href="#" target="_blank">
+                    <div class="beginner-content-steps-item-btns__btn-black">
+                      <img
+                        src="~/assets/img/beginners/binance.svg"
+                        alt=""
+                      /></div
+                  ></a>
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="beginner-content-step">
+              <span class="beginner_step_number">3</span>
+              <div class="beginner-content__title">Третий шаг</div>
+              <div class="beginner-content-steps-item">
+                <h3 class="beginner-content-steps-item__title">
+                  Ознакомиться с бесплатными уроками по пользованию биржами
+                </h3>
+                <p class="beginner-content-steps-item__about">
+                  Если вы попали в индустрию криптовалют только вчера, эти уроки
+                  составят вам понимание, как устроены криптобиржи от А до Я.
+                </p>
+              </div>
+              <div class="beginner-video-lessons">
+                <div
+                  class="beginner-video-lesson"
+                  v-for="(lesson, index) in videoLessons"
+                  :key="index"
+                >
+                  <h4 class="beginner-video-lesson__title">
+                    {{ index + 1 }}. {{ lesson.title }}
+                  </h4>
+                  <div
+                    class="beginner-video-lesson-btn"
+                    @click="openVideo(index)"
+                  >
+                    <img src="~/assets/img/beginners/youtube.svg" alt="" />
+                    <span>Смотреть</span>
+                  </div>
+                </div>
+                <img
+                  src="~/assets/img/beginners/decor-2.png"
+                  alt=""
+                  class="beginner-decor-2"
+                />
+              </div>
+              <!-- конец уроков -->
+              <div class="beginner-content-steps-links mob">
+                <div class="beginner-content-steps-links-item">
+                  <div class="beginner-content__title">
+                    <span class="steps-links__title">ACADEMY</span>
+                  </div>
+                  <div class="beginner-content-steps-item">
+                    <h3 class="beginner-content-steps-item__title">
+                      Будьте на стороне крупного игрока
+                    </h3>
+                    <p class="beginner-content-steps-item__about">
+                      Прогрессивное обучение профессиональному трейдингу с
+                      использованием институциональных методик.
+                    </p>
+                    <div class="beginner-content-steps-links-btn">
+                      Подробнее
+                      <img src="~/assets/img/beginners/arrow.svg" alt="" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="beginner-content-steps-links-item">
+                  <div class="beginner-content__title">
+                    <span class="steps-links__title">LIVE TRANIGN</span>
+                  </div>
+                  <div class="beginner-content-steps-item">
+                    <h3 class="beginner-content-steps-item__title">
+                      Учитесь, приобретайте опыт и зарабатывайте одновременно
+                    </h3>
+                    <p class="beginner-content-steps-item__about">
+                      Торговля в режиме реального времени совместно с
+                      профессиональными трейдерами.
+                    </p>
+                    <div class="beginner-content-steps-links-btn">
+                      Подробнее
+                      <img src="~/assets/img/beginners/arrow.svg" alt="" />
+                    </div>
+                  </div>
+                </div>
+                <div class="beginner-content-steps-links-item">
+                  <div class="beginner-content__title">
+                    <span class="steps-links__title">PRIVAT CLUB</span>
+                  </div>
+                  <div class="beginner-content-steps-item">
+                    <h3 class="beginner-content-steps-item__title">
+                      Не повторяйте действия крупного игрока,а станьте им
+                    </h3>
+                    <p class="beginner-content-steps-item__about">
+                      Место для тех, кто готов выйти на совершенно иной
+                      уровенья.
+                    </p>
+                    <div class="beginner-content-steps-links-btn">
+                      Подробнее
+                      <img src="~/assets/img/beginners/arrow.svg" alt="" />
+                    </div>
+                  </div>
+                </div>
+                <img
+                  src="~/assets/img/beginners/decor-3.1.png"
+                  alt=""
+                  class="beginner-decor-3"
+                />
+              </div>
+            </div>
+            <!-- end beginner step -->
+            
+          </div>
+          <!-- end beginner steps -->
+
           <div class="beginner-content-helps">
             <div class="beginner-content__title">Подсказки</div>
 
@@ -27,72 +196,20 @@
             </div>
             <!-- beginner-content-helps-items -->
             <client-only>
-            <swiper ref="mySwiper" :options="swiperOptions">
-              <swiper-slide v-for="(item, index) in helps" :key="index">
-                <div class="beginner-content-helps-item">
-                  <h3 class="beginner-content-helps-item__title">
-                    {{ item.title }}
-                  </h3>
-                  <p class="beginner-content-helps-item__about">
-                    {{ item.about }}
-                  </p>
-                </div>
-              </swiper-slide>
-              <div class="swiper-pagination" slot="pagination"></div>
-            </swiper>
-            </client-only>
-
-          </div>
-          <div class="beginner-content-steps">
-            <div class="beginner-content__title">Первый шаг</div>
-            <div class="beginner-content-steps-item">
-              <h3 class="beginner-content-steps-item__title">
-                Зарегистрироваться на одной из бирж:
-              </h3>
-              <p class="beginner-content-steps-item__about">
-                OKX и BINANCE — 20% кешбека на все комиссии биржи пожизненно
-              </p>
-              <div class="beginner-content-steps-item-btns">
-                <a href="#" target="_blank">
-                  <div class="beginner-content-steps-item-btns__btn-white">
-                    <img src="~/assets/img/beginners/first-btn.svg" alt="" />
+              <swiper ref="mySwiper" :options="swiperOptions">
+                <swiper-slide v-for="(item, index) in helps" :key="index">
+                  <div class="beginner-content-helps-item">
+                    <h3 class="beginner-content-helps-item__title">
+                      {{ item.title }}
+                    </h3>
+                    <p class="beginner-content-helps-item__about">
+                      {{ item.about }}
+                    </p>
                   </div>
-                </a>
-                <a href="#" target="_blank">
-                  <div class="beginner-content-steps-item-btns__btn-black">
-                    <img src="~/assets/img/beginners/binance.svg" alt="" /></div
-                ></a>
-              </div>
-            </div>
-
-            <div class="beginner-content__title step-2">Второй шаг</div>
-            <div class="beginner-content-steps-item">
-              <h3 class="beginner-content-steps-item__title">
-                Ознакомиться с бесплатными уроками по пользованию биржами
-              </h3>
-              <p class="beginner-content-steps-item__about">
-                В видеоурках подробно описано как начать путь трейдера
-              </p>
-            </div>
-            <div class="beginner-video-lessons">
-              <div
-                class="beginner-video-lesson"
-                v-for="(lesson, index) in videoLessons"
-                :key="index"
-              >
-                <h4 class="beginner-video-lesson__title">
-                  {{ index + 1 }}. {{ lesson.title }}
-                </h4>
-                <div
-                  class="beginner-video-lesson-btn"
-                  @click="openVideo(index)"
-                >
-                  Смотреть
-                  <img src="~/assets/img/beginners/youtube.svg" alt="" />
-                </div>
-              </div>
-            </div>
-
+                </swiper-slide>
+                <div class="swiper-pagination" slot="pagination"></div>
+              </swiper>
+            </client-only>
             <div class="beginner-content-steps-links">
               <div class="beginner-content-steps-links-item">
                 <div class="beginner-content__title">
@@ -100,10 +217,11 @@
                 </div>
                 <div class="beginner-content-steps-item">
                   <h3 class="beginner-content-steps-item__title">
-                    Eсли остались вопросы советуем перейти в раздел обучения
+                    Будьте на стороне крупного игрока
                   </h3>
                   <p class="beginner-content-steps-item__about">
-                    В видеоурках подробно описано как начать путь трейдера
+                    Прогрессивное обучение профессиональному трейдингу с
+                    использованием институциональных методик.
                   </p>
                   <div class="beginner-content-steps-links-btn">
                     Подробнее
@@ -118,10 +236,11 @@
                 </div>
                 <div class="beginner-content-steps-item">
                   <h3 class="beginner-content-steps-item__title">
-                    Eсли остались вопросы советуем перейти в раздел обучения
+                    Учитесь, приобретайте опыт и зарабатывайте одновременно
                   </h3>
                   <p class="beginner-content-steps-item__about">
-                    В видеоурках подробно описано как начать путь трейдера
+                    Торговля в режиме реального времени совместно с
+                    профессиональными трейдерами.
                   </p>
                   <div class="beginner-content-steps-links-btn">
                     Подробнее
@@ -135,10 +254,10 @@
                 </div>
                 <div class="beginner-content-steps-item">
                   <h3 class="beginner-content-steps-item__title">
-                    Eсли остались вопросы советуем перейти в раздел обучения
+                    Не повторяйте действия крупного игрока,а станьте им
                   </h3>
                   <p class="beginner-content-steps-item__about">
-                    В видеоурках подробно описано как начать путь трейдера
+                    Место для тех, кто готов выйти на совершенно иной уровенья.
                   </p>
                   <div class="beginner-content-steps-links-btn">
                     Подробнее
@@ -146,10 +265,25 @@
                   </div>
                 </div>
               </div>
+              <img
+                src="~/assets/img/beginners/decor-3.1.png"
+                alt=""
+                class="beginner-decor-3"
+              />
             </div>
+            <!-- beginner links -->
           </div>
         </div>
       </div>
+      <!-- декор элементы -->
+      <img src="~/assets/img/decor-4.png" alt="" class="decor-poligon" />
+      <img src="~/assets/img/beginners/decor-mob.png" alt="" class="beginner-decor-mob-1">
+      <img src="~/assets/img/beginners/mob-decor-5.png" alt="" class="beginner-decor-mob-2">
+      <img src="~/assets/img/beginners/decor-mob-6.png" alt="" class="beginner-decor-mob-3">
+      <img src="~/assets/img/beginners/decor-mob-4.png" alt="" class="beginner-decor-mob-4">
+      <div class="beginner_step_decor"></div>
+      <div class="decor-round"></div>
+       <!-- декор элементы -->
     </section>
     <div class="video-pop-overlay" v-if="playLesson">
       <div class="video-pop">
@@ -171,14 +305,16 @@
 
 
 <script>
+import zeusBg from "~/assets/img/beginners/numbers.png";
 export default {
   data() {
     return {
+      zeusBg,
       swiperOptions: {
         pagination: {
           el: ".swiper-pagination",
         },
-        spaceBetween: 20
+        spaceBetween: 20,
       },
       playLesson: false,
       videoLesson: null,
@@ -186,37 +322,58 @@ export default {
       videoLessons: [
         {
           videoSrc: "https://www.youtube.com/embed/aFOxDP2xWxI?autoplay=1",
-          title: "Что такое блокчейн?",
+          title: "Обзор биржи Binance. Обучение трейдингу",
         },
         {
           videoSrc: "https://www.youtube.com/embed/jMHOYQ8FgSU?autoplay=1",
-          title: "Что такое крипта?",
+          title: "Как пополнять счёт, вывод денег, верификация",
         },
         {
           videoSrc: "https://www.youtube.com/embed/aphTdC1T8KE?autoplay=1",
-          title: "Как торговать?",
+          title:
+            "Как продать и купить криптовалюту. Спот торговля, сбор портфеля",
+        },
+        {
+          videoSrc: "https://www.youtube.com/embed/aphTdC1T8KE?autoplay=1",
+          title: "Фьючерсы для новичков простыми словами",
+        },
+        {
+          videoSrc: "https://www.youtube.com/embed/aphTdC1T8KE?autoplay=1",
+          title: "Стоп-лоссы и тейк-профиты на Binance",
+        },
+        {
+          videoSrc: "https://www.youtube.com/embed/aphTdC1T8KE?autoplay=1",
+          title: "Все о комиссиях. Кэшбек до 50%",
+        },
+        {
+          videoSrc: "https://www.youtube.com/embed/aphTdC1T8KE?autoplay=1",
+          title: "Фьючерсы без риска ликвидации",
+        },
+        {
+          videoSrc: "https://www.youtube.com/embed/aphTdC1T8KE?autoplay=1",
+          title: "Почему я начал торговать на OKX",
         },
       ],
       helps: [
         {
-          title: "Ознакомиться с бесплатными уроками по пользованию биржами",
+          title: "Соблюдайте риск-менеджмент",
           about:
-            "Описание чем поможет эта инструкция. Можно в 2 предложения описать что даст курсы, чтобы захотел их посмотреть. Таким образом постоянное информационно-пропагандистское",
+            "Не рискуйте суммой более чем в 5% от депозита на одну сделку. Управление рисками - это то, что отличает профессионалов от игроманов. Режьте убытки и давайте прибыли течь, и только данное правило позволит вам быть на дистанции в плюсе и в том числе раскрутить небольшой депозит.",
         },
         {
-          title: "Ознакомиться с бесплатными уроками по пользованию биржами",
+          title: "Практикуйтесь",
           about:
-            "Описание чем поможет эта инструкция. Можно в 2 предложения описать что даст курсы, чтобы захотел их посмотреть. Таким образом постоянное информационно-пропагандистское",
+            "Нарабатывайте руку на большом количестве мелких сделок. Ваша задача - не заработать здесь и сейчас, а сформировать опыт и понимание рынка, чтобы впоследствии вы могли филигранно чувствовать рынок. На эту тему есть известная фраза: «чтобы стать мастером в каком-либо деле, посвятите ему 10000 часов»",
         },
         {
-          title: "Ознакомиться с бесплатными уроками по пользованию биржами",
+          title: "Торгуйте структуру рынка",
           about:
-            "Описание чем поможет эта инструкция. Можно в 2 предложения описать что даст курсы, чтобы захотел их посмотреть. Таким образом постоянное информационно-пропагандистское",
+            "Hе наступайте на стандартные грабли всех новичков.Не заходите по сигналам какого-то индикатора, пересечению скользящих средних или по словам блогера в интернете. Чтобы понимать, почему цена двигается именно так, изучайте поведение покупателей и продавцов - в первую очередь график цены и объемы.",
         },
         {
-          title: "Ознакомиться с бесплатными уроками по пользованию биржами",
+          title: "Занимайтесь статистикой",
           about:
-            "Описание чем поможет эта инструкция. Можно в 2 предложения описать что даст курсы, чтобы захотел их посмотреть. Таким образом постоянное информационно-пропагандистское",
+            "Ведите полные отчеты по своим торговым идеями их отработкам. Собирайте статистику сделок той или иной стратегии и фиксируйте поведение цены в различных рыночных ситуациях. Это может показаться лишней работой, но поверьте, что когда вы начнете собирать данные, постепенно рыночная структура у вас в голове встанет как книги на полках в библиотеке.",
         },
       ],
     };
@@ -234,5 +391,5 @@ export default {
 
 
 
-<style lang="sass">
+<style lang="sass" scoped>
 </style>

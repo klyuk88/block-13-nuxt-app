@@ -1,6 +1,7 @@
 #profile_page
   background: linear-gradient(180deg, #181818 -6.87%, #1F1E21 100%)
   padding-bottom: 200px
+  position: relative
 
 .profile_tabs_header
   display: block
@@ -95,7 +96,6 @@
     margin-top: 55px
 
 .profile_course_blocks
-  margin-top: 120px
   display: grid
   grid-template-columns: 1fr 1fr 1fr
   column-gap: 80px
@@ -149,6 +149,9 @@
 .profile_video
   position: relative
   margin-top: 120px
+  @media screen and ( max-width: 960px )
+    margin-top: 0
+    
 
 .profile_video_lessons
   margin-top: 100px
@@ -218,13 +221,6 @@
     display: flex
 
 
-.live_trading_grid
-    align-items: center
-    display: grid
-    grid-template-columns: 25% 1fr
-    column-gap: 160px
-    margin-top: 120px
-
 .profile_course_block__btn
     border-radius: 18px
 
@@ -255,7 +251,7 @@
     background: #2D2D2F
     border: 1px solid #575759
     border-radius: 23px
-    padding: 15px 32px
+    padding: 20px 32px
     color: #fff
     line-height: 1
     transition: all .3s ease
@@ -376,8 +372,10 @@
 .beginner-header
     padding-top: 80px
     position: relative
+    z-index: 10
     @media screen and ( max-width: 576px )
       padding-bottom: 0
+
       
 
 .beginner-header__title
@@ -672,6 +670,9 @@
 .header_login_info
   display: flex
   align-items: center
+  @media screen and ( max-width: 960px )
+    display: none
+    
 
 .header_login_info_wallet
   display: flex
@@ -955,3 +956,204 @@
 #register-form__overlay
   z-index: 10000
     
+
+
+.beginner-header__title.profile
+  font-size: 36px
+  font-weight: 800
+  box-shadow: none
+  text-shadow: none
+  margin-top: 0
+
+
+.profile-header-content
+  padding: 80px 0 120px 0
+  display: flex
+  align-items: center
+  justify-content: space-between
+  @media screen and ( max-width: 960px )
+    padding: 50px 0
+    
+
+.profile-btns
+  display: flex
+  align-items: center
+  @media screen and ( max-width: 960px )
+    display: none
+    
+
+
+.balance-title
+  font-size: 18px
+  font-weight: 600
+  margin-right: 24px
+.balance
+  display: flex
+  align-items: center
+  margin-right: 16px
+
+.balance-count
+  background: linear-gradient(180deg, #333336 0%, #2A2A2E 100%)
+  border-radius: 2px
+  padding: 0 40px
+  height: 40px
+  display: flex
+  align-items: center
+  justify-content: center
+  border: 1px solid
+  border-image: linear-gradient(103.31deg, #B3854D 5.67%, #F3D7AF 28.06%, #C6A47C 85.27%)
+  border-image-slice: 1
+  span
+    background: linear-gradient(103.31deg, #B3854D 5.67%, #F3D7AF 28.06%, #C6A47C 85.27%)
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    font-size: 16px
+    font-weight: 800
+
+
+.profile-icon
+  width: 40px
+  height: 40px
+  background: linear-gradient(180deg, #333336 0%, #2A2A2E 100%)
+  border: 1px solid rgba(255, 255, 255, 0.3)
+  display: flex
+  align-items: center
+  justify-content: center
+  margin-right: 16px
+
+.profile-icon:last-child
+  margin-right: 0
+
+
+#profile_tabs_body
+  margin-top: 150px
+  position: relative
+  z-index: 10
+  @media screen and ( max-width: 960px )
+    margin-top: 0
+    
+
+
+.profile_course_block_about__text
+  background: linear-gradient(103.31deg, #B3854D 5.67%, #F3D7AF 28.06%, #C6A47C 85.27%)
+  -webkit-background-clip: text
+  -webkit-text-fill-color: transparent
+  background-clip: text
+  text-fill-color: transparent
+  font-size: 18px
+  font-weight: 600
+
+
+.lessons__left-bottom
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+
+
+.lesson_btn
+  padding: 36px 88px
+  transition: all .3s ease
+  cursor: pointer
+  @include gradientBorderElem(18px)
+  @media screen and ( max-width: 960px )
+    display: none
+    
+  span
+    background: linear-gradient(103.31deg, #B3854D 5.67%, #F3D7AF 28.06%, #C6A47C 85.27%)
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    background-clip: text
+    text-fill-color: transparent
+    font-size: 15px
+    font-weight: 700
+
+.lesson_btn:before
+    @include gradientBorderBefore(18px)
+
+.lesson_btn:hover
+  filter: brightness(1.3)
+
+.lessons__desc
+  width: 70%
+  
+
+.lessons__desc-topic
+  display: flex
+
+.lessons__desc-topic-name
+  margin-right: 10px
+
+
+.block_content_icon
+  position: relative
+
+
+
+.live_trading_grid
+  max-width: 790px
+  margin: 0 auto
+
+
+.profile-live-trading-btn
+  padding: 13px 19px
+  margin: 0 auto
+  display: block
+  margin-top: 80px
+  transition: all .3s ease
+  background: transparent
+  cursor: pointer
+  border: none
+
+  @include gradientBorderElem(18px)
+  span
+    @include gradientText()
+    font-size: 16px
+    font-weight: 800
+    text-transform: uppercase
+
+.profile-live-trading-btn:before
+  @include gradientBorderBefore(18px)
+
+
+.profile-live-trading-btn:hover
+  @include hoverBtn()
+
+
+.profile-tabs-bg
+  position: absolute
+  bottom: 0
+  width: 100%
+  left: 0
+
+
+.profile-blocks
+  position: relative
+  z-index: 10
+  @media screen and ( max-width: 960px )
+    display: none
+    
+  
+
+.lessons__desc-parametres
+  @media screen and ( max-width: 960px )
+    flex-direction: column
+    gap: 5px
+    
+
+
+.profile-video-item-mob-lock
+  width: 28px
+  height: auto
+
+
+.profile_course_block.single
+  display: none
+  @media screen and ( max-width: 960px )
+    display: flex
+    
+
+.profile_tabs_body
+  margin-top: 50px

@@ -34,9 +34,11 @@
                   что происходит в текущий момент времени.
                 </p>
                 <div class="beginner-content-steps-item-btns">
+                  <a href="#">
                   <div class="beginner-content-steps-item-btns__btn-white">
                     <img src="~/assets/img/beginners/tg-logo.svg" alt="" />
                   </div>
+                  </a>
                 </div>
               </div>
             </div>

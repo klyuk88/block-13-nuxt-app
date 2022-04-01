@@ -1,12 +1,31 @@
 <template>
   <div id="profile_page">
-    <section class="beginner-header">
+    <section class="beginner-header profile">
       <div class="container">
-        <h2 class="beginner-header__title">ЛИЧНЫЙ КАБИНЕТ</h2>
+        <div class="profile-header-content">
+          <h2 class="beginner-header__title profile">ЛИЧНЫЙ КАБИНЕТ</h2>
+
+          <div class="profile-btns">
+            <div class="balance">
+              <span class="balance-title">Мой баланс:</span>
+              <div class="balance-count">
+                <span>$ 24932</span>
+              </div>
+            </div>
+            <a href="!#" class="profile-settings profile-icon">
+              <img src="~/assets/img/profile/settings.svg" alt="" />
+            </a>
+            <a href="!#" class="profile-chat profile-icon">
+              <img src="~/assets/img/profile/chat.svg" alt="" />
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="profile_tabs_body">
+    <ProfileBlocks/>
+
+    <section id="profile_tabs_body">
       <div class="container">
         <div class="profile_tabs_header">
           <div class="profile_tabs_wrap">
@@ -21,44 +40,48 @@
             </div>
           </div>
           <div class="profile_tabs_header__line">
-            <div
-            class="active_line"
-            :class="lineActive"
-            ></div>
+            <div class="active_line" :class="lineActive"></div>
           </div>
         </div>
-        <component :is="currentTabContent"></component>
+        <!-- <img src="~/assets/img/profile/arrow.svg" alt="" class="profile_course_block_arrow"> -->
+        <div class="profile_tabs_body">
+          <component :is="currentTabContent"></component>
+        </div>
+        
       </div>
       <!-- container -->
     </section>
+    <img v-if="currentIndex === 1" src="~/assets/img/profile/profile_live_trading_img.png" alt="" class="profile-tabs-bg">
+    <img v-if="currentIndex === 2" src="~/assets/img/profile/club-tab-bg.png" alt="" class="profile-tabs-bg">
   </div>
 </template>
 
 <script>
 export default {
-  middleware: 'secretLock',
+  middleware: "secretLock",
   data() {
     return {
       profileTabs: ["Academy", "LIVE TRADING", "PRIVAT CLUB"],
-      currentTabContent: 'the-academy',
+      currentTabContent: "the-academy",
       currentIndex: 0,
-      lineActive: 'left'
+      lineActive: "left",
     };
   },
   methods: {
     changeTab(index) {
-    this.currentIndex = this.profileTabs.findIndex((item, idx) => index === idx)
-    if(this.currentIndex === 0) {
-      this.currentTabContent = 'the-academy'
-      this.lineActive = 'left'
-    } else if(this.currentIndex === 1) {
-      this.currentTabContent = 'live-trading'
-      this.lineActive = 'center'
-    } else if(this.currentIndex === 2) {
-      this.currentTabContent = 'private-club'
-      this.lineActive = 'right'
-    }
-
+      this.currentIndex = this.profileTabs.findIndex(
+        (item, idx) => index === idx
+      );
+      if (this.currentIndex === 0) {
+        this.currentTabContent = "the-academy";
+        this.lineActive = "left";
+      } else if (this.currentIndex === 1) {
+        this.currentTabContent = "live-trading";
+        this.lineActive = "center";
+      } else if (this.currentIndex === 2) {
+        this.currentTabContent = "private-club";
+        this.lineActive = "right";
+      }
     },
   },
 };

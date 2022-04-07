@@ -8,12 +8,22 @@
     <AcceptRegister v-if="acceptRegisterShow" />
     <SaccessAlert v-if="saccessAlertShow"/>
     <ForgotPassword v-if="forgotPasswordShow" />
+    <ProfileSettings v-if="profileSettingsShow" />
+    <TopBalance v-if="topBalanceShow"/>
   </div>
 </template>
 
 <script>
+
 export default {
+
   computed: {
+    topBalanceShow() {
+      return this.$store.state.topBalance
+    },
+    profileSettingsShow() {
+      return this.$store.state.profileSettings
+    },
     popRegisterShow() {
       return this.$store.state.popRegisterShow;
     },

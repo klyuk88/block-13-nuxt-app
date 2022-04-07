@@ -75,10 +75,7 @@
                   v-for="(item, index) in menu"
                   :key="index"
                 >
-                  <nuxt-link
-                    :to="item.slug"
-                    class="menu-mobile__link"
-                    @click="openPage"
+                  <nuxt-link :to="item.slug" class="menu-mobile__link"
                     >{{ item.title }}
                   </nuxt-link>
                 </li>
@@ -92,15 +89,24 @@
             </div>
             <div class="mob_account_wrap" v-if="login">
               <div class="mob_account_wrap_row">
-                <span>$ {{balance}}</span>
-                <span>/</span>
+                <span>$ {{ balance }}</span>
+                <span>|</span>
                 <span><nuxt-link to="/profile">Личный кабинет</nuxt-link></span>
               </div>
+
               <div class="mob_account_wrap_row">
-                <span><a href="#">Пополнить</a></span>
-                <span>/</span>
+                <span><a href="!#" @click.prevent="openTopBalance">Пополнить</a></span>
+                <span>|</span>
+                <span><a href="!#" @click.prevent="openSettings">Настройки</a></span>
+              </div>
+
+              <div class="mob_account_wrap_row">
+                <span><a target="_blank" href="#">Тех. поддержка</a></span>
+                <span>|</span>
                 <span
-                  ><nuxt-link to="/profile/settings">Настройки</nuxt-link></span
+                  ><a href="!#" @click.prevent="logout" class="logout_link"
+                    >ВЫЙТИ</a
+                  ></span
                 >
               </div>
             </div>
@@ -108,7 +114,6 @@
           </div>
           <!-- mobile menu -->
           <div class="header_login_info" v-if="login">
-            
             <li class="header_login_account">
               <span class="header_login_account__title"
                 >МОЙ АККАУНТ
@@ -122,18 +127,15 @@
                 <li class="header_login_account_item">
                   <nuxt-link to="/profile">Личный кабинет</nuxt-link>
                 </li>
-                <li class="header_login_account_item">
-                  <nuxt-link to="/profile/settings">Настройки</nuxt-link>
-                </li>
                 <li class="header_login_account_item header_logout_account">
-                  <a href="!#" class="" @click.prevent="logout"
+                  <a href="!#" class="logout_link" @click.prevent="logout"
                     >Выйти из аккаунта</a
                   >
                 </li>
               </ul>
             </li>
           </div>
-          
+
           <div class="header__registration registration" v-else>
             <a href="#login" class="registration__link" @click="popLoginShow"
               >ВОЙТИ / РЕГИСТРАЦИЯ</a
@@ -177,25 +179,43 @@ export default {
       ],
     };
   },
+  watch: {
+    $route: function (newVal) {
+      setTimeout(() => {
+        this.closeMobMenu();
+      }, 500);
+    },
+  },
 
   computed: {
     login() {
-      return this.$store.state.login.token;
+      return this.$store.getters['login/getToken'];
     },
     balance() {
-      return this.$store.getters['login/getBalance']
+      return this.$store.getters["login/getBalance"];
     },
   },
 
   methods: {
+    openSettings() {
+      this.$store.commit('openSettings')
+    },
+    openTopBalance() {
+      this.$store.commit('openBalance')
+    },
     logout() {
       this.$store.commit("login/removeToken");
       this.$router.push("/");
+      if (this.mobMenu) {
+        setTimeout(() => {
+          this.closeMobMenu();
+        }, 500);
+      }
     },
     openPage() {
       setTimeout(() => {
         this.mobMenu = false;
-      }, 1000);
+      }, 500);
     },
     mobMenuShow() {
       this.mobMenu = true;
@@ -210,6 +230,13 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="sass" scoped>
+.logout_link
+  color: #FF4B4B
+
+.mob_account_wrap
+  max-width: 576px
+  left: 50%
+  transform: translateX(-50%)
 </style>
 

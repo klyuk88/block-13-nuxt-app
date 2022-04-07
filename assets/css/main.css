@@ -850,8 +850,8 @@ select {
 }
 .courses__item {
   width: 33.33%;
-  transition: all 0.5s ease;
-  background: linear-gradient(180deg, #202022 0%, #222224 100%);
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.2);
   min-height: 950px;
 }
 .courses__item-top {
@@ -867,9 +867,7 @@ select {
     margin-bottom: 0;
   }
 }
-.courses__item-bottom {
-  min-height: 382px;
-}
+
 @media (max-width: 575px) {
   .courses__item-bottom {
     padding-left: 10px;
@@ -879,57 +877,8 @@ select {
 .courses__item-link {
   display: block;
 }
-.courses__item:hover {
-  transition: all 0.5s ease;
-  width: 34%;
-  box-shadow: 0px 8px 0px #333333;
-  background: linear-gradient(180deg, #333336 0%, #2A2A2E 100%);
-}
-.courses__item:hover .courses__item-top {
-  height: 500px;
-  margin-bottom: 2rem;
-}
-.courses__item:hover .courses__item-bottom {
-  min-height: auto;
-}
-.courses__item:hover .courses__text {
-  padding: 0rem 3rem 2rem 4rem;
-}
-.courses__item:hover .courses__video-btn {
-  opacity: 0.5;
-}
-@media (max-width: 1400px) {
-  .courses__item:hover {
-    width: 55%;
-  }
-  .courses__item:hover .courses__item-top {
-    height: 338px;
-    margin-bottom: 6rem;
-  }
-  .courses__item:hover .courses__text {
-    padding: 2rem 6rem 2rem 6rem;
-  }
-}
-@media (max-width: 991px) {
-  .courses__item:hover {
-    width: 100%;
-  }
-  .courses__item:hover .courses__text {
-    padding: 0rem 3rem 2rem 4rem;
-  }
-}
-@media (max-width: 991px) {
-  .courses__item:hover {
-    width: 100%;
-  }
-  .courses__item:hover .courses__text {
-    padding: 0rem 1rem 2rem 1rem;
-  }
-  .courses__item:hover .courses__item-top {
-    height: 338px;
-    margin-bottom: 2rem;
-  }
-}
+
+
 @media (max-width: 1400px) {
   .courses__item {
     width: 55%;
@@ -1118,15 +1067,12 @@ select {
     height: auto;
   }
 }
-.lessons__tabs {
-  display: flex;
-  margin-bottom: 8px;
-}
+
 .lessons__tab {
   color: #605E5E;
   font-weight: 800;
   font-size: 1.06rem;
-  width: 50%;
+  width: 100%;
   padding: 12px 0px;
   text-transform: uppercase;
   border-radius: 2px;
@@ -1823,17 +1769,15 @@ select {
 .form-error {
   display: block;
   text-align: left;
-  max-height: 0;
-  margin-bottom: 0;
+  margin-bottom: 25px;
   color: #FF4B4B;
-  overflow: hidden;
   transition: all .2s ease;
 }
 
-.form-error.active {
+/* .form-error.active {
   max-height: 20px;
   margin-bottom: 1.5rem;
-}
+} */
 
 
 .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {

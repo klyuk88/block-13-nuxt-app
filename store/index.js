@@ -3,11 +3,25 @@ export const state = () => ({
   popLoginShow: false,
   acceptRegister: false,
   saccessAlert: false,
-  forgotPassword: false
+  forgotPassword: false,
+  profileSettings: false,
+  topBalance: false,
 })
 
 
 export const mutations = {
+  openBalance(state) {
+    state.topBalance = true
+  },
+  closeBalance(state) {
+    state.topBalance = false
+  },
+  openSettings(state) {
+    state.profileSettings = true
+  },
+  closeSettings(state) {
+    state.profileSettings = false
+  },
   closeForgotPassword(state) {
     state.forgotPassword = false
   },

@@ -12,14 +12,17 @@
               <div class="intro__video-btn course">
                 <img src="~/assets/img/intro/video-btn.svg" alt="video-btn" />
               </div>
-              <h1 class="intro__title section-title">Бесплатные видео уроки</h1>
+              <h1 class="intro__title section-title academy-page">
+                Будьте на стороне<br />
+                крупного игрока
+              </h1>
               <span class="intro__subtitle"
                 >Бесплатный курс с новым подходом к криптовалюте и
                 блокчейн</span
               >
               <div class="intro__btns">
-                <a href="#" class="intro__btn btn"><span>Подробнее</span></a>
-                <a href="#" class="intro__btn btn"><span>Подробнее</span></a>
+                <a href="#" class="intro__btn btn"><span>Начать путь</span></a>
+                <!-- <a href="#" class="intro__btn btn"><span>Подробнее</span></a> -->
               </div>
             </div>
           </div>
@@ -29,107 +32,10 @@
     <!-- //INTRO -->
 
     <!-- ADVANTAGES -->
-    <section class="advantages" id="advantages">
+    <section class="advantages academy-page" id="advantages">
       <div class="container">
-        <h2 class="advantages__title section-title">С НАМИ ОБРЕТАЮТ СИЛУ</h2>
-        <ul class="advantages__icons">
-          <li class="advantages__icon">
-            <div class="advantages__icon-top">
-              <div class="advantages__icon-rounded">
-                <div class="advantages__icon-title">1M $</div>
-              </div>
-            </div>
-            <div class="advantages__icon-bottom">
-              <div class="advantages__icon-desc">В УПРАВЛЕНИИ</div>
-            </div>
-          </li>
-          <li class="advantages__icon">
-            <div class="advantages__icon-top">
-              <div class="advantages__icon-rounded">
-                <div class="advantages__icon-title">>1000</div>
-              </div>
-            </div>
-            <div class="advantages__icon-bottom">
-              <div class="advantages__icon-desc">
-                ПРИБЫЛЬНЫХ СДЕЛОК <br />
-                с 2017
-              </div>
-            </div>
-          </li>
-          <li class="advantages__icon">
-            <div class="advantages__icon-top">
-              <div class="advantages__icon-rounded">
-                <div class="advantages__icon-title">1.5%</div>
-              </div>
-            </div>
-            <div class="advantages__icon-bottom">
-              <div class="advantages__icon-desc">
-                Средний риск <br />
-                на сделку
-              </div>
-            </div>
-          </li>
-          <li class="advantages__icon">
-            <div class="advantages__icon-top">
-              <div class="advantages__icon-rounded">
-                <div class="advantages__icon-title">5500%</div>
-              </div>
-            </div>
-            <div class="advantages__icon-bottom">
-              <div class="advantages__icon-desc">
-                ДОХОДНОСТЬ с 2019 <br />
-                С РИСКОМ ДО 20% <br />
-                НА ДЕПОЗИТ
-              </div>
-            </div>
-          </li>
-        </ul>
-        <!-- //advantages__icons -->
-        <div class="advantages__cards">
-          <div class="advantages__card">
-            <div class="advantages__card-inner">
-              <h3 class="advantages__card-title">Название</h3>
-              <p class="advantages__card-text">
-                Block #13 - команда трейдеров с высшим уровнем экспертизы. Мы
-                торговали на рынке криптовалют, Forex, CME, NYSE и NASDAQ еще
-                тогда, когда современные гуру-трейдеры в интернете только ходили
-                в школу.
-              </p>
-            </div>
-          </div>
-          <div class="advantages__card">
-            <div class="advantages__card-inner">
-              <h3 class="advantages__card-title">Название</h3>
-              <p class="advantages__card-text">
-                Block #13 - команда трейдеров с высшим уровнем экспертизы. Мы
-                торговали на рынке криптовалют, Forex, CME, NYSE и NASDAQ еще
-                тогда, когда современные гуру-трейдеры в интернете только ходили
-                в школу.
-              </p>
-            </div>
-          </div>
-          <div class="advantages__card">
-            <div class="advantages__card-inner">
-              <h3 class="advantages__card-title">Название</h3>
-              <p class="advantages__card-text">
-                Block #13 - команда трейдеров с высшим уровнем экспертизы. Мы
-                торговали на рынке криптовалют, Forex, CME.
-              </p>
-            </div>
-          </div>
-          <div class="advantages__card">
-            <div class="advantages__card-inner">
-              <h3 class="advantages__card-title">Название</h3>
-              <p class="advantages__card-text">
-                Block #13 - команда трейдеров с высшим уровнем экспертизы. Мы
-                торговали на рынке криптовалют, Forex, CME, NYSE и NASDAQ еще
-                тогда, когда современные гуру-трейдеры в интернете только ходили
-                в школу.
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- //advantages__cards -->
+        <h2 class="advantages__title section-title">ACADEMY</h2>
+        <TheCards :triggers="triggers" />
       </div>
       <!-- //container -->
       <div class="advantages__star">
@@ -144,28 +50,13 @@
           alt="left-icon"
         />
       </div>
+      <div class="academy-line"></div>
     </section>
+
+ 
     <!-- //ADVANTAGES -->
-
     <TheLessons />
-
-    <!-- INSTRUCTION -->
-    <section class="instruction" id="instruction">
-      <div class="container-1680">
-        <div class="instruction__offer">
-          <h2 class="instruction__title section-title">
-            инструкция для новичка
-          </h2>
-          <p class="instruction__desc">
-            Бесплатное подробное описание как начать свой путь трейдера с
-            инструкцией и видео уроками
-          </p>
-          <a href="#" class="instruction__btn btn"><span>Начать путь</span></a>
-        </div>
-        <div class="instruction__text-large">bloсk13</div>
-      </div>
-    </section>
-    <!-- //INSTRUCTION -->
+    <TheInstruction />
   </div>
 </template>
 
@@ -175,6 +66,28 @@ export default {
   data() {
     return {
       mainBannerBg,
+      triggers: [
+        {
+          title: "SMART-MONEY",
+          about:
+            "Концепция «Умных денег» Вы перестанете торговать так, как это делает большинство, научитесь идентифицировать действия и манипуляции крупных инвесторов, что даст вам конкурентное преимущество и позволит стабильно извлекать из этого прибыль.",
+        },
+        {
+          title: "PRICE ACTION",
+          about:
+            "Фундамент нашего обучения базируется на анализе взаимодействия спроса и предложения с помощью японских свечей и динамики изменения цен на основе механики рынка.",
+        },
+        {
+          title: "Объемный анализ",
+          about:
+            "Вы будете изучать не индикаторы, а профессиональные инструменты, отображающие первопричину движения котировок, и научитесь опережать движение графика на несколько шагов вперед.",
+        },
+        {
+          title: "С нуля до профессионала",
+          about:
+            "Самые сложные инструменты и методы аналитики будут разбираться с самых основ. Вы пройдете путь от новичка, изучающего простейшие инструменты, до гуру, анализирующего кластерный график и биржевой стакан.",
+        },
+      ],
     };
   },
 };

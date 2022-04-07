@@ -14,10 +14,13 @@
               </div>
               <h1 class="intro__title section-title">PRIVAT CLUB</h1>
               <span class="intro__subtitle"
-                >Уникальный клуб для людей готовых много тратить и еще больше заработать.  Личными инсайдами, сигналами, советами. </span
-              >
+                >Уникальный клуб для людей готовых много тратить и еще больше
+                заработать. Личными инсайдами, сигналами, советами.
+              </span>
               <div class="intro__btns">
-                <a href="#register" class="intro__btn btn"><span>Вступить</span></a>
+                <a href="#register" class="intro__btn btn"
+                  ><span>Вступить</span></a
+                >
               </div>
             </div>
           </div>
@@ -29,107 +32,16 @@
     <!-- ADVANTAGES -->
     <section class="advantages" id="advantages">
       <div class="container">
-        <h2 class="advantages__title section-title">С НАМИ ОБРЕТАЮТ СИЛУ</h2>
-        <ul class="advantages__icons">
-          <li class="advantages__icon">
-            <div class="advantages__icon-top">
-              <div class="advantages__icon-rounded">
-                <div class="advantages__icon-title">1M $</div>
-              </div>
-            </div>
-            <div class="advantages__icon-bottom">
-              <div class="advantages__icon-desc">В УПРАВЛЕНИИ</div>
-            </div>
-          </li>
-          <li class="advantages__icon">
-            <div class="advantages__icon-top">
-              <div class="advantages__icon-rounded">
-                <div class="advantages__icon-title">>1000</div>
-              </div>
-            </div>
-            <div class="advantages__icon-bottom">
-              <div class="advantages__icon-desc">
-                ПРИБЫЛЬНЫХ СДЕЛОК <br />
-                с 2017
-              </div>
-            </div>
-          </li>
-          <li class="advantages__icon">
-            <div class="advantages__icon-top">
-              <div class="advantages__icon-rounded">
-                <div class="advantages__icon-title">1.5%</div>
-              </div>
-            </div>
-            <div class="advantages__icon-bottom">
-              <div class="advantages__icon-desc">
-                Средний риск <br />
-                на сделку
-              </div>
-            </div>
-          </li>
-          <li class="advantages__icon">
-            <div class="advantages__icon-top">
-              <div class="advantages__icon-rounded">
-                <div class="advantages__icon-title">5500%</div>
-              </div>
-            </div>
-            <div class="advantages__icon-bottom">
-              <div class="advantages__icon-desc">
-                ДОХОДНОСТЬ с 2019 <br />
-                С РИСКОМ ДО 20% <br />
-                НА ДЕПОЗИТ
-              </div>
-            </div>
-          </li>
-        </ul>
-        <!-- //advantages__icons -->
-        <div class="advantages__cards">
-          <div class="advantages__card">
-            <div class="advantages__card-inner">
-              <h3 class="advantages__card-title">Название</h3>
-              <p class="advantages__card-text">
-                Block #13 - команда трейдеров с высшим уровнем экспертизы. Мы
-                торговали на рынке криптовалют, Forex, CME, NYSE и NASDAQ еще
-                тогда, когда современные гуру-трейдеры в интернете только ходили
-                в школу.
-              </p>
-            </div>
-          </div>
-          <div class="advantages__card">
-            <div class="advantages__card-inner">
-              <h3 class="advantages__card-title">Название</h3>
-              <p class="advantages__card-text">
-                Block #13 - команда трейдеров с высшим уровнем экспертизы. Мы
-                торговали на рынке криптовалют, Forex, CME, NYSE и NASDAQ еще
-                тогда, когда современные гуру-трейдеры в интернете только ходили
-                в школу.
-              </p>
-            </div>
-          </div>
-          <div class="advantages__card">
-            <div class="advantages__card-inner">
-              <h3 class="advantages__card-title">Название</h3>
-              <p class="advantages__card-text">
-                Block #13 - команда трейдеров с высшим уровнем экспертизы. Мы
-                торговали на рынке криптовалют, Forex, CME.
-              </p>
-            </div>
-          </div>
-          <div class="advantages__card">
-            <div class="advantages__card-inner">
-              <h3 class="advantages__card-title">Название</h3>
-              <p class="advantages__card-text">
-                Block #13 - команда трейдеров с высшим уровнем экспертизы. Мы
-                торговали на рынке криптовалют, Forex, CME, NYSE и NASDAQ еще
-                тогда, когда современные гуру-трейдеры в интернете только ходили
-                в школу.
-              </p>
-            </div>
-          </div>
+        <h2 class="advantages__title section-title">PRIVAT CLUB</h2>
+        <TheCards :triggers="triggers"/>
+        <div class="private-lines">
+          <button class="connect-btn">
+            <a href="http://"><span>ПРИСОЕДИНИТСЯ</span> </a>
+          </button>
         </div>
-        <!-- //advantages__cards -->
       </div>
       <!-- //container -->
+
       <div class="advantages__star">
         <img
           src="~/assets/img/advantages/advantages-img2.svg"
@@ -145,32 +57,40 @@
     </section>
     <!-- //ADVANTAGES -->
 
-    <!-- INSTRUCTION -->
-    <section class="instruction" id="instruction">
-      <div class="container-1680">
-        <div class="instruction__offer">
-          <h2 class="instruction__title section-title">
-            инструкция для новичка
-          </h2>
-          <p class="instruction__desc">
-            Бесплатное подробное описание как начать свой путь трейдера с
-            инструкцией и видео уроками
-          </p>
-          <nuxt-link to="/beginner" class="instruction__btn btn"><span>Начать путь</span></nuxt-link>
-        </div>
-        <div class="instruction__text-large">bloсk13</div>
-      </div>
-    </section>
-    <!-- //INSTRUCTION -->
+    <TheInstruction/>
+
+
   </div>
 </template>
 
 <script>
-import mainBannerBg from "~/assets/img/live_trading.jpg";
+import mainBannerBg from "~/assets/img/private-club-img.jpg";
 export default {
   data() {
     return {
       mainBannerBg,
+      triggers: [
+        {
+          title: "Live Trading",
+          about:
+            "Приватный канал с реал-тайм трейдингом, торговой системой и чатом практиков. Это экосистема активного извлечения прибыли из рыночных неэффективностей.",
+        },
+        {
+          title: "Academy",
+          about:
+            "Курс обучения прогрессивному трейдинга с дополнительными привелегиями - своевременной обратной связью от наставника и поддержкой в выполнении домашних заданий.",
+        },
+        {
+          title: "Аналитика",
+          about:
+            "Долгосрочные инвестидеи, сбор портфелей, pre-sale проекты, diamond монеты на ранних стадиях. Общение и обмен опытом с трейдерами и крупными инвесторами.",
+        },
+        {
+          title: "Эксклюзив",
+          about:
+            "Возможность тестирования наших передовых разработок в области алгоритмических торговых систем, ботов и копитрейдинга, а также участие в оффлайн мероприятиях.",
+        },
+      ],
     };
   },
 };

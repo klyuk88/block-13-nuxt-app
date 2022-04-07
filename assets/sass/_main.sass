@@ -995,8 +995,11 @@
 .balance-count
   background: linear-gradient(180deg, #333336 0%, #2A2A2E 100%)
   border-radius: 2px
-  padding: 0 40px
-  height: 40px
+  display: flex
+  align-items: center
+  justify-content: center
+  height: 48px
+  width: 144px
   display: flex
   align-items: center
   justify-content: center
@@ -1014,8 +1017,8 @@
 
 
 .profile-icon
-  width: 40px
-  height: 40px
+  width: 48px
+  height: 48px
   background: linear-gradient(180deg, #333336 0%, #2A2A2E 100%)
   border: 1px solid rgba(255, 255, 255, 0.3)
   display: flex
@@ -1078,6 +1081,9 @@
 
 .lessons__desc
   width: 70%
+  @media screen and ( max-width: 960px )
+    width: 100%
+    
   
 
 .lessons__desc-topic
@@ -1157,3 +1163,273 @@
 
 .profile_tabs_body
   margin-top: 50px
+
+.main-triggers
+  display: grid
+  width: 100%
+  grid-template-columns: repeat(4, 1fr)
+  @media screen and ( max-width: 960px )
+    grid-template-columns: 1fr 1fr
+    row-gap: 60px
+    
+
+.main-trigger
+  text-align: center
+  span
+    font-size: 16px
+    display: block
+    font-weight: 800
+    width: 55%
+    margin: 0 auto
+    text-transform: uppercase
+    line-height: 120%
+    @include gradientText()
+    @media screen and ( max-width: 960px )
+      font-size: 12px
+      
+
+
+.main-trigger-title
+  font-size: 72px
+  font-weight: 800
+  text-transform: uppercase
+  margin-bottom: 15px
+  @include gradientText()
+  @media screen and ( max-width: 960px )
+    font-size: 36px
+    
+
+
+.advantages__cards
+  padding-top: 0
+  margin-top: 80px
+  @media screen and ( max-width: 960px )
+    display: none
+    
+.advantages-mob
+  display: none
+  @media screen and ( max-width: 960px )
+    display: block
+    
+
+.trigger-line
+  width: 100%
+  height: 1px
+  background: linear-gradient(90deg, #F3D7AF 40.68%, #C6A47C 67.19%, rgba(198, 164, 124, 0) 95.23%)
+  margin-bottom: 15px
+
+.advantages__card-inner
+  background: linear-gradient(180deg, #333336 0%, #212124 100%)
+  border: 1px solid #4D4B4F
+  border-radius: 2px
+
+
+
+.connect-btn
+  padding: 13px 44px
+  background: transparent
+  border: none
+  margin: 0 auto
+  display: block
+  cursor: pointer
+  margin-top: 80px
+  @include gradientBorderElem(18px)
+  span
+    @include gradientText()
+
+.connect-btn:hover
+  @include hoverBtn()
+.connect-btn:before
+  @include gradientBorderBefore(18px)
+
+
+.private-lines
+  position: relative
+
+.private-lines:before
+  content: ''
+  position: absolute
+  width: 40%
+  height: 1px
+  background: linear-gradient(90deg, #F3D7AF 40.68%, #C6A47C 67.19%, rgba(198, 164, 124, 0) 95.23%)
+  transform: rotate(180deg)
+  left: 0
+  top: 50%
+  @media screen and ( max-width: 960px )
+    width: 35%
+  @media screen and ( max-width: 576px )
+    width: 70px
+  @media screen and ( max-width: 375px )
+    width: 60px
+
+.private-lines:after
+  content: ''
+  position: absolute
+  width: 40%
+  height: 1px
+  background: linear-gradient(90deg, #F3D7AF 40.68%, #C6A47C 67.19%, rgba(198, 164, 124, 0) 95.23%)
+  right: 0
+  top: 50%
+  @media screen and ( max-width: 960px )
+    width: 35%
+  @media screen and ( max-width: 576px )
+    width: 70px
+  @media screen and ( max-width: 375px )
+    width: 60px
+
+.advantages__card
+  transition: all .3s ease
+  overflow: hidden
+
+.advantages__card:hover
+  transform: translateY(-20px)
+  @media screen and ( max-width: 960px )
+    transform: translate(0)
+    
+
+
+.courses__item:hover
+  background: #333336
+  transform: scale(1.05)
+  transition: all 0.2s ease-in;
+  background: linear-gradient(180deg, #333336 0%, #2A2A2E 100%);
+  @media screen and ( max-width: 960px )
+    transition: scale(0)
+    
+  // .courses__item-top
+  //   height: 450px
+  //   @media screen and ( max-width: 960px )
+  //     height: auto
+
+    
+.courses__item-top
+  height: 240px
+
+.courses__item
+  @media screen and ( max-width: 960px )
+    min-height: auto
+    margin-bottom: 32px
+    
+
+.advantages__card-inner
+  @media screen and ( max-width: 960px )
+    min-height: 350px
+  @media screen and ( max-width: 576px )
+    min-height: 300px
+    
+.advantages-mob
+  margin-top: 120px
+
+.advantages-mob .swiper-container
+  padding-bottom: 30px
+  width: 80%
+  overflow: visible
+
+.advantages__card.swiper-slide
+  transition: transform .3s ease
+
+
+.advantages__card.swiper-slide.swiper-slide-active
+  transform: translateY(-20px)
+  
+
+.courses__btn
+  text-transform: uppercase
+  font-size: 20px
+  font-weight: 700
+  background: linear-gradient(103.31deg, #B3854D 5.67%, #F3D7AF 28.06%, #C6A47C 85.27%)
+  -webkit-background-clip: text
+  -webkit-text-fill-color: transparent
+  background-clip: text
+
+.courses__btn
+  @media screen and ( max-width: 960px )
+    font-size: 16px
+
+.courses__text-item
+  @media screen and ( max-width: 960px )
+    font-size: 14px
+    line-height: 150%
+    font-weight: 400
+
+
+.intro
+  @media screen and ( max-width: 576px )
+    height: 600px
+
+
+.btn_instruction
+  border: 1px solid #fff
+  border-radius: 18px
+  font-size: 16px
+  text-transform: uppercase
+  padding: 13px 43px
+  margin: 0 auto
+  display: inline-block
+  background: rgba(0, 0, 0, 0.15)
+
+.instruction__offer
+  text-align: center
+
+
+.academy-line
+  width: 100%
+  height: 1px
+  background: linear-gradient(90deg, rgba(179, 133, 77, 0) 3.68%, #F3D7AF 33.25%, #C8A57C 75.68%, rgba(198, 164, 124, 0) 95.23%)
+  position: absolute
+  bottom: 0
+
+.advantages.academy-page
+  position: relative
+
+#lessons
+  padding: 124px
+
+.lessons__tabs
+  display: grid
+  grid-template-columns: 50% 50%
+  margin-bottom: 10px
+
+.lessons__tab
+  border-radius: 0
+  height: 46px
+
+.intro__title.section-title
+  line-height: 130%
+
+
+.intro__video-btn
+  @media screen and ( max-width: 576px )
+    width: 50px
+    margin: 0 auto
+    margin-bottom: 120px
+
+
+#register-form__window
+  padding: 54px 24px
+
+
+.saccess_alert_content
+  text-align: center
+
+.saccess_image
+  margin: 0 auto
+  margin-bottom: 25px
+
+.btn_saccess_alert
+  margin: 0 auto
+  margin-top: 25px
+  span
+    @include gradientText()
+
+
+
+.register-form__title
+  font-size: 24px
+  line-height: 130%
+  width: 100%
+
+#register-form .register-form__btn
+  max-width: 100%
+#register-form input
+  width: 100%

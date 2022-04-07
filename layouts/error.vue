@@ -30,6 +30,8 @@ export default {
     background: linear-gradient(180deg, #181818 -6.87%, #1F1E21 100%)
     position: relative
     z-index: 10
+    @media screen and (max-width: 767px)
+        padding: 80px 15px
 
 .error-title
     font-size: 180px
@@ -37,6 +39,8 @@ export default {
     color: #575759
     position: relative
     z-index: 10
+    @media screen and (max-width: 767px)
+        font-size: 100px
 
 .error-subtitle
     font-size: 36px
@@ -52,11 +56,15 @@ export default {
     width: 50%
     margin: 0 auto
     margin-top: 70px
+    @media (max-width: 576px)
+        width: 100%
+        font-size: 14px
+        font-weight: 400
 
 .error-image
     position: absolute
     left: 0
     top: 0
-    z-index: 0
+    z-index: -1
     
 </style>

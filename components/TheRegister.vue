@@ -3,38 +3,44 @@
   <div id="register-form" class="register-form active">
     <div id="register-form__overlay"></div>
     <div id="register-form__window">
-      <div class="register-form__content">
+
+     <SaccessMessage
+      v-if="saccessMessage"
+      :message="saccessMessage"
+      @closeSaccessAlert="closeRegister"
+      />
+
+      <div class="register-form__content"
+       v-if="!saccessMessage"
+      >
         <div class="register-form__title-inner">
           <div class="register-form__title">Регистрация</div>
-          <p class="send_mail_alert" v-if="alertMessage">
-           {{alertMessage}}
-          </p>
+          <!-- <p class="send_mail_alert" v-if="errorMessage">
+            {{ errorMessage }}
+          </p> -->
           <button id="register-form__btn-close" @click="closeRegister"></button>
         </div>
         <form
+          v-if="!sendFormOk"
           class="js-form form-register-form"
-          action="mail.php"
           id="form-register-form"
+          novalidate="true"
           @submit.prevent="sendForm"
         >
           <FormInput
-            :type="'text'"
+            :type="'email'"
             :placeHolder="'E-mail'"
             v-model="inputs.email"
-            :readOnly="false"
-            :error="formErrors.emailError"
           />
           <FormInput
             :type="'tel'"
             :placeHolder="'Телефон'"
             v-model="inputs.phone"
-            :error="formErrors.phoneError"
           />
           <FormInput
             :type="'password'"
             :placeHolder="'Пароль'"
             v-model="inputs.password"
-            :error="formErrors.passwordError"
           />
 
           <button class="register-form__btn btn">
@@ -51,6 +57,35 @@
             <a href="#">Условия использования</a>
           </div>
         </form>
+
+      <!-- подтверждение регистрации -->
+        <form
+          v-if="sendFormOk"
+          class="js-form form-register-form"
+          id="form-register-form"
+          @submit.prevent="acceptRegister"
+        >
+          <FormInput
+            :type="'email'"
+            :placeHolder="'E-mail'"
+            v-model="inputs.email"
+          />
+          <FormInput
+            :type="'text'"
+            :placeHolder="'Введите код из письма'"
+            v-model="code"
+          />
+          <button class="register-form__btn btn">
+            <span>Зарегистрироваться</span>
+          </button>
+
+          <div class="register-form__personal">
+            <span>Входя в систему вы соглашаесть с нашими условиями</span>
+            <a href="#">Политика конфиденциальности</a>
+            <span>и</span>
+            <a href="#">Условия использования</a>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -58,15 +93,14 @@
 </template>
 
 <script>
+import SaccessMessage from './SaccessMessage.vue';
 export default {
+  components: { SaccessMessage },
   data() {
     return {
-      alertMessage: '',
-      formErrors: {
-        emailError: "",
-        phoneError: "",
-        passwordError: "",
-      },
+      saccessMessage: null,
+      sendFormOk: false,
+      code: null,
       inputs: {
         email: null,
         phone: null,
@@ -76,50 +110,33 @@ export default {
     };
   },
   computed: {
-    errorMessage() {
-      return this.$store.state.login.error.message;
-    },
-    errorCode() {
-      return this.$store.state.login.error.code;
+    error() {
+      return this.$store.getters['login/getError'];
     },
   },
   methods: {
     closeRegister() {
       this.$store.commit("closeRegister");
       this.$router.push("");
+      this.$store.commit('login/clearErrors')
     },
     async sendForm() {
-    await this.$store.dispatch("login/register", this.inputs)
-      if (this.errorMessage) {
-        this.formErrors.emailError = null;
-        this.formErrors.phoneError = null;
-        this.formErrors.passwordError = null;
-        switch (this.errorCode) {
-          case 22:
-            this.formErrors.emailError = "Не верно указан e-mail";
-            break;
-          case 2:
-            this.formErrors.emailError = "Не указан e-mail";
-            break;
-          case 3:
-            this.formErrors.passwordError = "Не указан пароль";
-            break;
-          case 23:
-            this.formErrors.phoneError = "Неверное значение номера телефона";
-            break;
-          case 20:
-            this.formErrors.phoneError = "Не указан телефон";
-            break;
-          case 24:
-            this.alertMessage = "Код может быть выслан не чаще, чем один раз в минуту";
-            break;
-        }
+      await this.$store.dispatch("login/register", this.inputs)
+      if (!this.error) {
+        this.sendFormOk = true;
       } else {
-        this.$store.commit('closeRegister')
-        this.$router.push("");
-        this.$store.commit('login/setUserMail', this.inputs.email)
-        this.$store.commit('openAcceptRegister')
-
+        return;
+      }
+    },
+    async acceptRegister() {
+      await this.$store.dispatch("login/acceptRegister", {
+        code: this.code,
+        email: this.inputs.email,
+      })
+      if(!this.error) {
+        this.saccessMessage = `Ваш аккаунт успешно зарегестрирован`
+      } else {
+        return;
       }
     },
     openLogin() {
@@ -130,3 +147,11 @@ export default {
 };
 </script>
 
+
+<style lang="sass" scoped>
+.send_mail_alert
+  text-transform: uppercase
+  font-weight: 600
+  color: #FF4B4B
+
+</style>

@@ -4,15 +4,19 @@
       <div class="container">
         <div class="profile-header-content">
           <h2 class="beginner-header__title profile">ЛИЧНЫЙ КАБИНЕТ</h2>
-
           <div class="profile-btns">
             <div class="balance">
               <span class="balance-title">Мой баланс:</span>
-              <div class="balance-count">
-                <span>$ 24932</span>
+              <div class="balance-count" @click="topBalance">
+                <span class="balance-num">$ {{balance}}</span>
+                <span class="topup">Пополнить</span>
               </div>
             </div>
-            <a href="!#" class="profile-settings profile-icon">
+            <a
+              href="!#"
+              class="profile-settings profile-icon"
+              @click.prevent="openSettings"
+            >
               <img src="~/assets/img/profile/settings.svg" alt="" />
             </a>
             <a href="!#" class="profile-chat profile-icon">
@@ -23,7 +27,7 @@
       </div>
     </section>
 
-    <ProfileBlocks/>
+    <ProfileBlocks />
 
     <section id="profile_tabs_body">
       <div class="container">
@@ -47,12 +51,21 @@
         <div class="profile_tabs_body">
           <component :is="currentTabContent"></component>
         </div>
-        
       </div>
       <!-- container -->
     </section>
-    <img v-if="currentIndex === 1" src="~/assets/img/profile/profile_live_trading_img.png" alt="" class="profile-tabs-bg">
-    <img v-if="currentIndex === 2" src="~/assets/img/profile/club-tab-bg.png" alt="" class="profile-tabs-bg">
+    <img
+      v-if="currentIndex === 1"
+      src="~/assets/img/profile/profile_live_trading_img.png"
+      alt=""
+      class="profile-tabs-bg"
+    />
+    <img
+      v-if="currentIndex === 2"
+      src="~/assets/img/profile/club-tab-bg.png"
+      alt=""
+      class="profile-tabs-bg"
+    />
   </div>
 </template>
 
@@ -65,9 +78,16 @@ export default {
       currentTabContent: "the-academy",
       currentIndex: 0,
       lineActive: "left",
+      balanceBtn: true,
     };
   },
   methods: {
+    topBalance() {
+      this.$store.commit('openBalance')
+    },
+    openSettings() {
+      this.$store.commit("openSettings");
+    },
     changeTab(index) {
       this.currentIndex = this.profileTabs.findIndex(
         (item, idx) => index === idx
@@ -84,9 +104,30 @@ export default {
       }
     },
   },
+  computed: {
+    balance() {
+      return this.$store.getters['login/getBalance']
+    }
+  },
+  async mounted() {
+    await this.$store.dispatch('login/user', this.$cookies.get('token'))
+  },
+
 };
 </script>
 
 <style lang="sass">
+.balance-count
+  cursor: pointer
+  .balance-num
+    transition: opacity .2s ease-out
+  .topup
+    display: none
 
+
+.balance-count:hover
+  .balance-num
+    display: none
+  .topup
+    display: block
 </style>

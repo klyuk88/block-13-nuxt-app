@@ -1,11 +1,11 @@
 <template>
   <div class="input_wrapper">
     <input
-      :class="{ error: !!error }"
+      :class="{ error: !!errorMessage }"
       :type="typeInput"
       :placeholder="placeHolder"
       :value="value"
-      v-mask="type === 'tel' ? '+7(###)###-##-##' : ''"
+      v-mask="type === 'tel' ? '+7(###)#######' : ''"
       :readonly="readOnly"
       @input="$emit('input', $event.target.value)"
     />
@@ -24,17 +24,22 @@
         :fill="showPassword ? '#fff' : '#575759'"
       />
     </svg>
-    <span class="form-error" :class="{ active: !!error }">{{ error }}</span>
+    <span class="form-error" v-if="errorMessage">{{ errorMessage }}</span>
   </div>
 </template>
 <script>
 export default {
   props: {
-    type: String,
+    type: {
+      type: String,
+      default: 'text'
+    },
     placeHolder: String,
     value: [String, Number],
-    readOnly: Boolean || false,
-    error: String,
+    readOnly: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -43,6 +48,17 @@ export default {
       typeInput: this.$props.type,
     };
   },
+  watch: {
+    type: function (newVal) {
+      this.typeInput = newVal
+      if (newVal === "password") {
+      this.typePassword = true;
+    } else {
+      this.typePassword = false;
+    }
+    }
+  },
+
   methods: {
     passwordShow() {
       this.showPassword = !this.showPassword;
@@ -52,6 +68,74 @@ export default {
         this.typeInput = this.$props.type;
       }
     },
+  },
+  computed: {
+    errorMessage() {
+      return this.$store.getters['login/getError']
+    }
+    // errorMessage() {
+    //   if (this.$store.state.login.error) {
+    //     if (
+    //       this.$store.state.login.error.code === 2 &&
+    //       this.$props.type === "email"
+    //     ) {
+    //       return this.$store.state.login.error.message;
+    //     } else if (
+    //       this.$store.state.login.error.code === 3 &&
+    //       this.$props.type === "tel"
+    //     ) {
+    //       return this.$store.state.login.error.message;
+    //     } else if (
+    //       this.$store.state.login.error.code === 17 &&
+    //       this.$props.type === "tel"
+    //     ) {
+    //       return this.$store.state.login.error.message;
+    //     } else if (
+    //       this.$store.state.login.error.code === 3 &&
+    //       this.$props.type === "password"
+    //     ) {
+    //       return this.$store.state.login.error.message;
+    //     } else if (
+    //       this.$store.state.login.error.code === 20 &&
+    //       this.$props.type === "tel"
+    //     ) {
+    //       return this.$store.state.login.error.message;
+    //     } else if (
+    //       this.$store.state.login.error.code === 23 &&
+    //       this.$props.type === "tel"
+    //     ) {
+    //       return this.$store.state.login.error.message;
+    //     } else if (
+    //       this.$store.state.login.error.code === 8 &&
+    //       this.$props.type === "email"
+    //     ) {
+    //       return this.$store.state.login.error.message;
+    //     } else if (
+    //       this.$store.state.login.error.code === 22 &&
+    //       this.$props.type === "email"
+    //     ) {
+    //       return this.$store.state.login.error.message;
+    //     } else if (
+    //       this.$store.state.login.error.code === 5 &&
+    //       this.$props.type === "email"
+    //     ) {
+    //       return this.$store.state.login.error.message;
+    //     } else if (this.$store.state.login.error.code === 9) {
+    //       return this.$store.state.login.error.message;
+    //     } else if (this.$store.state.login.error.code === 24) {
+    //       return this.$store.state.login.error.message;
+    //     } else if (
+    //       this.$store.state.login.error.code === 21 &&
+    //       this.$props.type === "tel"
+    //     ) {
+    //       return this.$store.state.login.error.message;
+    //     } else {
+    //       return "";
+    //     }
+    //   } else {
+    //     return "";
+    //   }
+    // },
   },
   mounted() {
     if (this.$props.type === "password") {
@@ -97,3 +181,4 @@ export default {
   top: 50%
   transform: translateY(-50%)
 </style>
+

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="profile_course_block">
+    <div class="profile_course_block single">
       <h3 class="profile_course_block__title">LIVE TRADING</h3>
       <div class="profile_course_block_count">
         <div class="profile_course_block_count_days">

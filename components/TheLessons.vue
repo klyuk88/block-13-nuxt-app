@@ -42,14 +42,14 @@
               </div> -->
 
               <!-- 3-e состояние плеера с кнопкой снизу, добавляем к плееру кнопку при active -->
-              <div class="lessons__btn-bottom-right active">
+              <!-- <div class="lessons__btn-bottom-right active">
                 <a
                   href="#register"
                   class="lessons__btn btn"
                   @click="openRegister"
                   ><span>Смотреть курс</span></a
                 >
-              </div>
+              </div> -->
             </div>
             <div class="lessons__left-bottom">
               <div class="lessons__desc">
@@ -80,8 +80,10 @@
           <div class="lessons__right">
             <div class="lessons__right-top">
               <div class="lessons__tabs">
-                <button class="lessons__tab active">Тизеры</button>
-                <!-- <button class="lessons__tab">Курсы</button> -->
+                <div><button class="lessons__tab active">Тизеры</button></div>
+                <div><button class="lessons__tab">Курсы</button></div>
+                
+                
               </div>
               <div class="lessons__themes">
                 <div
@@ -116,24 +118,9 @@
                 </div>
               </div>
             </div>
-            <button class="lessons__visible-btn">Посмотреть еще</button>
-            <div class="lessons__right-bottom">
-              <div class="lessons__questions">
-                <div class="lessons__questions-title">
-                  Как получить доступ ко всем курсам?
-                </div>
-                <div class="lessons__questions-desc">
-                  при первой покупке скидка 20%
-                </div>
-                <div class="lessons__questions-btns">
-                  <a href="#" class="btn lessons__questions-btn"
-                    >$ 34 ЗА ВЕСЬ КУРС</a
-                  >
-                  <a href="#" class="btn lessons__questions-btn"
-                    >$13.99 ЗА УРОК</a
-                  >
-                </div>
-              </div>
+            <!-- <button class="lessons__visible-btn">Посмотреть еще</button> -->
+            <div class="lesson_btn">
+              <span>$ 34 — КУПИТЬ ВЕСЬ КУРС</span>
             </div>
           </div>
         </div>
@@ -141,7 +128,6 @@
     </section>
     <!-- //LESSONS -->
   </div>
-
 </template>
 
 <script>
@@ -156,8 +142,8 @@ export default {
       lesson: {},
       percentProgress: null,
       player: "",
-      link: '',
-      video: null
+      link: "",
+      video: null,
     };
   },
 
@@ -186,7 +172,7 @@ export default {
   },
   computed: {},
   async mounted() {
-    try {
+    // try {
       // const video = await this.$axios.$get("video/nVtvPQU8gviTrviqz8", {
       //   headers: {
       //     Authorization:
@@ -200,21 +186,19 @@ export default {
       // this.video.src = this.link
       // this.video.src = 'http://localhost:3000/video.mp4'
       // this.video.play()
-  
-
       // URL.revokeObjectURL( this.link );
       // this.video = this.$refs.video
       // console.log(this.video);
       // this.video.src = this.link
       // this.video.load()
-
-
-    } catch (error) {
-      console.log(error);
-    }
+    // } catch (error) {
+    //   console.log(error);
+    // }
 
     const res = await this.$axios.$get("http://localhost:3000/lessons.json");
     this.lessons = res;
+    this.firstLessonAbout = this.lessons[0].about
+    this.firstLessonTitle = this.lessons[0].name
 
     this.player = this.$refs.plyr.player;
     this.player.source = {
@@ -240,7 +224,5 @@ export default {
 </script>
 
 <style scoped>
-.lessons__btn-bottom-right {
-  background: rgba(0, 0, 0, 0.6);
-}
+
 </style>

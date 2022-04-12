@@ -10,6 +10,7 @@
     <ForgotPassword v-if="forgotPasswordShow" />
     <ProfileSettings v-if="profileSettingsShow" />
     <TopBalance v-if="topBalanceShow"/>
+    <BuyPopup v-if="buyPopup" />
   </div>
 </template>
 
@@ -18,6 +19,9 @@
 export default {
 
   computed: {
+    buyPopup() {
+      return this.$store.state.popup.buy
+    },
     topBalanceShow() {
       return this.$store.state.topBalance
     },

@@ -15,54 +15,19 @@
                   </video>
                 </vue-plyr>
               </client-only>
-
-              <!-- 2-е состояние плеера при добавлении active -->
-              <!-- <div class="lessons__overlay">
-                <div class="lessons__overlay-title">
-                  Тизер —Что такое блокчейн?
-                </div>
-                <div class="lessons__overlay-offer">
-                  <div class="lessons__overlay-offer-title">
-                    Подпишитесь на ACAdemy - Курсы,<br />
-                    чтобы продолжить просмотр
-                  </div>
-                  <div class="lessons__overlay-offer-desc">
-                    От 5400 ₽/мес (оплачивается ежегодно) за неограниченный
-                    просмотр всех 12 занятий и сессий
-                  </div>
-                  <div class="lessons__overlay-offer-btns">
-                    <a href="#" class="btn lessons__questions-btn"
-                      >$ 34 ЗА ВЕСЬ КУРС</a
-                    >
-                    <a href="#" class="btn lessons__questions-btn"
-                      >$13.99 ЗА УРОК</a
-                    >
-                  </div>
-                </div>
-              </div> -->
-
-              <!-- 3-e состояние плеера с кнопкой снизу, добавляем к плееру кнопку при active -->
-              <!-- <div class="lessons__btn-bottom-right active">
-                <a
-                  href="#register"
-                  class="lessons__btn btn"
-                  @click="openRegister"
-                  ><span>Смотреть курс</span></a
-                >
-              </div> -->
             </div>
             <div class="lessons__left-bottom">
               <div class="lessons__desc">
                 <div class="lessons__desc-title">
-                  {{ firstLessonTitle }}
+                  {{ lessonTitle }}
                 </div>
                 <p class="lessons__desc-text">
-                  {{ firstLessonAbout }}
+                  {{ lessonDescription }}
                 </p>
                 <div class="lessons__desc-parametres">
                   <div class="lessons__desc-duration">
                     <span class="lessons__desc-duration-name">
-                      Среднее время курса:
+                      Время курса:
                     </span>
                     <span class="lessons__desc-duration-sum"> 45 минут </span>
                   </div>
@@ -81,9 +46,7 @@
             <div class="lessons__right-top">
               <div class="lessons__tabs">
                 <div><button class="lessons__tab active">Тизеры</button></div>
-                <div><button class="lessons__tab">Курсы</button></div>
-                
-                
+                <div><nuxt-link to="/profile"><button class="lessons__tab">Курсы</button></nuxt-link></div>
               </div>
               <div class="lessons__themes">
                 <div
@@ -94,7 +57,7 @@
                   :class="{ active: index === idx ? true : false }"
                 >
                   <div class="lessons__theme-header">
-                    {{ lesson.id }}. {{ lesson.name }}
+                    {{ index + 1 }}. {{ lesson.name }}
                     <span class="lessons__theme-arrow">
                       <img src="~/assets/img/lessons/lesson-arrow.svg" alt="" />
                     </span>
@@ -104,9 +67,9 @@
                   </div>
 
                   <div class="lessons__theme-desc">
-                    <div class="lessons__theme-title">{{ lesson.time }}</div>
+                    <div class="lessons__theme-title">{{ lessonDuration }}</div>
                     <p class="lessons__theme-text">
-                      {{ lesson.about }}
+                      {{ lesson.shortDescription }}
                     </p>
                     <div class="value">
                       <div
@@ -119,13 +82,16 @@
               </div>
             </div>
             <!-- <button class="lessons__visible-btn">Посмотреть еще</button> -->
+            <nuxt-link to="/profile">
             <div class="lesson_btn">
               <span>$ 34 — КУПИТЬ ВЕСЬ КУРС</span>
             </div>
+            </nuxt-link>
           </div>
         </div>
       </div>
     </section>
+
     <!-- //LESSONS -->
   </div>
 </template>
@@ -136,33 +102,44 @@ export default {
     return {
       isActive: false,
       idx: 0,
-      firstLessonTitle: "",
-      firstLessonAbout: "",
-      lessons: [],
-      lesson: {},
+      lessonTitle: "",
+      lessonDescription: "",
+      lessonDuration: 0,
       percentProgress: null,
-      player: "",
-      link: "",
-      video: null,
+      lesson: null,
+      player: null
     };
+  },
+
+  computed: {
+    lessons() {
+      return this.$store.getters["lessons/getLessons"];
+    },
+    videoKey() {
+      return this.$store.getters["lessons/getVideoKey"];
+    },
   },
 
   methods: {
     openRegister() {
       this.$store.commit("openRegister");
     },
-    openDesc(index) {
+    async openDesc(index) {
       this.idx = index;
       this.lesson = this.lessons.find((item, indx) => indx === index);
-      this.firstLessonTitle = this.lesson.name;
-      this.firstLessonAbout = this.lesson.about;
+      await this.$store.dispatch("lessons/getVideoKey", {
+        typeVideo: 4,
+        elementId: this.lesson.id,
+      });
       this.percentProgress = 0;
+      this.lessonTitle = this.lesson.name
+      this.lessonDescription = this.lesson.fullDescription
       this.player.source = {
         type: "video",
         title: "",
         sources: [
           {
-            src: this.lesson.video,
+            src: `${this.$config.API_URL}/video/${this.videoKey}`,
             type: "video/mp4",
             size: 1080,
           },
@@ -170,53 +147,42 @@ export default {
       };
     },
   },
-  computed: {},
   async mounted() {
-    // try {
-      // const video = await this.$axios.$get("video/nVtvPQU8gviTrviqz8", {
-      //   headers: {
-      //     Authorization:
-      //       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MjM5ODJlMTZkZGRjZTVjNmExNDk2YTEiLCJleHAiOjE2NDgzOTU1MjcsImlhdCI6MTY0ODMwOTEyN30.4YXg_A6HhBOqWadi67fn5mz2OcR-HxWAo85zKJ53lrw",
-      //     Range: "bytes=0-",
-      //   },
-      // });
-      // let blob = new Blob([video], {type: 'video/mp4'});
-      // this.link = URL.createObjectURL(blob)
-      // this.video = this.$refs.videoTag;
-      // this.video.src = this.link
-      // this.video.src = 'http://localhost:3000/video.mp4'
-      // this.video.play()
-      // URL.revokeObjectURL( this.link );
-      // this.video = this.$refs.video
-      // console.log(this.video);
-      // this.video.src = this.link
-      // this.video.load()
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    await this.$store.dispatch("lessons/getLessons");
+    //получаем тизер первого урока
+    await this.$store.dispatch("lessons/getVideoKey", {
+      typeVideo: 4,
+      elementId: this.lessons[0].id,
+    });
+    //получить описание и название первого урока
+    this.lessonTitle = this.lessons[0].name;
+    this.lessonDescription = this.lessons[0].fullDescription;
 
-    const res = await this.$axios.$get("http://localhost:3000/lessons.json");
-    this.lessons = res;
-    this.firstLessonAbout = this.lessons[0].about
-    this.firstLessonTitle = this.lessons[0].name
-
+    //получаем экземпляр плеера и ставим видео из 1го урока
     this.player = this.$refs.plyr.player;
     this.player.source = {
       type: "video",
       title: "",
       sources: [
         {
-          src: this.lessons[0].video,
+          src: `${this.$config.API_URL}/video/${this.videoKey}`,
           type: "video/mp4",
           size: 1080,
         },
       ],
     };
+    //слушаем загрузку мета видео и получаем продолжительность видео
+    this.player.on("loadedmetadata", (event) => {
+      const plyr = event.detail.plyr
+      this.lessonDuration = plyr.duration;
+    });
 
+    //слушаем обновление времени показываем прогресс
     this.player.on("timeupdate", (event) => {
+      const plyr = event.detail.plyr
       this.percentProgress =
         parseInt(
-          (this.player.currentTime / this.player.media.duration) * 100
+          (plyr.currentTime / plyr.media.duration) * 100
         ) || 0;
     });
   },
@@ -224,5 +190,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

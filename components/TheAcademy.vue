@@ -7,7 +7,7 @@
         <h5 class="profile_course_block_count__about">уроков</h5>
       </div>
       <div class="profile_course_block_about">
-        <p class="profile_course_block_about__text">$ 700 за весь курс</p>
+        <p class="profile_course_block_about__text">$ {{coursePrice}} за весь курс</p>
         <p class="profile_course_block_about__price">
           15 уроков с абсолютно новым подходом
         </p>
@@ -16,7 +16,11 @@
         <span>Купить весь курс</span>
       </button>
     </div>
-    <img src="~/assets/img/profile/arrow.svg" alt="" class="profile_course_block_arrow">
+    <img
+      src="~/assets/img/profile/arrow.svg"
+      alt=""
+      class="profile_course_block_arrow"
+    />
     <!-- profile_course_blocks -->
     <div class="profile_video">
       <div class="profile_video_player">
@@ -28,14 +32,10 @@
       </div>
     </div>
     <div class="lessons__left-bottom">
-      <div class="lessons__desc">
-        <div class="lessons__desc-title">Что такое блокчейн</div>
+      <div class="lessons__desc profile">
+        <div class="lessons__desc-title">{{ lessonTitle }}</div>
         <p class="lessons__desc-text">
-          Равным образом постоянное информационно-пропагандистское обеспечение
-          нашей деятельности играет важную роль в формировании новых
-          предложений. С другой стороны постоянный количественный рост и сфера
-          нашей активности в значительной степени обуславливает создание
-          существенных финансовых и административных условий.
+          {{ lessonAbout }}
         </p>
         <div class="lessons__desc-parametres">
           <div class="lessons__desc-duration">
@@ -52,56 +52,36 @@
           </div>
         </div>
       </div>
-      <div class="lesson_btn">
-        <span>КУПИТЬ ВЕСЬ КУРС ЗА $ 700</span>
+      <div class="lesson_btn" @click="openBuy">
+        <span>КУПИТЬ ВЕСЬ КУРС ЗА $ {{ coursePrice }}</span>
       </div>
     </div>
     <!-- lessons__left-bottom -->
     <div class="profile_video_lessons">
       <h3 class="profile_video_lessons__title">Криптокурс, 1-12 частей</h3>
       <div class="profile_video_lessons_grid">
-        <div class="profile_video_lessons_grid_item">
+        <!-- урок  -->
+        <div
+          class="profile_video_lessons_grid_item"
+          v-for="(item, index) in lessons"
+          :key="index"
+          :class="{
+            blocked: item.bought === false && item.price > 0 ? true : false,
+          }"
+        >
           <img
-            src="~/assets/img/profile/video-prev.jpg"
+            :src="`${$config.API_URL}/img/${item.logo}`"
             alt=""
             class="profile_video_lessons_grid_item__image"
+            @click="playLesson(item)"
           />
           <p class="profile_video_lessons_grid_item__title">
-            1. Что такое блокчейн?
+            {{ index + 1 }}. {{ item.name }}
           </p>
           <div class="blocked_overlay">
             <div class="blocked_overlay_content">
               <img
-                src="~/assets/img/profile/video-prev.jpg"
-                alt=""
-                class="blocked_overlay_content__bg"
-              />
-              <img
-                src="~/assets/img/profile/lock.svg"
-                alt=""
-                class="block_content_icon"
-              />
-              <!-- <p class="blocked-overlay__title">
-                Для просмотра<br />необходимо купить урок
-              </p>
-              <button class="btn"><span>Купить урок</span></button> -->
-            </div>
-          </div>
-        </div>
-
-        <div class="profile_video_lessons_grid_item blocked">
-          <img
-            src="~/assets/img/profile/video-prev.jpg"
-            alt=""
-            class="profile_video_lessons_grid_item__image"
-          />
-          <p class="profile_video_lessons_grid_item__title">
-            2. Что такое блокчейн?
-          </p>
-          <div class="blocked_overlay">
-            <div class="blocked_overlay_content">
-              <img
-                src="~/assets/img/profile/video-prev.jpg"
+                :src="`${$config.API_URL}/img/${item.logo}`"
                 alt=""
                 class="blocked_overlay_content__bg"
               />
@@ -113,6 +93,7 @@
             </div>
           </div>
         </div>
+        <!-- урок  -->
       </div>
     </div>
     <!-- profile_video_lessons -->
@@ -130,7 +111,9 @@
         <img src="~/assets/img/profile/play-gold.svg" alt="" />
       </div>
     </div>
+    
   </div>
+  
 </template>
 
 <script>
@@ -138,16 +121,81 @@ export default {
   data() {
     return {
       player: "",
+      lessonTitle: "",
+      lessonAbout: "",
+      isActive: false,
     };
   },
-  mounted() {
+  computed: {
+    lessons() {
+      return this.$store.getters["lessons/getLessons"];
+    },
+    videoKey() {
+      return this.$store.getters["lessons/getVideoKey"];
+    },
+    coursePrice() {
+      return this.$store.getters["lessons/getCoursePrice"];
+    },
+    courseId() {
+      return this.$store.getters['lessons/getCourseId']
+    }
+  },
+  methods: {
+    openBuy() {
+      this.$store.commit('popup/setBuyData', {
+        title: 'Купить весь курс',
+        subtitle: '102 часа, 12 уроков',
+        price: this.coursePrice,
+        id: this.courseId,
+        type: 1
+      })
+     this.$store.commit('popup/openBuy')
+    },
+    async playLesson(item) {
+      await this.$store.dispatch("lessons/getVideoKey", {
+        typeVideo: 2,
+        elementId: item.id,
+        token: this.$cookies.get("token"),
+      });
+      this.lessonTitle = item.name;
+      this.lessonAbout = item.fullDescription;
+      this.player.sourse = {
+        type: "video",
+        title: "",
+        sources: [
+          {
+            src: `${this.$config.API_URL}/video/${this.videoKey}`,
+            type: "video/mp4",
+            size: 1080,
+          },
+        ],
+      };
+    },
+  },
+  async mounted() {
+    await this.$store.dispatch("lessons/getCourse");
+    //получаем уроки c авторизацией
+    await this.$store.dispatch("lessons/getLessons", {
+      token: this.$cookies.get("token"),
+    });
+
+    //получаем видео первого урока
+    await this.$store.dispatch("lessons/getVideoKey", {
+      typeVideo: 2,
+      elementId: this.lessons[0].id,
+      token: this.$cookies.get("token"),
+    });
+
+    this.lessonTitle = this.lessons[0].name;
+    this.lessonAbout = this.lessons[0].fullDescription;
+
     this.player = this.$refs.plyr.player;
     this.player.source = {
       type: "video",
       title: "",
       sources: [
         {
-          src: "http://localhost:3000/video.mp4",
+          src: `${this.$config.API_URL}/video/${this.videoKey}`,
           type: "video/mp4",
           size: 1080,
         },

@@ -38,16 +38,19 @@ export default {
     '@nuxtjs/style-resources'
   ],
   axios: {
-    baseURL: 'http://176.99.9.44:8086/api', // Used as fallback if no runtime config is provided
+    baseURL: process.env.API_URL, // Used as fallback if no runtime config is provided
+  },
+  publicRuntimeConfig: {
+    API_URL: process.env.API_URL
   },
 
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
   ],
   router: {
     middleware: 'header',
-  }
+  },
 }

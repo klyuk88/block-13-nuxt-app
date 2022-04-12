@@ -345,7 +345,7 @@
     left: 0
     width: 100%
     height: 100%
-    z-index: 2
+    z-index: 200
     background: rgba(24, 24, 24, 0.9)
     .video-pop
         position: fixed
@@ -951,6 +951,8 @@
 
 #register-form__window
   z-index: 10000
+  max-width: 400px
+  width: 400px
 
 
 #register-form__overlay
@@ -1057,10 +1059,14 @@
 
 
 .lesson_btn
-  padding: 36px 88px
+  padding: 36px 40px
+  display: flex
+  align-items: center
+  justify-content: center
   transition: all .3s ease
   cursor: pointer
   @include gradientBorderElem(18px)
+  
   @media screen and ( max-width: 960px )
     display: none
     
@@ -1080,7 +1086,7 @@
   filter: brightness(1.3)
 
 .lessons__desc
-  width: 70%
+  width: 80%
   @media screen and ( max-width: 960px )
     width: 100%
     
@@ -1296,10 +1302,10 @@
   @media screen and ( max-width: 960px )
     transition: scale(0)
     
-  // .courses__item-top
-  //   height: 450px
-  //   @media screen and ( max-width: 960px )
-  //     height: auto
+  .courses__item-top
+    height: 450px
+    @media screen and ( max-width: 960px )
+      height: auto
 
     
 .courses__item-top
@@ -1433,3 +1439,17 @@
   max-width: 100%
 #register-form input
   width: 100%
+
+
+.lessons__wrapper
+  gap: 12px
+
+.lessons__desc.profile
+  width: 70%
+
+.profile_video_lessons_grid_item.active
+  border: 1px solid #F3D7AF
+
+.buy-pop-price
+  font-size: 18px
+  @include gradientText()

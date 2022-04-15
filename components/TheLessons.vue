@@ -27,14 +27,14 @@
                 <div class="lessons__desc-parametres">
                   <div class="lessons__desc-duration">
                     <span class="lessons__desc-duration-name">
-                      Время курса:
+                      Общее время курса:
                     </span>
-                    <span class="lessons__desc-duration-sum"> 45 минут </span>
+                    <span class="lessons__desc-duration-sum"> {{courseTime}} </span>
                   </div>
                   <div class="lessons__desc-topic">
                     <span class="lessons__desc-topic-name">Тема: </span>
                     <div class="lessons__desc-topic-list">
-                      Блокчейн, Криптовалюта, Рынок, Анализ и др.
+                      {{courseTheme}}
                     </div>
                   </div>
                 </div>
@@ -84,7 +84,7 @@
             <!-- <button class="lessons__visible-btn">Посмотреть еще</button> -->
             <nuxt-link to="/profile">
             <div class="lesson_btn">
-              <span>$ 34 — КУПИТЬ ВЕСЬ КУРС</span>
+              <span>$ {{coursePrice}} — КУПИТЬ ВЕСЬ КУРС</span>
             </div>
             </nuxt-link>
           </div>
@@ -118,6 +118,15 @@ export default {
     videoKey() {
       return this.$store.getters["lessons/getVideoKey"];
     },
+    courseTime() {
+      return this.$store.getters['lessons/getCourseDuration']
+    },
+    courseTheme() {
+      return this.$store.getters['lessons/getCourseTheme']
+    },
+    coursePrice() {
+      return this.$store.getters['lessons/getCoursePrice']
+    }
   },
 
   methods: {
@@ -139,7 +148,7 @@ export default {
         title: "",
         sources: [
           {
-            src: `${this.$config.API_URL}/video/${this.videoKey}`,
+            src: `${this.$config.API_URL}/video/${this.videoKey}.mp4`,
             type: "video/mp4",
             size: 1080,
           },
@@ -148,6 +157,7 @@ export default {
     },
   },
   async mounted() {
+    await this.$store.dispatch('lessons/getCourse')
     await this.$store.dispatch("lessons/getLessons");
     //получаем тизер первого урока
     await this.$store.dispatch("lessons/getVideoKey", {
@@ -165,7 +175,7 @@ export default {
       title: "",
       sources: [
         {
-          src: `${this.$config.API_URL}/video/${this.videoKey}`,
+          src: `${this.$config.API_URL}/video/${this.videoKey}.mp4`,
           type: "video/mp4",
           size: 1080,
         },

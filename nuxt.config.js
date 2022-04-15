@@ -28,6 +28,7 @@ export default {
     { src: '~/plugins/vue-mask.js', mode: 'client' },
     { src: '~/plugins/vue-awesome-swiper.js', mode: 'client' },
     { src: '~/plugins/vue-clipboard2.js', mode: 'client' },
+    { src: '~/plugins/vue-countdown-timer.js', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

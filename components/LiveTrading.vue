@@ -1,32 +1,12 @@
 <template>
   <div>
-    <div class="profile_course_block single">
-      <h3 class="profile_course_block__title">LIVE TRADING</h3>
-      <div class="profile_course_block_count">
-        <div class="profile_course_block_count_days">
-          <h4>89</h4>
-          <span></span>
-          <h6>Дней</h6>
-        </div>
-        <div class="profile_course_block_count_time">
-          <div class="profile_course_block_count_time__timer">
-            <span class="minute">23</span>:<span class="second">00</span>
-          </div>
-          <div class="line"></div>
-          <h6>Минут</h6>
-        </div>
-      </div>
-      <div class="profile_course_block_about">
-        <p class="profile_course_block_about__text">$ 300 за сезон</p>
-        <p class="profile_course_block_about__price">
-          Каждый период длится 90 дней.
-        </p>
-      </div>
-      <button class="btn profile_course_block__btn">
-        <span>Приобрести</span>
-      </button>
-    </div>
-    <img src="~/assets/img/profile/arrow.svg" alt="" class="profile_course_block_arrow">
+    <div class="profile-card-mob"><ChatCard/></div>
+    
+    <img
+      src="~/assets/img/profile/arrow.svg"
+      alt=""
+      class="profile_course_block_arrow"
+    />
     <div class="live_trading_grid">
       <h6 class="live_trading__title">LIVE TRADING</h6>
       <p class="live_trading__about">
@@ -64,8 +44,15 @@
 export default {
   data() {
     return {
-      liveTradingLink: null,
+      liveTradingLink: this.$store.state.login.user['tgChat'],
     };
+  },
+  computed: {
+    
+   
+  },
+  methods: {
+   
   },
 };
 </script>

@@ -1,21 +1,9 @@
 <template>
   <div>
-    <div class="profile_course_block single">
-      <h3 class="profile_course_block__title">Academy</h3>
-      <div class="profile_course_block_count">
-        <h4 class="profile_course_block_count__num">15</h4>
-        <h5 class="profile_course_block_count__about">уроков</h5>
-      </div>
-      <div class="profile_course_block_about">
-        <p class="profile_course_block_about__text">$ {{coursePrice}} за весь курс</p>
-        <p class="profile_course_block_about__price">
-          15 уроков с абсолютно новым подходом
-        </p>
-      </div>
-      <button class="btn profile_course_block__btn">
-        <span>Купить весь курс</span>
-      </button>
+    <div class="profile-card-mob">
+      <CourseCard/>
     </div>
+    
     <img
       src="~/assets/img/profile/arrow.svg"
       alt=""
@@ -24,11 +12,13 @@
     <!-- profile_course_blocks -->
     <div class="profile_video">
       <div class="profile_video_player">
-        <vue-plyr ref="plyr">
-          <video controls crossorigin playsinline>
-            <source size="" src="" type="video/mp4" />
-          </video>
-        </vue-plyr>
+        <client-only>
+          <vue-plyr ref="plyr">
+            <video controls crossorigin playsinline>
+              <source size="" src="" type="video/mp4" />
+            </video>
+          </vue-plyr>
+        </client-only>
       </div>
     </div>
     <div class="lessons__left-bottom">
@@ -40,25 +30,28 @@
         <div class="lessons__desc-parametres">
           <div class="lessons__desc-duration">
             <span class="lessons__desc-duration-name">
-              Среднее время курса:
+              Общее время курса:
             </span>
-            <span class="lessons__desc-duration-sum"> 45 минут </span>
+            <span class="lessons__desc-duration-sum">
+              {{courseDuration}} </span>
           </div>
           <div class="lessons__desc-topic">
             <span class="lessons__desc-topic-name">Тема: </span>
             <div class="lessons__desc-topic-list">
-              Блокчейн, Криптовалюта, Рынок, Анализ и др.
+              {{courseTheme}}
             </div>
           </div>
         </div>
       </div>
-      <div class="lesson_btn" @click="openBuy">
+      <div class="lesson_btn" v-if="!courseStatus" @click="openBuy">
         <span>КУПИТЬ ВЕСЬ КУРС ЗА $ {{ coursePrice }}</span>
       </div>
     </div>
     <!-- lessons__left-bottom -->
     <div class="profile_video_lessons">
-      <h3 class="profile_video_lessons__title">Криптокурс, 1-12 частей</h3>
+      <h3 class="profile_video_lessons__title">
+        {{courseTheme}}
+        </h3>
       <div class="profile_video_lessons_grid">
         <!-- урок  -->
         <div
@@ -98,26 +91,33 @@
     </div>
     <!-- profile_video_lessons -->
     <div class="profile_video_lessons_grid_mob">
-      <div class="profile_video_lessons_grid_mob_item">
-        <span>1. Что такое блокчейн?</span>
+      <div
+        class="profile_video_lessons_grid_mob_item"
+        v-for="(item, index) in lessons"
+        :key="index"
+        :class="{ purchased: item.bought || item.price === 0 ? true : false }"
+        @click="playLesson(item)"
+      >
+        <span>{{ index + 1 }}. {{ item.name }}</span>
         <img
-          src="~/assets/img/profile/lock.svg"
+          v-if="item.bought || item.price === 0"
+          src="~/assets/img/profile/play-gold.svg"
           alt=""
           class="profile-video-item-mob-lock"
         />
-      </div>
-      <div class="profile_video_lessons_grid_mob_item purchased">
-        <span>2. Что такое блокчейн?</span>
-        <img src="~/assets/img/profile/play-gold.svg" alt="" />
+        <img v-else src="~/assets/img/profile/lock.svg" alt="" />
       </div>
     </div>
-    
+    <div class="lesson_btn mob-btn-buy" v-if="!courseStatus" @click="openBuy">
+      <span>КУПИТЬ ВЕСЬ КУРС ЗА $ {{ coursePrice }}</span>
+    </div>
   </div>
-  
 </template>
 
 <script>
+import CourseCard from './CourseCard.vue';
 export default {
+  components: { CourseCard },
   data() {
     return {
       player: "",
@@ -137,39 +137,52 @@ export default {
       return this.$store.getters["lessons/getCoursePrice"];
     },
     courseId() {
-      return this.$store.getters['lessons/getCourseId']
+      return this.$store.getters["lessons/getCourseId"];
+    },
+    courseDuration() {
+      return this.$store.getters['lessons/getCourseDuration']
+    },
+    courseTheme() {
+      return this.$store.getters['lessons/getCourseTheme']
+    },
+    courseStatus() {
+      return this.$store.getters['lessons/getCourseBought']
     }
   },
   methods: {
     openBuy() {
-      this.$store.commit('popup/setBuyData', {
-        title: 'Купить весь курс',
-        subtitle: '102 часа, 12 уроков',
+      this.$store.commit("popup/setBuyData", {
+        title: "Купить весь курс",
+        subtitle: "102 часа, 12 уроков",
         price: this.coursePrice,
         id: this.courseId,
-        type: 1
-      })
-     this.$store.commit('popup/openBuy')
+        type: 1,
+      });
+      this.$store.commit("popup/openBuy");
     },
     async playLesson(item) {
-      await this.$store.dispatch("lessons/getVideoKey", {
-        typeVideo: 2,
-        elementId: item.id,
-        token: this.$cookies.get("token"),
-      });
-      this.lessonTitle = item.name;
-      this.lessonAbout = item.fullDescription;
-      this.player.sourse = {
-        type: "video",
-        title: "",
-        sources: [
-          {
-            src: `${this.$config.API_URL}/video/${this.videoKey}`,
-            type: "video/mp4",
-            size: 1080,
-          },
-        ],
-      };
+      if (item.bought || item.price === 0) {
+        await this.$store.dispatch("lessons/getVideoKey", {
+          typeVideo: 2,
+          elementId: item.id,
+          token: this.$cookies.get("token"),
+        });
+        this.lessonTitle = item.name;
+        this.lessonAbout = item.fullDescription;
+        this.player.sourse = {
+          type: "video",
+          title: "",
+          sources: [
+            {
+              src: `${this.$config.API_URL}/video/${this.videoKey}`,
+              type: "video/mp4",
+              size: 1080,
+            },
+          ],
+        };
+      } else {
+        return;
+      }
     },
   },
   async mounted() {
@@ -195,7 +208,7 @@ export default {
       title: "",
       sources: [
         {
-          src: `${this.$config.API_URL}/video/${this.videoKey}`,
+          src: `${this.$config.API_URL}/video/${this.videoKey}.mp4`,
           type: "video/mp4",
           size: 1080,
         },

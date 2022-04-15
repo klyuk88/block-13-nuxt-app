@@ -1,32 +1,14 @@
 <template>
   <div>
-    <div class="profile_course_block single">
-      <h3 class="profile_course_block__title">privat club</h3>
-      <div class="profile_course_block_count">
-        <div class="profile_course_block_count_days">
-          <h4>29</h4>
-          <span></span>
-          <h6>Дней</h6>
-        </div>
-        <div class="profile_course_block_count_time">
-          <div class="profile_course_block_count_time__timer">
-            <span class="minute">23</span>:<span class="second">00</span>
-          </div>
-          <div class="line"></div>
-          <h6>Минут</h6>
-        </div>
-      </div>
-      <div class="profile_course_block_about">
-        <p class="profile_course_block_about__text">$ 1500 за сезон</p>
-        <p class="profile_course_block_about__price">
-          Каждый период длится 90 дней.
-        </p>
-      </div>
-      <button class="btn profile_course_block__btn">
-        <span>Приобрести</span>
-      </button>
+    <div class="profile-card-mob">
+      <ChanelCard/>
     </div>
-    <img src="~/assets/img/profile/arrow.svg" alt="" class="profile_course_block_arrow">
+    
+    <img
+      src="~/assets/img/profile/arrow.svg"
+      alt=""
+      class="profile_course_block_arrow"
+    />
     <div class="live_trading_grid">
       <h6 class="live_trading__title">Privite club</h6>
       <p class="live_trading__about">
@@ -64,8 +46,24 @@
 export default {
   data() {
     return {
-      liveTradingLink: null,
+      liveTradingLink: this.$store.state.login.user['tgChannel'],
     };
+  },
+  methods: {
+    buyChanel() {
+      this.$store.commit("popup/setBuyData", {
+        title: "Купить канал",
+        subtitle: "Каждый период длится 90 дней. Как взвешивать решения?",
+        price: this.chanelPrice,
+        type: 3,
+      });
+      this.$store.commit("popup/openBuy");
+    },
+  },
+  computed: {
+    chanelPrice() {
+      return this.$store.getters["lessons/getChannelPrice"];
+    },
   },
 };
 </script>

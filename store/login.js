@@ -1,6 +1,6 @@
 export const state = () => ({
   token: null,
-  user: null,
+  user: {},
   userBalance: null,
   error: null
 })
@@ -26,7 +26,30 @@ export const getters = {
 }
 export const actions = {
 
-//запрос на смему телефона
+  //пополние баланса
+  async payBalance({
+    state,
+    commit,
+    dispatch
+  }, payload) {
+    try {
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${this.$cookies.get('token')}`
+        }
+      }
+      await this.$axios.post(`/payment/${payload.type || 'freecassa'}/pay`, {
+        count: payload.count
+      }, config)
+      await dispatch('userBalance', this.$cookies.get('token'))
+      commit('clearErrors')
+
+    } catch (error) {
+      commit('setErrorMessage', error.response.data)
+    }
+  },
+
+  //запрос на смему телефона
   async changePhone({
     state,
     commit,
@@ -47,7 +70,7 @@ export const actions = {
       commit('setErrorMessage', error.response.data)
     }
   },
-//запрос на смему пароля
+  //запрос на смему пароля
   async changePassword({
     state,
     commit
@@ -64,7 +87,7 @@ export const actions = {
       commit('setErrorMessage', error.response.data)
     }
   },
-//запрос на смену почты
+  //запрос на смену почты
   async setEmail({
     state,
     commit
@@ -83,7 +106,7 @@ export const actions = {
 
   },
 
-//подтверджение на смену почты
+  //подтверджение на смену почты
   async acceptMail({
     state,
     commit,
@@ -103,7 +126,7 @@ export const actions = {
       commit('setErrorMessage', error.response.data)
     }
   },
-//подтверждение на восстановление пароля
+  //подтверждение на восстановление пароля
   async acceptRestorePassword({
     state,
     commit,
@@ -167,13 +190,13 @@ export const actions = {
       })
       await dispatch('userBalance', res.access.token)
       commit('setToken', res.access.token)
-      
+
       commit('clearErrors')
     } catch (error) {
       commit('setErrorMessage', error.response.data)
     }
   },
-//логин в системе
+  //логин в системе
   async login({
     state,
     commit,
@@ -195,8 +218,10 @@ export const actions = {
     }
 
   },
-//запрос баланса
-  async userBalance({commit}, token) {
+  //запрос баланса
+  async userBalance({
+    commit
+  }, token) {
     try {
       const resData = {
         "page": 0,
@@ -221,13 +246,13 @@ export const actions = {
       commit('setErrorMessage', error.response.data)
     }
   },
-//получаем пользователя
+  //получаем пользователя
   async user({
     state,
     commit,
   }, token) {
     try {
-     const user = await this.$axios.$get('user/profile/me', {
+      const user = await this.$axios.$get('user/profile/me', {
         headers: {
           'Authorization': `Bearer ${token}`
         }

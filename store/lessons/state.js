@@ -3,5 +3,6 @@ export default () => ({
     lessons: null,
     videoKey: null,
     course: {},
-    error: {}
+    error: {},
+    telegram: {}
 })

@@ -1,6 +1,6 @@
 export default {
   //получить курсы
-  async getCourse({
+  async getCourses({
     commit
   }, data = {}) {
     try {
@@ -10,6 +10,7 @@ export default {
         }
       }
       const res = await this.$axios.get('/courses', config)
+      console.log(res.data);
       commit('setCourses', res.data.courses)
     } catch (error) {
       console.log(error);
@@ -56,18 +57,24 @@ export default {
     }
   },
 
+//получаем первый курс
   async getCourse({
     commit
-  }) {
+  }, ) {
     try {
-      const res = await this.$axios.get('/courses')
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${this.$cookies.get('token') || ''}`
+        },
+      }
+      const res = await this.$axios.get('/courses', config)
       const firstCourse = res.data.courses[0]
       commit('setCourse', firstCourse)
     } catch (error) {
       console.log(error);
     }
   },
-
+//покупка продукта
   async buyProduct({state, commit, dispatch}, data) {
     try {
       const config = {
@@ -79,8 +86,12 @@ export default {
     } catch (error) {
      commit('setError', error.response.data)
     }
-    
-  }
+  },
+  //запрос цен на телеграм
+  async getTelegramProduct({commit}) {
+    const res = await this.$axios.get('/telegram/prices')
+    commit('setTelegram', res.data)
+  },
 
 
 }

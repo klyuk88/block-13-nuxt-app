@@ -14,6 +14,13 @@ export default {
     setError(state, error) {
         console.log(error);
         state.error = error
-    }
+    }, 
+    clearError(state) {
+        state.error = {}
+    },
+    setTelegram(state, data) {
+        state.telegram = data
+    },
+
 
 }

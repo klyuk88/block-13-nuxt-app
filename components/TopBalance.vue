@@ -3,7 +3,14 @@
   <div id="register-form" class="register-form active">
     <div id="register-form__overlay"></div>
     <div id="register-form__window">
-      <div class="register-form__content">
+    <SaccessMessage
+      v-if="saccessMessage"
+      :message="saccessMessage"
+      @closeSaccessAlert="closePop"
+      />
+      <div class="register-form__content"
+      v-if="!saccessMessage"
+      >
         <div class="register-form__title-inner">
           <div class="register-form__title">ПОПОЛНИТЬ КОШЕЛЕК</div>
           <p class="balance-top-subtitle">
@@ -21,9 +28,10 @@
             :type="'text'"
             v-model="balance"
           />
-          <button class="register-form__btn btn"><span>Продолжить</span></button>
+          <button class="register-form__btn btn"><span>Пополнить</span></button>
         </form>
       </div>
+
     </div>
   </div>
   <!-- //register-form -->
@@ -33,16 +41,31 @@
 export default {
   data() {
     return {
-        balance: null
+        balance: null,
+        saccessMessage: null
     };
   },
   methods: {
-    async sendForm() {},
+    async sendForm() {
+      await this.$store.dispatch('login/payBalance', {
+        type: 'courses_free',
+        count: this.balance
+      })
+      if(!this.error) {
+        this.saccessMessage = `Ваш баланс успешно пополнен`
+      } else {
+        return;
+      }
+    },
     closePop() {
       this.$store.commit("closeBalance");
     },
   },
-  computed: {},
+  computed: {
+    error() {
+      return this.$store.getters['login/getError']
+    }
+  },
 };
 </script>
 

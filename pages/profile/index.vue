@@ -107,10 +107,17 @@ export default {
   computed: {
     balance() {
       return this.$store.getters['login/getBalance']
+    },
+    error() {
+      return this.$store.getters['login/getError']
     }
   },
   async mounted() {
     await this.$store.dispatch('login/user', this.$cookies.get('token'))
+    if(this.error === 'Пользователь не авторизован') {
+      this.$store.commit('login/removeToken')
+      this.$router.push('/#login')
+    }
   },
 
 };

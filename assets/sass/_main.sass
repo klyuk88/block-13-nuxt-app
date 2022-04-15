@@ -223,6 +223,10 @@
 
 .profile_course_block__btn
     border-radius: 18px
+    height: 50px
+    display: flex
+    align-items: center
+    justify-content: center
 
 .live_trading__title
     text-transform: uppercase
@@ -1390,6 +1394,10 @@
 
 #lessons
   padding: 124px
+  @media screen and ( max-width: 960px )
+    padding: 0
+    padding-top: 80px
+    
 
 .lessons__tabs
   display: grid
@@ -1446,6 +1454,9 @@
 
 .lessons__desc.profile
   width: 70%
+  @media screen and ( max-width: 960px )
+    width: 100%
+    
 
 .profile_video_lessons_grid_item.active
   border: 1px solid #F3D7AF
@@ -1453,3 +1464,21 @@
 .buy-pop-price
   font-size: 18px
   @include gradientText()
+
+
+.lesson_btn.mob-btn-buy
+  display: none
+  margin-top: 45px
+  font-size: 15px
+  @media screen and ( max-width: 960px )
+    display: flex
+
+.btn_buy_check
+  margin: 0 auto
+    
+
+.profile-card-mob
+  display: none
+  @media screen and ( max-width: 960px )
+    display: block
+    

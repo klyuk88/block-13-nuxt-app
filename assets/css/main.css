@@ -1769,7 +1769,8 @@ select {
 .form-error {
   display: block;
   text-align: left;
-  margin-bottom: 25px;
+  position: relative;
+  top: -20px;
   color: #FF4B4B;
   transition: all .2s ease;
 }

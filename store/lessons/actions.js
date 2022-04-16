@@ -43,11 +43,11 @@ export default {
     state,
     commit,
     dispatch
-  }, data = {}) {
+  }, data) {
     try {
       const config = {
         headers: {
-          'Authorization': `Bearer ${data.token || ''}`
+          'Authorization': `Bearer ${this.$cookies.get('token')}`
         }
       }
       const res = await this.$axios.get(`/video/${data.typeVideo}/${data.elementId}`, config)

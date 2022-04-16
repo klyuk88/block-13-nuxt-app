@@ -141,6 +141,7 @@ export default {
       })
       if(!this.error) {
         this.saccessMessage = `Ваш пароль успешно изменен`
+        this.$store.dispatch('')
       } else {
         return;
       }
@@ -199,7 +200,7 @@ export default {
       return this.$store.getters['login/getUser']
     },
     error() {
-      return this.$store.getters['login/error'];
+      return this.$store.getters['login/getError'];
     },
     token() {
       return this.$store.getters['login/getToken']

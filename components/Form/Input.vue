@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="input_wrapper">
     <input
       :class="{ error: !!errorMessage }"
@@ -24,8 +25,14 @@
         :fill="showPassword ? '#fff' : '#575759'"
       />
     </svg>
-    <span class="form-error" v-if="errorMessage">{{ errorMessage }}</span>
+    
   </div>
+
+  <FormError
+    :typeInput="typeInput"
+  />
+</div>
+
 </template>
 <script>
 export default {
@@ -73,69 +80,6 @@ export default {
     errorMessage() {
       return this.$store.getters['login/getError']
     }
-    // errorMessage() {
-    //   if (this.$store.state.login.error) {
-    //     if (
-    //       this.$store.state.login.error.code === 2 &&
-    //       this.$props.type === "email"
-    //     ) {
-    //       return this.$store.state.login.error.message;
-    //     } else if (
-    //       this.$store.state.login.error.code === 3 &&
-    //       this.$props.type === "tel"
-    //     ) {
-    //       return this.$store.state.login.error.message;
-    //     } else if (
-    //       this.$store.state.login.error.code === 17 &&
-    //       this.$props.type === "tel"
-    //     ) {
-    //       return this.$store.state.login.error.message;
-    //     } else if (
-    //       this.$store.state.login.error.code === 3 &&
-    //       this.$props.type === "password"
-    //     ) {
-    //       return this.$store.state.login.error.message;
-    //     } else if (
-    //       this.$store.state.login.error.code === 20 &&
-    //       this.$props.type === "tel"
-    //     ) {
-    //       return this.$store.state.login.error.message;
-    //     } else if (
-    //       this.$store.state.login.error.code === 23 &&
-    //       this.$props.type === "tel"
-    //     ) {
-    //       return this.$store.state.login.error.message;
-    //     } else if (
-    //       this.$store.state.login.error.code === 8 &&
-    //       this.$props.type === "email"
-    //     ) {
-    //       return this.$store.state.login.error.message;
-    //     } else if (
-    //       this.$store.state.login.error.code === 22 &&
-    //       this.$props.type === "email"
-    //     ) {
-    //       return this.$store.state.login.error.message;
-    //     } else if (
-    //       this.$store.state.login.error.code === 5 &&
-    //       this.$props.type === "email"
-    //     ) {
-    //       return this.$store.state.login.error.message;
-    //     } else if (this.$store.state.login.error.code === 9) {
-    //       return this.$store.state.login.error.message;
-    //     } else if (this.$store.state.login.error.code === 24) {
-    //       return this.$store.state.login.error.message;
-    //     } else if (
-    //       this.$store.state.login.error.code === 21 &&
-    //       this.$props.type === "tel"
-    //     ) {
-    //       return this.$store.state.login.error.message;
-    //     } else {
-    //       return "";
-    //     }
-    //   } else {
-    //     return "";
-    //   }
-    // },
   },
   mounted() {
     if (this.$props.type === "password") {

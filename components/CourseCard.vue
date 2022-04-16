@@ -6,7 +6,7 @@
       <h5 class="profile_course_block_count__about">уроков</h5>
     </div>
     <div class="profile_course_block_about">
-      <p class="profile_course_block_about__text">$ {{ price }} за весь курс</p>
+      <p class="profile_course_block_about__text">$ {{ coursePrice }} за весь курс</p>
       <p class="profile_course_block_about__price">
         15 уроков с абсолютно новым подходом
       </p>
@@ -53,6 +53,7 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch("lessons/getCourse");
+    console.log(this.coursePrice);
   },
 };
 </script>

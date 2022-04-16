@@ -8,8 +8,6 @@ export default ({
     store.commit('login/setToken', app.$cookies.get('token'))
     //записываем баланс из куки в состояниепри перезагрузке
     store.commit('login/setBalance', app.$cookies.get('balance'))
-
   }
-
 
 }

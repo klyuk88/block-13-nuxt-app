@@ -2,7 +2,7 @@ export const state = () => ({
   token: null,
   user: {},
   userBalance: null,
-  error: null
+  error: {}
 })
 
 export const getters = {
@@ -21,7 +21,9 @@ export const getters = {
     } else {
       return ''
     }
-
+  },
+  getErrorCode(state) {
+    return state.error.code
   }
 }
 export const actions = {
@@ -35,13 +37,13 @@ export const actions = {
     try {
       const config = {
         headers: {
-          'Authorization': `Bearer ${this.$cookies.get('token')}`
+          'Authorization': `Bearer ${state.token}`
         }
       }
       await this.$axios.post(`/payment/${payload.type || 'freecassa'}/pay`, {
         count: payload.count
       }, config)
-      await dispatch('userBalance', this.$cookies.get('token'))
+      await dispatch('userBalance')
       commit('clearErrors')
 
     } catch (error) {
@@ -119,7 +121,7 @@ export const actions = {
         }
       })
       //обновляем пользователя
-      await dispatch('user', state.token)
+      await dispatch('user')
       //чистим ошибки
       commit('clearErrors')
     } catch (error) {
@@ -140,7 +142,7 @@ export const actions = {
       })
       commit('setToken', res.data.access.token)
       //получаем баланс
-      await dispatch('userBalance', res.data.access.token)
+      await dispatch('userBalance')
       //чистим ошибки
       commit('clearErrors')
     } catch (error) {
@@ -188,9 +190,9 @@ export const actions = {
       await this.$cookies.set('token', res.access.token, {
         maxAge: res.access.liveTime
       })
-      await dispatch('userBalance', res.access.token)
       commit('setToken', res.access.token)
 
+      await dispatch('userBalance')
       commit('clearErrors')
     } catch (error) {
       commit('setErrorMessage', error.response.data)
@@ -210,7 +212,7 @@ export const actions = {
       //пишем токен в куки
       commit('setToken', res.access.token)
       //получаем баланс
-      await dispatch('userBalance', res.access.token)
+      await dispatch('userBalance')
       //чистим ошибки
       commit('clearErrors')
     } catch (error) {
@@ -221,7 +223,7 @@ export const actions = {
   //запрос баланса
   async userBalance({
     commit
-  }, token) {
+  }) {
     try {
       const resData = {
         "page": 0,
@@ -229,7 +231,7 @@ export const actions = {
       }
       const resConfig = {
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${state.token}`
         }
       }
       //запрашиваем баланс
@@ -250,11 +252,11 @@ export const actions = {
   async user({
     state,
     commit,
-  }, token) {
+  }, ) {
     try {
       const user = await this.$axios.$get('user/profile/me', {
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${state.token}`
         }
       })
       commit('setUser', user)

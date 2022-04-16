@@ -21,11 +21,15 @@ export default {
         return state.telegram.chat
     },
     getCourseDuration(state) {
-        if(state.course.duration/60 > 60) {
-            return state.course.duration/60/60 + ' часов'
-        } else {
-            return state.course.duration/60 + ' минут'
-        }
+        let time = state.course.duration
+        let h = Math.floor(time / 60 / 60)
+        let m = Math.floor(time / 60) - (h * 60)
+        let s = Math.floor(time % 60)
+        return [
+            h.toString().padStart(2, '0'),
+            m.toString().padStart(2, '0'),
+            s.toString().padStart(2, '0'),
+        ].join(':')
     },
     getCourseTheme(state) {
         return state.course.theme

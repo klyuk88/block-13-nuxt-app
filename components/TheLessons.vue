@@ -67,7 +67,7 @@
                   </div>
 
                   <div class="lessons__theme-desc">
-                    <div class="lessons__theme-title">{{ lessonDuration }}</div>
+                    <div class="lessons__theme-title" v-if="lessonDuration">{{ lessonDuration }}</div>
                     <p class="lessons__theme-text">
                       {{ lesson.shortDescription }}
                     </p>
@@ -104,7 +104,7 @@ export default {
       idx: 0,
       lessonTitle: "",
       lessonDescription: "",
-      lessonDuration: 0,
+      lessonDuration: '00:00:00',
       percentProgress: null,
       lesson: null,
       player: null
@@ -184,7 +184,15 @@ export default {
     //слушаем загрузку мета видео и получаем продолжительность видео
     this.player.on("loadedmetadata", (event) => {
       const plyr = event.detail.plyr
-      this.lessonDuration = plyr.duration;
+      let time = plyr.duration
+      let h = Math.floor(time / 60 / 60)
+       let m = Math.floor(time / 60) - (h * 60)
+      let s = Math.floor(time % 60)
+      this.lessonDuration = [
+        h.toString().padStart(2, '0'),
+        m.toString().padStart(2, '0'),
+        s.toString().padStart(2, '0'),
+      ].join(':')      
     });
 
     //слушаем обновление времени показываем прогресс

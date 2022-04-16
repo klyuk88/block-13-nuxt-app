@@ -125,16 +125,23 @@ export default {
 
 <style lang="sass">
 .balance-count
+  position: relative
   cursor: pointer
   .balance-num
-    transition: opacity .2s ease-out
+    transition: opacity .1s ease-out
+    opacity: 1
   .topup
-    display: none
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    opacity: 0
+    transition: opacity .1s ease
 
 
 .balance-count:hover
   .balance-num
-    display: none
+    opacity: 0
   .topup
-    display: block
+    opacity: 1
 </style>

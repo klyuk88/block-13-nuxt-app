@@ -60,13 +60,14 @@
           :key="index"
           :class="{
             blocked: item.bought === false && item.price > 0 ? true : false,
+            active: activeIndex == index
           }"
         >
           <img
             :src="`${$config.API_URL}/img/${item.logo}`"
             alt=""
             class="profile_video_lessons_grid_item__image"
-            @click="playLesson(item)"
+            @click="playLesson(item, index)"
           />
           <p class="profile_video_lessons_grid_item__title">
             {{ index + 1 }}. {{ item.name }}
@@ -123,7 +124,7 @@ export default {
       player: "",
       lessonTitle: "",
       lessonAbout: "",
-      isActive: false,
+      activeIndex: 0,
     };
   },
   computed: {
@@ -160,21 +161,22 @@ export default {
       });
       this.$store.commit("popup/openBuy");
     },
-    async playLesson(item) {
+    async playLesson(item, index) {
+      this.activeIndex = index
       if (item.bought || item.price === 0) {
         await this.$store.dispatch("lessons/getVideoKey", {
           typeVideo: 2,
           elementId: item.id,
-          token: this.$cookies.get("token"),
         });
+        
         this.lessonTitle = item.name;
         this.lessonAbout = item.fullDescription;
-        this.player.sourse = {
+        this.player.source = {
           type: "video",
           title: "",
           sources: [
             {
-              src: `${this.$config.API_URL}/video/${this.videoKey}`,
+              src: `${this.$config.API_URL}/video/${this.videoKey}.mp4`,
               type: "video/mp4",
               size: 1080,
             },
@@ -196,7 +198,6 @@ export default {
     await this.$store.dispatch("lessons/getVideoKey", {
       typeVideo: 2,
       elementId: this.lessons[0].id,
-      token: this.$cookies.get("token"),
     });
 
     this.lessonTitle = this.lessons[0].name;

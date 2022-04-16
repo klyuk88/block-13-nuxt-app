@@ -1296,29 +1296,46 @@
   @media screen and ( max-width: 960px )
     transform: translate(0)
     
+.courses__text
+  width: 350px
+  margin: 0 auto
+
+.courses__item
+  min-height: 820px
+  position: relative
+  transition: all .3s ease
+  padding-bottom: 50px
+  @media screen and ( max-width: 960px )
+    min-height: auto
+    margin-bottom: 32px
 
 
 .courses__item:hover
   background: #333336
+  transition: all 0.2s ease-in
   transform: scale(1.05)
-  transition: all 0.2s ease-in;
-  background: linear-gradient(180deg, #333336 0%, #2A2A2E 100%);
+  z-index: 99
+  .courses__item-link
+    height: 450px
+    transition: height .3s ease
+    @media screen and ( max-width: 960px)
+      height: auto
   @media screen and ( max-width: 960px )
     transition: scale(0)
-    
-  .courses__item-top
-    height: 450px
-    @media screen and ( max-width: 960px )
-      height: auto
 
-    
-.courses__item-top
-  height: 240px
+.courses__item-link
+  overflow: hidden
+  position: relative
+  height: 350px
+  margin-bottom: 35px
 
-.courses__item
-  @media screen and ( max-width: 960px )
-    min-height: auto
-    margin-bottom: 32px
+.courses__item-link-img
+  position: absolute
+  width: 100%
+  height: 450px
+  top: 0
+  left: 0
+  object-fit: cover
     
 
 .advantages__card-inner

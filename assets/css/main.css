@@ -852,9 +852,8 @@ select {
   width: 33.33%;
   transition: all 0.3s ease;
   background: rgba(0, 0, 0, 0.2);
-  min-height: 950px;
 }
-.courses__item-top {
+/* .courses__item-top {
   height: 338px;
   transition: all 0.5s ease;
   margin-bottom: 6rem;
@@ -866,7 +865,7 @@ select {
   .courses__item-top {
     margin-bottom: 0;
   }
-}
+} */
 
 @media (max-width: 575px) {
   .courses__item-bottom {
@@ -895,7 +894,6 @@ select {
   }
 }
 .courses__text {
-  padding: 2rem 6rem 2rem 6rem;
   transition: all 0.5s ease;
 }
 .courses__text-title {

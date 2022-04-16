@@ -31,7 +31,7 @@
     <section class="advantages" id="advantages">
       <TheNumbers />
       <div class="container">
-        <TheCards :triggers="triggers"/>
+        <TheCards :triggers="triggers" />
         <!-- //advantages__cards -->
       </div>
       <!-- //container -->
@@ -56,14 +56,11 @@
         <ul class="courses__list">
           <li class="courses__item">
             <a href="#" class="courses__item-link">
-              <div
-                class="courses__item-top bg-set"
-                :style="{ backgroundImage: `url('${itemOneBg}')` }"
-              >
-                <!-- <div class="courses__video-btn">
-                  <img src="~/assets/img/intro/video-btn.svg" alt="video-btn" />
-                </div> -->
-              </div>
+              <img
+                src="~/assets/img/trigger-1.jpg"
+                alt=""
+                class="courses__item-link-img"
+              />
             </a>
             <div class="courses__item-bottom">
               <div class="courses__text">
@@ -86,14 +83,11 @@
           <!-- //courses__item -->
           <li class="courses__item">
             <a href="#" class="courses__item-link">
-              <div
-                class="courses__item-top bg-set"
-                :style="{ backgroundImage: `url('${itemTwoBg}')` }"
-              >
-                <!-- <div class="courses__video-btn">
-                  <img src="~/assets/img/intro/video-btn.svg" alt="video-btn" />
-                </div> -->
-              </div>
+              <img
+                src="~/assets/img/trigger-2.jpg"
+                alt=""
+                class="courses__item-link-img"
+              />
             </a>
             <div class="courses__item-bottom">
               <div class="courses__text">
@@ -120,14 +114,11 @@
           <!-- //courses__item -->
           <li class="courses__item">
             <a href="#" class="courses__item-link">
-              <div
-                class="courses__item-top bg-set"
-                :style="{ backgroundImage: `url('${itemThreeBg}')` }"
-              >
-                <!-- <div class="courses__video-btn">
-                  <img src="~/assets/img/intro/video-btn.svg" alt="video-btn" />
-                </div> -->
-              </div>
+              <img
+                src="~/assets/img/trigger-3.jpg"
+                alt=""
+                class="courses__item-link-img"
+              />
             </a>
             <div class="courses__item-bottom">
               <div class="courses__text">
@@ -159,16 +150,10 @@
 
 <script>
 import introBannerBg from "~/assets/img/intro/intro-baner.png";
-import itemOneBg from "~/assets/img/trigger-1.jpg";
-import itemTwoBg from "~/assets/img/trigger-2.jpg";
-import itemThreeBg from "~/assets/img/trigger-3.jpg";
 export default {
   data() {
     return {
       introBannerBg,
-      itemOneBg,
-      itemTwoBg,
-      itemThreeBg,
       triggers: [
         {
           title: "Экспертиза",

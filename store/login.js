@@ -16,11 +16,7 @@ export const getters = {
     return state.userBalance
   },
   getError(state) {
-    if (state.error) {
-      return state.error.message
-    } else {
-      return ''
-    }
+    return state.error.message
   },
   getErrorCode(state) {
     return state.error.code
@@ -295,6 +291,6 @@ export const mutations = {
     state.error = payload
   },
   clearErrors(state) {
-    state.error = null
+    state.error = {}
   }
 }

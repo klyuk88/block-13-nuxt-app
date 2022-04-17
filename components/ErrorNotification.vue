@@ -16,8 +16,6 @@ export default {
         errorValidate() {
             if(this.errorCode !== 2 && this.errorCode !== 3 && this.errorCode !== 22 && this.errorCode !== 23) {
                 return this.error
-            } else {
-                return null
             }
         }
     }

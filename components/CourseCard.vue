@@ -52,7 +52,6 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch("lessons/getCourse");
-    console.log(this.coursePrice);
   },
 };
 </script>

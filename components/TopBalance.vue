@@ -14,7 +14,7 @@
         <div class="register-form__title-inner">
           <div class="register-form__title">ПОПОЛНИТЬ КОШЕЛЕК</div>
           <p class="balance-top-subtitle">
-            1$ = 1b монете внутреннего кошелька
+            1₽ = 1 монете внутреннего кошелька
           </p>
           <button id="register-form__btn-close" @click="closePop"></button>
         </div>
@@ -24,7 +24,7 @@
           @submit.prevent="sendForm"
         >
           <FormInput
-            :placeHolder="'Укажите нужную сумму — $'"
+            :placeHolder="'Укажите нужную сумму — ₽'"
             :type="'text'"
             v-model="balance"
           />

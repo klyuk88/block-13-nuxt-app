@@ -16,10 +16,20 @@ export const getters = {
     return state.userBalance
   },
   getError(state) {
-    return state.error.message
+    if(state.error) {
+      return state.error.message
+    } else {
+      return ''
+    }
+    
   },
   getErrorCode(state) {
-    return state.error.code
+    if(state.error) {
+      return state.error.code
+    } else {
+      return ''
+    }
+    
   }
 }
 export const actions = {
@@ -218,6 +228,7 @@ export const actions = {
   },
   //запрос баланса
   async userBalance({
+    state,
     commit
   }) {
     try {

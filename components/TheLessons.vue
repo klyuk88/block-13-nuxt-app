@@ -84,7 +84,7 @@
             <!-- <button class="lessons__visible-btn">Посмотреть еще</button> -->
             <nuxt-link to="/profile">
             <div class="lesson_btn">
-              <span>$ {{coursePrice}} — КУПИТЬ ВЕСЬ КУРС</span>
+              <span>₽ {{coursePrice}} — КУПИТЬ ВЕСЬ КУРС</span>
             </div>
             </nuxt-link>
           </div>

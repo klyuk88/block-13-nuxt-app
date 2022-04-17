@@ -11,7 +11,6 @@
         15 уроков с абсолютно новым подходом
       </p>
     </div>
-
     <button class="btn profile_course_block__btn" @click="buyCourse" :disabled="courseBougth ? true : false">
       <span v-if="!courseBougth">Купить весь курс</span>
       <img

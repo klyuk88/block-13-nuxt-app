@@ -2,7 +2,7 @@ export const state = () => ({
   token: null,
   user: {},
   userBalance: null,
-  error: {}
+  error: {},
 })
 
 export const getters = {

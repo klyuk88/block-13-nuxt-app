@@ -22,12 +22,14 @@
           </p>
           <button id="register-form__btn-close" @click="closePop"></button>
         </div>
+        <ErrorNotification />
        
        <!-- форма настроек  -->
           <form
             v-if="!acceptEmailForm && !changePasswordForm"
             class="js-form form-register-form"
             id="form-register-form"
+            novalidate
           >
             <FormInput
               :placeHolder="'E-mail'"
@@ -64,6 +66,7 @@
             class="js-form form-register-form"
             id="form-register-form"
             @submit.prevent="sendAcceptMail"
+            novalidate
           >
             <FormInput
               :placeHolder="'E-mail'"
@@ -88,6 +91,7 @@
             class="js-form form-register-form"
             id="form-register-form"
             @submit.prevent="changePassword"
+            novalidate
           >
             <FormInput
               :placeHolder="'Введите старый пароль'"

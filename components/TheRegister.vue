@@ -20,6 +20,7 @@
           </p> -->
           <button id="register-form__btn-close" @click="closeRegister"></button>
         </div>
+        <ErrorNotification />
         <form
           v-if="!sendFormOk"
           class="js-form form-register-form"

@@ -19,14 +19,16 @@
           <button id="register-form__btn-close" @click="closePop"></button>
         </div>
         <!-- запрос на восстановлнеие пароля -->
+        <ErrorNotification />
         <form
           v-if="!sendFormOk"
           class="js-form form-register-form"
           id="form-register-form"
+          novalidate="true"
           @submit.prevent="sendForm"
         >
           <FormInput
-            :type="'text'"
+            :type="'email'"
             :placeHolder="'E-mail'"
             v-model="emailInput"
           />
@@ -45,6 +47,7 @@
           v-if="sendFormOk"
           class="js-form form-register-form"
           id="form-register-form"
+          novalidate
           @submit.prevent="acceptSendForm"
         >
           <FormInput

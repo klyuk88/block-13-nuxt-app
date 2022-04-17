@@ -2,7 +2,7 @@
 <div>
   <div class="input_wrapper">
     <input
-      :class="{ error: !!errorMessage }"
+      :class="{ 'error': !!errorValidate }"
       :type="typeInput"
       :placeholder="placeHolder"
       :value="value"
@@ -25,12 +25,8 @@
         :fill="showPassword ? '#fff' : '#575759'"
       />
     </svg>
-    
   </div>
-
-  <FormError
-    :typeInput="typeInput"
-  />
+  <span class="form-error" v-if="errorValidate">{{errorValidate}}</span>
 </div>
 
 </template>
@@ -77,9 +73,31 @@ export default {
     },
   },
   computed: {
-    errorMessage() {
+    error() {
       return this.$store.getters['login/getError']
+    },
+    errorCode() {
+      return this.$store.getters['login/getErrorCode']
+    },
+    errorValidate() {
+      //E-mail не указан
+      if(this.errorCode === 2 && this.typeInput === 'email') {
+        return this.error
+      }
+      //Пароль не указан
+      if(this.errorCode === 3 && this.typeInput === 'password') {
+        return this.error
+      }
+      //Неверное значение e-mail
+      if(this.errorCode === 22 && this.typeInput === 'email') {
+        return this.error
+      }
+      //Неверное значение номера телефона
+      if(this.errorCode === 23 && this.typeInput === 'tel') {
+        return this.error
+      }
     }
+    
   },
   mounted() {
     if (this.$props.type === "password") {

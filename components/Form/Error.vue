@@ -8,11 +8,8 @@ export default {
   },
   computed: {
     error() {
-      return this.$store.getters["login/getError"];
-    },
-    code() {
-      return this.$store.getters["login/getErrorCode"];
-    },
+      return this.$store.getters['login/getError']
+    }
   },
 };
 </script>

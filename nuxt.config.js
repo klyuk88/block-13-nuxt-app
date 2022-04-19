@@ -44,14 +44,14 @@ export default {
   publicRuntimeConfig: {
     API_URL: process.env.API_URL
   },
-
-
+  target: 'static',
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
   ],
   router: {
+    base: '/block13/',
     middleware: 'header',
   },
 }

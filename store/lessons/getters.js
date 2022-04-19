@@ -9,16 +9,16 @@ export default {
         return state.videoKey
     },
     getCoursePrice(state) {
-        return state.course.price
+        return state.course.price.discountPrice
     },
     getCourseId(state) {
         return state.course.id
     },
     getChannelPrice(state) {
-        return state.telegram.channel
+        return state.telegram.channel.discountPrice
     },
     getChatPrice(state) {
-        return state.telegram.chat
+        return state.telegram.chat.discountPrice
     },
     getCourseDuration(state) {
         let time = state.course.duration
@@ -36,6 +36,8 @@ export default {
     },
     getCourseBought(state) {
         return state.course.bought
+    },
+    getCourse(state) {
+        return state.course
     }
-
 }

@@ -8,7 +8,7 @@
       <div class="container">
         <div class="beginner_content_wrap">
           <div>
-            <h2 class="beginner-header__title">ИНСТРУКЦИЯ НОВИЧКА</h2>
+            <h2 class="beginner-header__title">ИНСТРУКЦИЯ для НОВИЧКА</h2>
           </div>
           <div>
             <img src="~/assets/img/beginners/zeus.png" alt="" />

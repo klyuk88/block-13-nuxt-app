@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="lesson_btn" v-if="!courseStatus" @click="openBuy">
-        <span>КУПИТЬ ВЕСЬ КУРС ЗА $ {{ coursePrice }}</span>
+        <span>КУПИТЬ ВЕСЬ КУРС ЗА $ {{coursePrice}}</span>
       </div>
     </div>
     <!-- lessons__left-bottom -->
@@ -113,12 +113,11 @@
       <span>КУПИТЬ ВЕСЬ КУРС ЗА $ {{ coursePrice }}</span>
     </div>
   </div>
+  
 </template>
 
 <script>
-import CourseCard from './CourseCard.vue';
 export default {
-  components: { CourseCard },
   data() {
     return {
       player: "",
@@ -148,7 +147,8 @@ export default {
     },
     courseStatus() {
       return this.$store.getters['lessons/getCourseBought']
-    }
+    },
+    
   },
   methods: {
     openBuy() {
@@ -158,6 +158,9 @@ export default {
         price: this.coursePrice,
         id: this.courseId,
         type: 1,
+        course: {
+          price: {}
+        }
       });
       this.$store.commit("popup/openBuy");
     },

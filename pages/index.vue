@@ -19,7 +19,7 @@
                 >Бесплатный курс с новым подходом к криптовалюте и
                 блокчейн</span
               >
-              <a href="#" class="intro__btn btn"><span>Подробнее</span></a>
+              <nuxt-link to="/profile" class="intro__btn btn"><span>Подробнее</span></nuxt-link>
             </div>
           </div>
         </div>

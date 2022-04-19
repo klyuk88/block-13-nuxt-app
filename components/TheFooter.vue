@@ -13,24 +13,19 @@
             <div class="footer__nav-wrapper">
               <ul class="footer__nav-left">
                 <li class="footer__nav-item">
-                  <a href="#" class="footer__nav-link">О нас</a>
+                  <nuxt-link to="/academy" class="footer__nav-link">Academy</nuxt-link>
                 </li>
+                
                 <li class="footer__nav-item">
-                  <a href="#" class="footer__nav-link">Курсы</a>
-                </li>
-                <li class="footer__nav-item">
-                  <a href="#" class="footer__nav-link">Торговля</a>
+                  <nuxt-link to="live-trading " class="footer__nav-link">Live Trading </nuxt-link>
                 </li>
               </ul>
               <ul class="footer__nav-right">
                 <li class="footer__nav-item">
-                  <a href="#" class="footer__nav-link">Инструкция новичка</a>
+                  <nuxt-link to="/beginner" class="footer__nav-link">Инструкция для новичка</nuxt-link>
                 </li>
                 <li class="footer__nav-item">
-                  <a href="#" class="footer__nav-link">Клуб</a>
-                </li>
-                <li class="footer__nav-item">
-                  <a href="#" class="footer__nav-link">Контакты</a>
+                  <nuxt-link to="/private-club" class="footer__nav-link">Private club</nuxt-link>
                 </li>
               </ul>
             </div>

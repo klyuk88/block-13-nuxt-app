@@ -878,8 +878,6 @@
 
 .beginner-body
   position: relative
-  @media screen and ( max-width: 576px )
-    transform: translateY(-80px)
     
 
 .decor-poligon
@@ -957,6 +955,10 @@
   z-index: 10000
   max-width: 400px
   width: 400px
+  @media screen and ( max-width: 576px )
+    width: 95%
+    padding: 35px 20px!important
+    
 
 
 #register-form__overlay
@@ -1321,7 +1323,9 @@
     @media screen and ( max-width: 960px)
       height: auto
   @media screen and ( max-width: 960px )
-    transition: scale(0)
+    transform: none
+    -webkit-transform: none
+    background: rgba(0, 0, 0, 0.2)
 
 .courses__item-link
   overflow: hidden
@@ -1499,3 +1503,53 @@
   @media screen and ( max-width: 960px )
     display: block
     
+#header__nav
+  @media screen and ( max-width: 960px )
+    display: none
+      
+#header
+  @media screen and ( max-width: 960px )
+    padding: 24px 0
+
+.header__inner
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+.mob-nav-item
+  position: relative
+
+.mob-nav-item-wrap
+  display: none
+  margin: 0 auto
+  @media screen and ( max-width: 960px )
+    display: block
+
+.mob-nav-item-title
+  display: flex
+  align-items: center
+  font-size: 14px
+  img
+    width: 10px
+    margin-left: 5px
+    transition: transform .3s ease
+  img.active
+    transform: rotate(-180deg)
+
+.mob-nav-submenu
+  display: none
+  position: absolute
+  width: 200px
+  background: linear-gradient(180deg, #333336 0%, #2A2A2E 100%)
+  transform: translateX(-30%)
+  margin-top: 15px
+  li
+    text-align: center
+    border-bottom: 1px solid #47474A
+    a
+      font-size: 12px
+      text-transform: uppercase
+      padding: 20px
+
+.mob-nav-submenu.active
+  display: block

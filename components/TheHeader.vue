@@ -4,9 +4,9 @@
     <header class="header" id="header">
       <div class="container">
         <div class="header__inner">
-          <a href="/" class="header__logo-link">
+          <nuxt-link to="/" class="header__logo-link">
             <img src="~/assets/img/header/bloсk13.svg" alt="" />
-          </a>
+          </nuxt-link>
 
           <!-- Navigation -->
           <div class="header-nav" id="overlaymenu">
@@ -46,6 +46,30 @@
             </nav>
             <!-- //Navigation -->
           </div>
+
+          <ul class="mob-nav-item-wrap">
+            <li class="mob-nav-item" @click="mobSubMenu = !mobSubMenu">
+              <span class="mob-nav-item-title">
+                Разделы
+                <img
+                  src="~/assets/img/header/arrow-header.svg"
+                  alt=""
+                  :class="{ active: mobSubMenu }"
+                />
+              </span>
+              <ul class="mob-nav-submenu" :class="{ active: mobSubMenu }">
+                <li>
+                  <nuxt-link to="/academy">Academy</nuxt-link>
+                </li>
+                <li>
+                  <nuxt-link to="/live-trading">Live Trading</nuxt-link>
+                </li>
+                <li>
+                  <nuxt-link to="/private-club">Private Club</nuxt-link>
+                </li>
+              </ul>
+            </li>
+          </ul>
 
           <!-- Burger -->
           <button class="menu" id="toggle" @click="mobMenuShow">
@@ -95,9 +119,17 @@
               </div>
 
               <div class="mob_account_wrap_row">
-                <span><a href="!#" @click.prevent="openTopBalance">Пополнить</a></span>
+                <span
+                  ><a href="!#" @click.prevent="openTopBalance"
+                    >Пополнить</a
+                  ></span
+                >
                 <span>|</span>
-                <span><a href="!#" @click.prevent="openSettings">Настройки</a></span>
+                <span
+                  ><a href="!#" @click.prevent="openSettings"
+                    >Настройки</a
+                  ></span
+                >
               </div>
 
               <div class="mob_account_wrap_row">
@@ -154,6 +186,7 @@
 export default {
   data() {
     return {
+      mobSubMenu: false,
       mobMenu: false,
       menu: [
         {
@@ -161,12 +194,8 @@ export default {
           slug: "/",
         },
         {
-          title: "Инструкция новичка",
+          title: "Инструкция для новичка",
           slug: "/beginner",
-        },
-        {
-          title: "Privat Club",
-          slug: "/private-club",
         },
         {
           title: "Academy",
@@ -175,6 +204,10 @@ export default {
         {
           title: "Live Trading",
           slug: "/live-trading",
+        },
+        {
+          title: "Privat Club",
+          slug: "/private-club",
         },
       ],
     };
@@ -189,7 +222,7 @@ export default {
 
   computed: {
     login() {
-      return this.$store.getters['login/getToken'];
+      return this.$store.getters["login/getToken"];
     },
     balance() {
       return this.$store.getters["login/getBalance"];
@@ -198,10 +231,10 @@ export default {
 
   methods: {
     openSettings() {
-      this.$store.commit('openSettings')
+      this.$store.commit("openSettings");
     },
     openTopBalance() {
-      this.$store.commit('openBalance')
+      this.$store.commit("openBalance");
     },
     logout() {
       this.$store.commit("login/removeToken");

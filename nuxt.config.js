@@ -51,7 +51,6 @@ export default {
     'cookie-universal-nuxt',
   ],
   router: {
-    base: '/block13/',
     middleware: 'header',
   },
 }

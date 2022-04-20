@@ -36,7 +36,7 @@
     </div>
     <div class="profile_course_block_about">
       <p class="profile_course_block_about__text">
-        $ {{ chanelPrice }} за сезон
+        {{ chanelPrice }} за сезон
       </p>
       <p class="profile_course_block_about__price">
         Каждый период длится 90 дней.

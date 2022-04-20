@@ -29,7 +29,12 @@ export const getters = {
     } else {
       return ''
     }
-    
+  },
+  getChanel(state) {
+    return state.user.tgChannel
+  },
+  getChat(state) {
+    return state.user.tgChat
   }
 }
 export const actions = {

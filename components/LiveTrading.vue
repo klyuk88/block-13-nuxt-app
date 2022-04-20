@@ -44,7 +44,7 @@
 export default {
   data() {
     return {
-      liveTradingLink: this.$store.state.login.user['tgChat'],
+      liveTradingLink: this.$store.getters['login/getChat'],
     };
   },
   computed: {

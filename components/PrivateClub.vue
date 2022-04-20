@@ -46,9 +46,10 @@
 export default {
   data() {
     return {
-      liveTradingLink: this.$store.state.login.user['tgChannel'],
+      liveTradingLink: this.$store.getters['login/getChanel']
     };
   },
+ 
   methods: {
     buyChanel() {
       this.$store.commit("popup/setBuyData", {
@@ -57,13 +58,18 @@ export default {
         price: this.chanelPrice,
         type: 3,
       });
+
       this.$store.commit("popup/openBuy");
     },
   },
+
   computed: {
     chanelPrice() {
       return this.$store.getters["lessons/getChannelPrice"];
     },
+    tgChanel() {
+      return this.$store.getters['login/getChanel']
+    }
   },
 };
 </script>

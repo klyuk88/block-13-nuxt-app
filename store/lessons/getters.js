@@ -9,16 +9,28 @@ export default {
         return state.videoKey
     },
     getCoursePrice(state) {
-        return state.course.price.discountPrice
+        if(state.course.price.discountPercent) {
+            return `₽ <del>${state.course.price.price}</del> ₽${state.course.price.discountPrice}`
+        } else {
+            return `₽ ${state.course.price.price}`
+        }
     },
     getCourseId(state) {
         return state.course.id
     },
     getChannelPrice(state) {
-        return state.telegram.channel.discountPrice
+        if(state.telegram.channel.discountPercent) {
+            return `₽ <del>${state.telegram.channel.price}</del> ₽${state.telegram.channel.discountPrice}`
+        } else {
+            return `₽ ${state.telegram.channel.price}`
+        }
     },
     getChatPrice(state) {
-        return state.telegram.chat.discountPrice
+        if(state.telegram.chat.discountPercent) {
+            return `₽ <del>${state.telegram.chat.price}</del> ₽${state.telegram.chat.discountPrice}`
+        } else {
+            return `₽ ${state.telegram.chat.price}`
+        }
     },
     getCourseDuration(state) {
         let time = state.course.duration

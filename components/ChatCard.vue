@@ -35,7 +35,7 @@
       </client-only>
     </div>
     <div class="profile_course_block_about">
-      <p class="profile_course_block_about__text">$ {{ chatPrice }} за сезон</p>
+      <p class="profile_course_block_about__text">{{ chatPrice }} за сезон</p>
       <p class="profile_course_block_about__price">
         Каждый период длится 90 дней.
       </p>

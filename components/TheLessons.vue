@@ -31,12 +31,12 @@
                     </span>
                     <span class="lessons__desc-duration-sum"> {{courseTime}} </span>
                   </div>
-                  <div class="lessons__desc-topic">
+                  <!-- <div class="lessons__desc-topic">
                     <span class="lessons__desc-topic-name">Тема: </span>
                     <div class="lessons__desc-topic-list">
                       {{courseTheme}}
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -84,7 +84,7 @@
             <!-- <button class="lessons__visible-btn">Посмотреть еще</button> -->
             <nuxt-link to="/profile">
             <div class="lesson_btn">
-              <span>₽ {{coursePrice}} — КУПИТЬ ВЕСЬ КУРС</span>
+              <span>₽ {{course.price.discountPrice}} — КУПИТЬ ВЕСЬ КУРС</span>
             </div>
             </nuxt-link>
           </div>
@@ -124,8 +124,8 @@ export default {
     courseTheme() {
       return this.$store.getters['lessons/getCourseTheme']
     },
-    coursePrice() {
-      return this.$store.getters['lessons/getCoursePrice']
+    course() {
+      return this.$store.getters['lessons/getCourse']
     }
   },
 

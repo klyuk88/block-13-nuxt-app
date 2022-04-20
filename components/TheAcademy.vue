@@ -35,12 +35,12 @@
             <span class="lessons__desc-duration-sum">
               {{courseDuration}} </span>
           </div>
-          <div class="lessons__desc-topic">
+          <!-- <div class="lessons__desc-topic">
             <span class="lessons__desc-topic-name">Тема: </span>
             <div class="lessons__desc-topic-list">
               {{courseTheme}}
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="lesson_btn" v-if="!courseStatus" @click="openBuy">
@@ -59,7 +59,7 @@
           v-for="(item, index) in lessons"
           :key="index"
           :class="{
-            blocked: item.bought === false && item.price > 0 ? true : false,
+            blocked: item.bought === false && item.price.discountPrice > 0 ? true : false,
             active: activeIndex == index
           }"
         >
@@ -96,7 +96,7 @@
         class="profile_video_lessons_grid_mob_item"
         v-for="(item, index) in lessons"
         :key="index"
-        :class="{ purchased: item.bought || item.price === 0 ? true : false }"
+        :class="{ purchased: item.bought || item.price.discountPrice === 0 ? true : false }"
         @click="playLesson(item)"
       >
         <span>{{ index + 1 }}. {{ item.name }}</span>
@@ -166,7 +166,7 @@ export default {
     },
     async playLesson(item, index) {
       this.activeIndex = index
-      if (item.bought || item.price === 0) {
+      if (item.bought || item.price.discountPrice === 0) {
         await this.$store.dispatch("lessons/getVideoKey", {
           typeVideo: 2,
           elementId: item.id,

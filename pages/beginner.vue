@@ -212,6 +212,7 @@
                 <div class="swiper-pagination" slot="pagination"></div>
               </swiper>
             </client-only>
+
             <div class="beginner-content-steps-links">
               <div class="beginner-content-steps-links-item">
                 <div class="beginner-content__title">
@@ -225,10 +226,10 @@
                     Прогрессивное обучение профессиональному трейдингу с
                     использованием институциональных методик.
                   </p>
-                  <div class="beginner-content-steps-links-btn">
+                  <nuxt-link to="/academy"><div class="beginner-content-steps-links-btn">
                     Подробнее
                     <img src="~/assets/img/beginners/arrow.svg" alt="" />
-                  </div>
+                  </div></nuxt-link>
                 </div>
               </div>
 
@@ -244,10 +245,13 @@
                     Торговля в режиме реального времени совместно с
                     профессиональными трейдерами.
                   </p>
-                  <div class="beginner-content-steps-links-btn">
+                  <nuxt-link to="/live-trading">
+                   <div class="beginner-content-steps-links-btn">
                     Подробнее
                     <img src="~/assets/img/beginners/arrow.svg" alt="" />
                   </div>
+                  </nuxt-link>
+                 
                 </div>
               </div>
               <div class="beginner-content-steps-links-item">
@@ -261,10 +265,12 @@
                   <p class="beginner-content-steps-item__about">
                     Место для тех, кто готов выйти на совершенно иной уровенья.
                   </p>
+                  <nuxt-link to="/private-club">
                   <div class="beginner-content-steps-links-btn">
                     Подробнее
                     <img src="~/assets/img/beginners/arrow.svg" alt="" />
                   </div>
+                  </nuxt-link>
                 </div>
               </div>
               <img

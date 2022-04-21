@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       swiperOptions: {
-        loop: true,
+        loop: false,
         pagination: {
           el: ".swiper-pagination",
         },

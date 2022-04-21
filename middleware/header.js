@@ -2,6 +2,7 @@ import axios from 'axios'
 export default ({
   app,
   store,
+  route
 }) => {
   if (app.$cookies.get('token')) {
     //записываем токен из куки в состояние при перезагрузке
@@ -9,5 +10,7 @@ export default ({
     //записываем баланс из куки в состояниепри перезагрузке
     store.commit('login/setBalance', app.$cookies.get('balance'))
   }
+
+
 
 }

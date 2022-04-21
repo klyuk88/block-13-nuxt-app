@@ -11,7 +11,7 @@
 
       <div v-if="!sacessMessage" class="register-form__content">
         <div class="register-form__title-inner">
-          <div class="register-form__title">ВОССТАНОВЛЕНИЯ ПАРОЛЯ</div>
+          <div class="register-form__title">ВОССТАНОВЛЕНИЕ ПАРОЛЯ</div>
           <p class="send_mail_alert" v-if="sendFormOk">
             Мы отправили вам электронное письмо с кодом для восстановления
             пароля

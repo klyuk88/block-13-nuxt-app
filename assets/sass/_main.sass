@@ -426,6 +426,9 @@
     background: #282729
     transition: box-shadow .3s ease
     margin-bottom: 24px
+    position: relative
+    z-index: 10
+    
     @media screen and ( max-width: 960px )
       padding: 58px 24px
       min-height: 250px
@@ -1330,7 +1333,7 @@
     height: 450px
     transition: height .3s ease
     @media screen and ( max-width: 960px)
-      height: auto
+      height: 350px
   @media screen and ( max-width: 960px )
     transform: none
     -webkit-transform: none
@@ -1379,7 +1382,7 @@
   font-weight: 700
   background: linear-gradient(103.31deg, #B3854D 5.67%, #F3D7AF 28.06%, #C6A47C 85.27%)
   -webkit-background-clip: text
-  -webkit-text-fill-color: transparent
+  // -webkit-text-fill-color: transparent
   background-clip: text
 
 .courses__btn
@@ -1562,3 +1565,10 @@
 
 .mob-nav-submenu.active
   display: block
+
+
+.intro
+  height: 100vh
+  @media screen and ( max-width: 960px )
+    height: auto
+    

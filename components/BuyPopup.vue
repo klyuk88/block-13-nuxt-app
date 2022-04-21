@@ -16,7 +16,7 @@
         </div>
         <div class="pop-buy-content">
           <p class="buy-pop-title">{{ buyData.subtitle }}</p>
-          <span class="buy-pop-price">₽ {{ buyData.price }}</span>
+          <span class="buy-pop-price">{{ buyData.price }}</span>
         </div>
         <button class="register-form__btn btn" @click="buyProduct">
           <span>Купить</span>

@@ -55,13 +55,13 @@
       <div class="container-1680">
         <ul class="courses__list">
           <li class="courses__item">
-            <a href="#" class="courses__item-link">
+            <div class="courses__item-link">
               <img
                 src="~/assets/img/trigger-1.jpg"
                 alt=""
                 class="courses__item-link-img"
               />
-            </a>
+            </div>
             <div class="courses__item-bottom">
               <div class="courses__text">
                 <h2 class="courses__text-title section-title">LIVE TRADING</h2>
@@ -82,13 +82,13 @@
           </li>
           <!-- //courses__item -->
           <li class="courses__item">
-            <a href="#" class="courses__item-link">
+            <div class="courses__item-link">
               <img
                 src="~/assets/img/trigger-2.jpg"
                 alt=""
                 class="courses__item-link-img"
               />
-            </a>
+            </div>
             <div class="courses__item-bottom">
               <div class="courses__text">
                 <h2 class="courses__text-title section-title">ACADEMY</h2>
@@ -113,13 +113,13 @@
           </li>
           <!-- //courses__item -->
           <li class="courses__item">
-            <a href="#" class="courses__item-link">
+            <div class="courses__item-link">
               <img
                 src="~/assets/img/trigger-3.jpg"
                 alt=""
                 class="courses__item-link-img"
               />
-            </a>
+            </div>
             <div class="courses__item-bottom">
               <div class="courses__text">
                 <h2 class="courses__text-title section-title">PRIVATE CLUB</h2>

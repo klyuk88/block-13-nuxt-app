@@ -10,7 +10,7 @@
       class="profile_course_block_arrow"
     />
     <!-- profile_course_blocks -->
-    <div class="profile_video">
+    <div class="profile_video" id="video-block">
       <div class="profile_video_player">
         <client-only>
           <vue-plyr ref="plyr">
@@ -44,13 +44,13 @@
         </div>
       </div>
       <div class="lesson_btn" v-if="!courseStatus" @click="openBuy">
-        <span>КУПИТЬ ВЕСЬ КУРС ЗА $ {{coursePrice}}</span>
+        <span>КУПИТЬ ВЕСЬ КУРС - {{coursePrice}}</span>
       </div>
     </div>
     <!-- lessons__left-bottom -->
     <div class="profile_video_lessons">
       <h3 class="profile_video_lessons__title">
-        {{courseTheme}}
+        ОБУЧАЮЩИЙ КУРС ПО ТРЕЙДИНГУ
         </h3>
       <div class="profile_video_lessons_grid">
         <!-- урок  -->
@@ -67,6 +67,7 @@
             :src="`${$config.API_URL}/img/${item.logo}`"
             alt=""
             class="profile_video_lessons_grid_item__image"
+            v-scroll-to="'#video-block'"
             @click="playLesson(item, index)"
           />
           <p class="profile_video_lessons_grid_item__title">
@@ -93,15 +94,16 @@
     <!-- profile_video_lessons -->
     <div class="profile_video_lessons_grid_mob">
       <div
+        v-scroll-to="'#video-block'"
         class="profile_video_lessons_grid_mob_item"
         v-for="(item, index) in lessons"
         :key="index"
-        :class="{ purchased: item.bought || item.price.discountPrice === 0 ? true : false }"
+        :class="{ purchased: item.bought || item.price.price === 0 ? true : false }"
         @click="playLesson(item)"
       >
         <span>{{ index + 1 }}. {{ item.name }}</span>
         <img
-          v-if="item.bought || item.price === 0"
+          v-if="item.bought || item.price.price === 0"
           src="~/assets/img/profile/play-gold.svg"
           alt=""
           class="profile-video-item-mob-lock"
@@ -110,7 +112,7 @@
       </div>
     </div>
     <div class="lesson_btn mob-btn-buy" v-if="!courseStatus" @click="openBuy">
-      <span>КУПИТЬ ВЕСЬ КУРС ЗА $ {{ coursePrice }}</span>
+      <span>КУПИТЬ ВЕСЬ КУРС - {{ coursePrice }}</span>
     </div>
   </div>
   

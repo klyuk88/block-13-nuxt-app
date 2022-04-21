@@ -3,7 +3,7 @@
     <!-- LESSONS -->
     <section class="lessons" id="lessons">
       <div class="container">
-        <h2 class="lessons__title">КУРСЫ ПО КРИПТОВАЛЮТЕ</h2>
+        <h2 class="lessons__title">ОБУЧАЮЩИЙ КУРС ПО ТРЕЙДИНГУ</h2>
         <div class="lessons__wrapper">
           <div class="lessons__left">
             <div class="lessons__left-top">
@@ -24,20 +24,20 @@
                 <p class="lessons__desc-text">
                   {{ lessonDescription }}
                 </p>
-                <div class="lessons__desc-parametres">
+                <!-- <div class="lessons__desc-parametres">
                   <div class="lessons__desc-duration">
                     <span class="lessons__desc-duration-name">
                       Общее время курса:
                     </span>
                     <span class="lessons__desc-duration-sum"> {{courseTime}} </span>
-                  </div>
-                  <!-- <div class="lessons__desc-topic">
+                  </div> -->
+                <!-- <div class="lessons__desc-topic">
                     <span class="lessons__desc-topic-name">Тема: </span>
                     <div class="lessons__desc-topic-list">
                       {{courseTheme}}
                     </div>
                   </div> -->
-                </div>
+                <!-- </div> -->
               </div>
             </div>
             <!-- lessons__left-bottom -->
@@ -46,7 +46,11 @@
             <div class="lessons__right-top">
               <div class="lessons__tabs">
                 <div><button class="lessons__tab active">Тизеры</button></div>
-                <div><nuxt-link to="/profile"><button class="lessons__tab">Курсы</button></nuxt-link></div>
+                <div>
+                  <nuxt-link to="/profile"
+                    ><button class="lessons__tab">Курсы</button></nuxt-link
+                  >
+                </div>
               </div>
               <div class="lessons__themes">
                 <div
@@ -67,7 +71,9 @@
                   </div>
 
                   <div class="lessons__theme-desc">
-                    <div class="lessons__theme-title" v-if="lessonDuration">{{ lessonDuration }}</div>
+                    <div class="lessons__theme-title" v-if="lessonDuration">
+                      {{ lessonDuration }}
+                    </div>
                     <p class="lessons__theme-text">
                       {{ lesson.shortDescription }}
                     </p>
@@ -83,9 +89,17 @@
             </div>
             <!-- <button class="lessons__visible-btn">Посмотреть еще</button> -->
             <nuxt-link to="/profile">
-            <div class="lesson_btn">
-              <span>₽ {{course.price.discountPrice}} — КУПИТЬ ВЕСЬ КУРС</span>
-            </div>
+              <div class="lesson_btn">
+                <img
+                  src="~/assets/img/ci_check.svg"
+                  alt=""
+                  class="btn_buy_check"
+                  v-if="course.bought"
+                />
+                <span v-else
+                  >КУПИТЬ ВЕСЬ КУРС - $ {{ course.price.discountPrice }}</span
+                >
+              </div>
             </nuxt-link>
           </div>
         </div>
@@ -104,10 +118,10 @@ export default {
       idx: 0,
       lessonTitle: "",
       lessonDescription: "",
-      lessonDuration: '00:00:00',
+      lessonDuration: "00:00:00",
       percentProgress: null,
       lesson: null,
-      player: null
+      player: null,
     };
   },
 
@@ -118,15 +132,9 @@ export default {
     videoKey() {
       return this.$store.getters["lessons/getVideoKey"];
     },
-    courseTime() {
-      return this.$store.getters['lessons/getCourseDuration']
-    },
-    courseTheme() {
-      return this.$store.getters['lessons/getCourseTheme']
-    },
     course() {
-      return this.$store.getters['lessons/getCourse']
-    }
+      return this.$store.getters["lessons/getCourse"];
+    },
   },
 
   methods: {
@@ -141,8 +149,8 @@ export default {
         elementId: this.lesson.id,
       });
       this.percentProgress = 0;
-      this.lessonTitle = this.lesson.name
-      this.lessonDescription = this.lesson.fullDescription
+      this.lessonTitle = this.lesson.name;
+      this.lessonDescription = this.lesson.fullDescription;
       this.player.source = {
         type: "video",
         title: "",
@@ -157,13 +165,14 @@ export default {
     },
   },
   async mounted() {
-    await this.$store.dispatch('lessons/getCourse')
+    await this.$store.dispatch("lessons/getCourse");
     await this.$store.dispatch("lessons/getLessons");
     //получаем тизер первого урока
     await this.$store.dispatch("lessons/getVideoKey", {
       typeVideo: 4,
       elementId: this.lessons[0].id,
     });
+
     //получить описание и название первого урока
     this.lessonTitle = this.lessons[0].name;
     this.lessonDescription = this.lessons[0].fullDescription;
@@ -183,25 +192,23 @@ export default {
     };
     //слушаем загрузку мета видео и получаем продолжительность видео
     this.player.on("loadedmetadata", (event) => {
-      const plyr = event.detail.plyr
-      let time = plyr.duration
-      let h = Math.floor(time / 60 / 60)
-       let m = Math.floor(time / 60) - (h * 60)
-      let s = Math.floor(time % 60)
+      const plyr = event.detail.plyr;
+      let time = plyr.duration;
+      let h = Math.floor(time / 60 / 60);
+      let m = Math.floor(time / 60) - h * 60;
+      let s = Math.floor(time % 60);
       this.lessonDuration = [
-        h.toString().padStart(2, '0'),
-        m.toString().padStart(2, '0'),
-        s.toString().padStart(2, '0'),
-      ].join(':')      
+        h.toString().padStart(2, "0"),
+        m.toString().padStart(2, "0"),
+        s.toString().padStart(2, "0"),
+      ].join(":");
     });
 
     //слушаем обновление времени показываем прогресс
     this.player.on("timeupdate", (event) => {
-      const plyr = event.detail.plyr
+      const plyr = event.detail.plyr;
       this.percentProgress =
-        parseInt(
-          (plyr.currentTime / plyr.media.duration) * 100
-        ) || 0;
+        parseInt((plyr.currentTime / plyr.media.duration) * 100) || 0;
     });
   },
 };

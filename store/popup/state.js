@@ -1,4 +1,6 @@
 export default () => ({
     buy: false,
-    buyData: {}
+    buyData: {},
+    saccessPay: false,
+    errorPay: false
 })

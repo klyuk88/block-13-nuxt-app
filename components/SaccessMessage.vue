@@ -5,7 +5,7 @@
           {{message}}
         </div>
         <button class="btn btn_saccess_alert" @click="$emit('closeSaccessAlert')">
-          <span>Спасибо</span>
+          <span>Окей</span>
         </button>
       </div>
 </template>

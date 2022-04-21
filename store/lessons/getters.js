@@ -10,9 +10,9 @@ export default {
     },
     getCoursePrice(state) {
         if(state.course.price.discountPercent) {
-            return `₽ <del>${state.course.price.price}</del> ₽${state.course.price.discountPrice}`
+            return `$ <del>${state.course.price.price}</del> $ ${state.course.price.discountPrice}`
         } else {
-            return `₽ ${state.course.price.price}`
+            return `$ ${state.course.price.price}`
         }
     },
     getCourseId(state) {
@@ -20,16 +20,16 @@ export default {
     },
     getChannelPrice(state) {
         if(state.telegram.channel.discountPercent) {
-            return `₽ <del>${state.telegram.channel.price}</del> ₽${state.telegram.channel.discountPrice}`
+            return `$ <del>${state.telegram.channel.price}</del> $ ${state.telegram.channel.discountPrice}`
         } else {
-            return `₽ ${state.telegram.channel.price}`
+            return `$ ${state.telegram.channel.price}`
         }
     },
     getChatPrice(state) {
         if(state.telegram.chat.discountPercent) {
-            return `₽ <del>${state.telegram.chat.price}</del> ₽${state.telegram.chat.discountPrice}`
+            return `$ <del>${state.telegram.chat.price}</del> $ ${state.telegram.chat.discountPrice}`
         } else {
-            return `₽ ${state.telegram.chat.price}`
+            return `$ ${state.telegram.chat.price}`
         }
     },
     getCourseDuration(state) {

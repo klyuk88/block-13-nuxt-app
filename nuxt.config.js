@@ -49,6 +49,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
+    'vue-scrollto/nuxt'
   ],
   router: {
     middleware: 'header',

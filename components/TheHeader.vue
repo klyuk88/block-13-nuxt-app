@@ -103,14 +103,12 @@
                     >{{ item.title }}
                   </nuxt-link>
                 </li>
+                <li class="menu-mobile__item" v-if="!login">
+                  <nuxt-link to="#login">Вход/Регистрация</nuxt-link>
+                </li>
               </ul>
             </div>
 
-            <div class="menu-mobile__registration" v-if="!login">
-              <a href="#login" class="registration__link" @click="popLoginShow"
-                >ВОЙТИ / РЕГИСТРАЦИЯ
-              </a>
-            </div>
             <div class="mob_account_wrap" v-if="login">
               <div class="mob_account_wrap_row">
                 <span>$ {{ balance }}</span>
@@ -197,18 +195,7 @@ export default {
           title: "Инструкция для новичка",
           slug: "/beginner",
         },
-        {
-          title: "Academy",
-          slug: "/academy",
-        },
-        {
-          title: "Live Trading",
-          slug: "/live-trading",
-        },
-        {
-          title: "Privat Club",
-          slug: "/private-club",
-        },
+      
       ],
     };
   },

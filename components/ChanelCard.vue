@@ -65,7 +65,7 @@ export default {
     buyChanel() {
       this.$store.commit("popup/setBuyData", {
         title: "Купить канал",
-        subtitle: "Каждый период длится 90 дней. Как взвешивать решения?",
+        subtitle: "Каждый период длится 90 дней.",
         price: this.chanelPrice,
         type: 3,
       });

@@ -72,7 +72,7 @@ export default {
     buyChat() {
       this.$store.commit("popup/setBuyData", {
         title: "Купить чат",
-        subtitle: "Каждый период длится 90 дней. Как взвешивать решения?",
+        subtitle: "Каждый период длится 90 дней.",
         price: this.chatPrice,
         type: 4,
       });

@@ -14,7 +14,7 @@
         <div class="register-form__title-inner">
           <div class="register-form__title">ПОПОЛНИТЬ КОШЕЛЕК</div>
           <p class="balance-top-subtitle">
-            1₽ = 1 монете внутреннего кошелька
+            1$ = 1 монете внутреннего кошелька
           </p>
           <button id="register-form__btn-close" @click="closePop"></button>
         </div>
@@ -48,11 +48,12 @@ export default {
   methods: {
     async sendForm() {
       await this.$store.dispatch('login/payBalance', {
-        type: 'courses_free',
-        count: this.balance
+        // type: 'courses_free',
+        type: 'freecassa',
+        count: this.balance * 100
       })
       if(!this.error) {
-        this.saccessMessage = `Ваш баланс успешно пополнен`
+        this.closePop()
       } else {
         return;
       }

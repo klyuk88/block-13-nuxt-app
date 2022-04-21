@@ -56,10 +56,14 @@ export default {
         this.$store.commit("openLogin");
       } else if (newVal.hash == "#register") {
         this.$store.commit("openRegister");
-      } else if (newVal.hash == "#saccess-pay") {
+      }
+      if (newVal.query.pay === "ok") {
         this.$store.commit("popup/openSaccessPay");
-      } else if(newVal.hash == "#error-pay") {
-        this.$store.commit("popup/openErrrorPay");
+        this.$store.dispatch("login/user");
+      }
+      if (newVal.query.pay === "fail") {
+        this.$store.commit("popup/openErrorPay");
+        this.$store.dispatch("login/user");
       }
     },
   },
@@ -68,10 +72,14 @@ export default {
       this.$store.commit("openLogin");
     } else if (this.$route.hash == "#register") {
       this.$store.commit("openRegister");
-    } else if (this.$route.hash == "#saccess-pay") {
+    }
+    if (this.$route.query.pay === "ok") {
       this.$store.commit("popup/openSaccessPay");
-    } else if(this.$route.hash == "#error-pay") {
+      this.$store.dispatch("login/user");
+    }
+    if (this.$route.query.pay === "fail") {
       this.$store.commit("popup/openErrorPay");
+      this.$store.dispatch("login/user");
     }
   },
 };

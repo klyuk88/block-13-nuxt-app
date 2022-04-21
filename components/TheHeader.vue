@@ -5,9 +5,10 @@
       <div class="container">
         <div class="header__inner">
           <nuxt-link to="/" class="header__logo-link">
-            <img src="~/assets/img/header/bloсk13.svg" alt="" />
+            <!-- <img src="~/assets/img/bloсk13.png" alt="" /> -->
+            <img src="~/assets/img/logo.png" alt="" />
           </nuxt-link>
-
+          
           <!-- Navigation -->
           <div class="header-nav" id="overlaymenu">
             <nav class="header__nav overlay-menu" id="header__nav">
@@ -82,7 +83,7 @@
           <div class="menu-mobile" :class="{ active: mobMenu }">
             <div class="mobile_menu_header">
               <img
-                src="~/assets/img/header/bloсk13.svg"
+                src="~/assets/img/logo.png"
                 alt="block13"
                 class="mobile_menu_header__logo"
               />
@@ -108,6 +109,7 @@
                 </li>
               </ul>
             </div>
+
 
             <div class="mob_account_wrap" v-if="login">
               <div class="mob_account_wrap_row">

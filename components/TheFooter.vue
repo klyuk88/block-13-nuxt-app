@@ -5,7 +5,7 @@
     <div class="container">
       <div class="footer__inner">
         <a href="#" class="footer__logo">
-          <img src="~/assets/img/footer/footer-logo.svg" alt="logo" class="footer__logo-img">
+          <img src="~/assets/img/logo.png" alt="logo" class="footer__logo-img">
         </a>
         <div class="footer__contacts">
           <div class="footer__nav">
@@ -48,7 +48,6 @@
           </div>
         </div>
       </div><!-- //footer__inner -->
-      <div class="footer__mail">@peprosse.com</div>
     </div><!-- //container -->
     <div class="advantages__star">
       <img src="~/assets/img/footer/rhombus1.svg" alt="left-icon">

@@ -8,7 +8,7 @@
             <div class="balance">
               <span class="balance-title">Мой баланс:</span>
               <div class="balance-count" @click="topBalance">
-                <span class="balance-num">₽ {{balance}}</span>
+                <span class="balance-num">$ {{balance}}</span>
                 <span class="topup">Пополнить</span>
               </div>
             </div>
@@ -114,10 +114,8 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('login/user', this.$cookies.get('token'))
-    if(this.error === 'Пользователь не авторизован') {
-      this.$store.commit('login/removeToken')
-      this.$router.push('/#login')
-    }
+    
+ 
   },
 
 };

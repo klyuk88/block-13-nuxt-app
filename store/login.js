@@ -3,6 +3,7 @@ export const state = () => ({
   user: {},
   userBalance: null,
   error: {},
+  paySettings: {}
 })
 
 export const getters = {
@@ -13,7 +14,7 @@ export const getters = {
     return state.user
   },
   getBalance(state) {
-    return state.userBalance
+    return state.userBalance / 100
   },
   getError(state) {
     if(state.error) {
@@ -51,9 +52,20 @@ export const actions = {
           'Authorization': `Bearer ${state.token}`
         }
       }
-      await this.$axios.post(`/payment/${payload.type || 'freecassa'}/pay`, {
+      const res = await this.$axios.post(`/payment/${payload.type}/pay`, {
         count: payload.count
       }, config)
+      
+      const m = res.data.freecassa.shopId
+      const oa = res.data.freecassa.amount
+      const currency = res.data.freecassa.currency
+      const o = res.data.freecassa.payId
+      const s = res.data.freecassa.sign
+
+
+
+      window.open(`https://pay.freekassa.ru/?m=${m}&oa=${oa}&currency=${currency}&o=${o}&s=${s}`)
+
       await dispatch('userBalance')
       commit('clearErrors')
 
@@ -264,6 +276,7 @@ export const actions = {
   async user({
     state,
     commit,
+    dispatch
   }, ) {
     try {
       const user = await this.$axios.$get('user/profile/me', {
@@ -271,6 +284,7 @@ export const actions = {
           'Authorization': `Bearer ${state.token}`
         }
       })
+      await dispatch('userBalance')
       commit('setUser', user)
       commit('clearErrors')
     } catch (error) {

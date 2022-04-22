@@ -16,7 +16,7 @@
         </div>
         <div class="pop-buy-content">
           <p class="buy-pop-title">{{ buyData.subtitle }}</p>
-          <span class="buy-pop-price">{{ buyData.price }}</span>
+          <span class="buy-pop-price">$ {{ buyData.price / 100}}</span>
         </div>
         <button class="register-form__btn btn" @click="buyProduct">
           <span>Купить</span>
@@ -64,9 +64,11 @@ export default {
         itemId: this.buyData.id || '',
         type: this.buyData.type,
       });
-      await this.$store.dispatch('login/userBalance', this.$cookies.get('token'))
-      await this.$store.dispatch('login/user', this.$cookies.get('token'))
+      
       if(!this.error) {
+        await this.$store.dispatch('login/user')
+        await this.$store.dispatch('lessons/getCourse')
+        await this.$store.dispatch("lessons/getLessons");
         this.saccessMessage = 'Спасибо за покупку'
         
       } else {
@@ -76,12 +78,14 @@ export default {
   },
   computed: {
     buyData() {
-      return this.$store.state.popup.buyData;
+      return this.$store.getters['popup/getBuyData'];
     },
     error() {
       return this.$store.state.lessons.error.message;
     },
   },
+  
+
 };
 </script>
 

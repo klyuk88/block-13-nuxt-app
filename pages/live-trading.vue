@@ -33,9 +33,9 @@
         <h2 class="advantages__title section-title">Live Trading</h2>
         <TheCards :triggers="triggers"/>
         <div class="private-lines">
-          <button class="connect-btn">
-            <a href="http://"><span>ПРИСОЕДИНИТСЯ</span> </a>
-          </button>
+         <a href="#login"> <button class="connect-btn">
+            <span>ПРИСОЕДИНИТСЯ</span> 
+          </button></a>
         </div>
       </div>
       <!-- //container -->

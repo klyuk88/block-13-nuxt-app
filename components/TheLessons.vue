@@ -8,7 +8,7 @@
           <div class="lessons__left">
             <div class="lessons__left-top">
               <!-- 1-е состояние плеера -->
-              <client-only>
+              <client-only v-if="lessons">
                 <vue-plyr ref="plyr">
                   <video controls crossorigin playsinline>
                     <source size="" src="" type="video/mp4" />
@@ -16,7 +16,7 @@
                 </vue-plyr>
               </client-only>
             </div>
-            <div class="lessons__left-bottom">
+            <div class="lessons__left-bottom" v-if="lessons">
               <div class="lessons__desc">
                 <div class="lessons__desc-title">
                   {{ lessonTitle }}
@@ -52,7 +52,7 @@
                   >
                 </div>
               </div>
-              <div class="lessons__themes">
+              <div class="lessons__themes" v-if="lessons">
                 <div
                   class="lessons__theme"
                   v-for="(lesson, index) in lessons"
@@ -62,19 +62,20 @@
                 >
                   <div class="lessons__theme-header">
                     {{ index + 1 }}. {{ lesson.name }}
-                    <span class="lessons__theme-arrow">
+                    <span class="lessons__theme-arrow"
+                    >
                       <img src="~/assets/img/lessons/lesson-arrow.svg" alt="" />
                     </span>
-                    <span class="lessons__theme-progress">{{
+                    <!-- <span class="lessons__theme-progress">{{
                       percentProgress + "%"
-                    }}</span>
+                    }}</span> -->
                   </div>
 
                   <div class="lessons__theme-desc">
                     <div class="lessons__theme-title" v-if="lessonDuration">
                       {{ lessonDuration }}
                     </div>
-                    <p class="lessons__theme-text">
+                    <p class="lessons__theme-text" v-if="lesson.shortDescription">
                       {{ lesson.shortDescription }}
                     </p>
                     <div class="value">
@@ -97,7 +98,7 @@
                   v-if="course.bought"
                 />
                 <span v-else
-                  >КУПИТЬ ВЕСЬ КУРС - $ {{ course.price.discountPrice }}</span
+                  >КУПИТЬ ВЕСЬ КУРС - $ {{ course.price.discountPrice / 100 }}</span
                 >
               </div>
             </nuxt-link>
@@ -198,7 +199,6 @@ export default {
       let m = Math.floor(time / 60) - h * 60;
       let s = Math.floor(time % 60);
       this.lessonDuration = [
-        h.toString().padStart(2, "0"),
         m.toString().padStart(2, "0"),
         s.toString().padStart(2, "0"),
       ].join(":");

@@ -54,37 +54,10 @@
     <section class="courses" id="courses">
       <div class="container-1680">
         <ul class="courses__list">
-          <li class="courses__item">
+                    <li class="courses__item">
             <div class="courses__item-link">
               <img
-                src="~/assets/img/trigger-1.jpg"
-                alt=""
-                class="courses__item-link-img"
-              />
-            </div>
-            <div class="courses__item-bottom">
-              <div class="courses__text">
-                <h2 class="courses__text-title section-title">LIVE TRADING</h2>
-                <ul class="courses__text-list">
-                  <li class="courses__text-item">
-                    Публичная торговля на фьючерсом спотовом рынке
-                  </li>
-                  <li class="courses__text-item">Торговая система</li>
-                  <li class="courses__text-item">
-                    Закрытый чат для участников
-                  </li>
-                </ul>
-                <nuxt-link to="/live-trading" class="courses__btn"
-                  ><span>Подробнее</span></nuxt-link
-                >
-              </div>
-            </div>
-          </li>
-          <!-- //courses__item -->
-          <li class="courses__item">
-            <div class="courses__item-link">
-              <img
-                src="~/assets/img/trigger-2.jpg"
+                src="~/assets/img/academy-main.jpg"
                 alt=""
                 class="courses__item-link-img"
               />
@@ -112,6 +85,34 @@
             </div>
           </li>
           <!-- //courses__item -->
+          <li class="courses__item">
+            <div class="courses__item-link">
+              <img
+                src="~/assets/img/live-trading-main.jpg"
+                alt=""
+                class="courses__item-link-img"
+              />
+            </div>
+            <div class="courses__item-bottom">
+              <div class="courses__text">
+                <h2 class="courses__text-title section-title">LIVE TRADING</h2>
+                <ul class="courses__text-list">
+                  <li class="courses__text-item">
+                    Публичная торговля на фьючерсом спотовом рынке
+                  </li>
+                  <li class="courses__text-item">Торговая система</li>
+                  <li class="courses__text-item">
+                    Закрытый чат для участников
+                  </li>
+                </ul>
+                <nuxt-link to="/live-trading" class="courses__btn"
+                  ><span>Подробнее</span></nuxt-link
+                >
+              </div>
+            </div>
+          </li>
+          <!-- //courses__item -->
+
           <li class="courses__item">
             <div class="courses__item-link">
               <img

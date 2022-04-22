@@ -113,7 +113,7 @@
 
             <div class="mob_account_wrap" v-if="login">
               <div class="mob_account_wrap_row">
-                <span>$ {{ balance }}</span>
+                <span>$ {{ user.balance / 100}}</span>
                 <span>|</span>
                 <span><nuxt-link to="/profile">Личный кабинет</nuxt-link></span>
               </div>
@@ -213,8 +213,8 @@ export default {
     login() {
       return this.$store.getters["login/getToken"];
     },
-    balance() {
-      return this.$store.getters["login/getBalance"];
+    user() {
+      return this.$store.getters["login/getUser"];
     },
   },
 

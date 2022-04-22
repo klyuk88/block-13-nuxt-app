@@ -34,7 +34,7 @@
                   что происходит в текущий момент времени.
                 </p>
                 <div class="beginner-content-steps-item-btns">
-                  <a href="#">
+                  <a href="https://t.me/+kEoUT65cjTFiM2Qy" target="_blank">
                   <div class="beginner-content-steps-item-btns__btn-white">
                     <img src="~/assets/img/beginners/tg-logo.svg" alt="" />
                   </div>
@@ -58,12 +58,12 @@
                   дистанции вы сможете сэкономить тысячи долларов комиссионных.
                 </p>
                 <div class="beginner-content-steps-item-btns">
-                  <a href="#" target="_blank">
+                  <a href="https://www.okx.com/join/14332324" target="_blank">
                     <div class="beginner-content-steps-item-btns__btn-white">
                       <img src="~/assets/img/beginners/first-btn.svg" alt="" />
                     </div>
                   </a>
-                  <a href="#" target="_blank">
+                  <a href="https://accounts.binance.com/ru/register?ref=W5IYJ4BK" target="_blank">
                     <div class="beginner-content-steps-item-btns__btn-black">
                       <img
                         src="~/assets/img/beginners/binance.svg"
@@ -329,38 +329,34 @@ export default {
       video: "",
       videoLessons: [
         {
-          videoSrc: "https://www.youtube.com/embed/aFOxDP2xWxI?autoplay=1",
-          title: "Обзор биржи Binance. Обучение трейдингу",
+          videoSrc: "https://youtu.be/ud6vp7NV4D0",
+          title: "Почему я начал торговать на OKX ",
         },
         {
-          videoSrc: "https://www.youtube.com/embed/jMHOYQ8FgSU?autoplay=1",
+          videoSrc: "https://youtu.be/SduAgmikUl4",
           title: "Как пополнять счёт, вывод денег, верификация",
         },
         {
-          videoSrc: "https://www.youtube.com/embed/aphTdC1T8KE?autoplay=1",
-          title:
-            "Как продать и купить криптовалюту. Спот торговля, сбор портфеля",
-        },
-        {
-          videoSrc: "https://www.youtube.com/embed/aphTdC1T8KE?autoplay=1",
-          title: "Фьючерсы для новичков простыми словами",
-        },
-        {
-          videoSrc: "https://www.youtube.com/embed/aphTdC1T8KE?autoplay=1",
-          title: "Стоп-лоссы и тейк-профиты на Binance",
-        },
-        {
-          videoSrc: "https://www.youtube.com/embed/aphTdC1T8KE?autoplay=1",
+          videoSrc: "https://www.youtube.com/watch?v=ZiuvMTTI5Rk",
           title: "Все о комиссиях. Кэшбек до 50%",
         },
         {
-          videoSrc: "https://www.youtube.com/embed/aphTdC1T8KE?autoplay=1",
+          videoSrc: "https://youtu.be/00A2_S2SA9w",
+          title: "Фьючерсы для новичков простыми словами",
+        },
+        {
+          videoSrc: "https://youtu.be/_WGVLcs98pw",
+          title: "Стоп-лоссы и тейк-профиты на Binance",
+        },
+        {
+          videoSrc: "https://www.youtube.com/watch?v=tRw2pT5aCk0&t=1s",
           title: "Фьючерсы без риска ликвидации",
         },
         {
-          videoSrc: "https://www.youtube.com/embed/aphTdC1T8KE?autoplay=1",
-          title: "Почему я начал торговать на OKX",
+          videoSrc: "https://youtu.be/W3yeESVDBHg",
+          title: "Обзор биржи Binance. Обучение трейдингу",
         },
+        
       ],
       helps: [
         {

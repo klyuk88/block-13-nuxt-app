@@ -21,6 +21,9 @@ export default {
     setTelegram(state, data) {
         state.telegram = data
     },
+    setLessonsToken(state, token) {
+        state.lessonsToken = token
+    }
 
 
 }

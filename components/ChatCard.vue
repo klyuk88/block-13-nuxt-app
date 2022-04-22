@@ -35,13 +35,19 @@
       </client-only>
     </div>
     <div class="profile_course_block_about">
-      <p class="profile_course_block_about__text">{{ chatPrice }} за сезон</p>
+      <p class="profile_course_block_about__text">
+        <del v-if="chat.discountPercent">$ {{chat.price / 100}}</del> {{ chat.discountPrice / 100 }} $ за сезон
+        </p>
       <p class="profile_course_block_about__price">
         Каждый период длится 90 дней.
       </p>
     </div>
-    <button class="btn profile_course_block__btn" @click="buyChat" :disabled="tgChat ? true : false">
-      <span v-if="!tgChat">Приобрести</span>
+    <button
+      class="btn profile_course_block__btn"
+      @click="buyChat"
+      :disabled="user.tgChat ? true : false"
+    >
+      <span v-if="!user.tgChat">Приобрести</span>
       <img
         v-else
         src="~/assets/img/ci_check.svg"
@@ -54,12 +60,12 @@
 <script>
 export default {
   computed: {
-    chatPrice() {
-      return this.$store.getters["lessons/getChatPrice"];
+    user() {
+      return this.$store.getters["login/getUser"];
     },
-    tgChat() {
-      return this.$store.state.login.user['tgChat']
-    }
+    chat() {
+      return this.$store.getters["lessons/getChat"];
+    },
   },
   methods: {
     startCallBack: function (x) {
@@ -68,12 +74,12 @@ export default {
     endCallBack: function (x) {
       //   console.log(x);
     },
-    
+
     buyChat() {
       this.$store.commit("popup/setBuyData", {
         title: "Купить чат",
         subtitle: "Каждый период длится 90 дней.",
-        price: this.chatPrice,
+        price: this.chat.discountPrice,
         type: 4,
       });
       this.$store.commit("popup/openBuy");
@@ -81,6 +87,7 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch("lessons/getTelegramProduct");
+    await this.$store.dispatch("login/user");
   },
 };
 </script>

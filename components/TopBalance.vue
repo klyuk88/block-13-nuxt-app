@@ -24,7 +24,7 @@
           @submit.prevent="sendForm"
         >
           <FormInput
-            :placeHolder="'Укажите нужную сумму — ₽'"
+            :placeHolder="'Укажите нужную сумму — $'"
             :type="'text'"
             v-model="balance"
           />
@@ -54,6 +54,7 @@ export default {
       })
       if(!this.error) {
         this.closePop()
+        this.$store.dispatch('login/user')
       } else {
         return;
       }

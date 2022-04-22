@@ -6,13 +6,13 @@
       <h5 class="profile_course_block_count__about">уроков</h5>
     </div>
     <div class="profile_course_block_about">
-      <p class="profile_course_block_about__text">{{ coursePrice }} за весь курс</p>
+      <p class="profile_course_block_about__text"><del v-if="course.price.discountPercent > 0">$ {{course.price.price / 100}}</del>$ {{ course.price.discountPrice / 100 }} за весь курс</p>
       <p class="profile_course_block_about__price">
         15 уроков с абсолютно новым подходом
       </p>
     </div>
-    <button class="btn profile_course_block__btn" @click="buyCourse" :disabled="courseBougth ? true : false">
-      <span v-if="!courseBougth">Купить весь курс</span>
+    <button class="btn profile_course_block__btn" @click="buyCourse" :disabled="course.bought ? true : false">
+      <span v-if="!course.bought">Купить весь курс</span>
       <img
         v-else
         src="~/assets/img/ci_check.svg"
@@ -24,31 +24,24 @@
 </template>
 <script>
 export default {
-  props: {
-    price: Number,
-  },
+
   methods: {
     buyCourse() {
       this.$store.commit("popup/setBuyData", {
         title: "Купить весь курс",
         subtitle: "102 часа, 12 уроков",
-        price: this.coursePrice,
-        id: this.courseId,
+        price: this.course.price.discountPrice,
+        id: this.course.id,
         type: 1,
       });
       this.$store.commit("popup/openBuy");
     },
   },
   computed: {
-    coursePrice() {
-      return this.$store.getters["lessons/getCoursePrice"];
-    },
-    courseId() {
-      return this.$store.getters["lessons/getCourseId"];
-    },
-    courseBougth() {
-      return this.$store.getters["lessons/getCourseBought"];
-    },
+    course() {
+      return this.$store.getters['lessons/getCourse']
+    }
+
   },
   async mounted() {
     await this.$store.dispatch("lessons/getCourse");

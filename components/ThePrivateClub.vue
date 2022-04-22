@@ -20,13 +20,21 @@
       <!-- добавить active  -->
       <div class="live_trading_link_wrap">
         <input
+          v-if="user.tgChannel"
           class="live_trading__link"
           type="text"
           placeholder="Здесь будет ваша ссылка в секретный чат"
-          v-model="liveTradingLink"
+          v-model="user.tgChannel"
           readonly
         />
-        <div class="live_trading_link__btn" v-clipboard:copy="liveTradingLink">
+        <input
+          v-else
+          class="live_trading__link"
+          type="text"
+          placeholder="Здесь будет ваша ссылка"
+          readonly
+        />
+        <div class="live_trading_link__btn" v-clipboard:copy="user.tgChannel">
           Копировать
         </div>
       </div>
@@ -42,31 +50,15 @@
 export default {
   data() {
     return {
-      liveTradingLink: this.$store.getters['login/getChanel']
+      // privateLink: this.$store.state.login.user['tgChannel']
     };
   },
- 
-  methods: {
-    buyChanel() {
-      this.$store.commit("popup/setBuyData", {
-        title: "Купить канал",
-        subtitle: "Каждый период длится 90 дней.",
-        price: this.chanelPrice,
-        type: 3,
-      });
-
-      this.$store.commit("popup/openBuy");
-    },
-  },
-
   computed: {
-    chanelPrice() {
-      return this.$store.getters["lessons/getChannelPrice"];
-    },
-    tgChanel() {
-      return this.$store.getters['login/getChanel']
+    user() {
+      return this.$store.getters['login/getUser']
     }
-  },
+  }
+ 
 };
 </script>
 <style lang="sass" scoped>

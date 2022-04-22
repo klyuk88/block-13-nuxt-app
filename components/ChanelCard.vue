@@ -36,20 +36,20 @@
     </div>
     <div class="profile_course_block_about">
       <p class="profile_course_block_about__text">
-        {{ chanelPrice }} за сезон
+        <del v-if="chanel.discountPercent">$ {{chanel.price / 100}}</del> {{ chanel.discountPrice / 100 }} $ за сезон
       </p>
       <p class="profile_course_block_about__price">
         Каждый период длится 90 дней.
       </p>
     </div>
-    <button class="btn profile_course_block__btn" @click="buyChanel" :disabled="tgChanel ? true : false">
-      <span v-if="!tgChanel">Приобрести</span>
+    <button class="btn profile_course_block__btn" @click="buyChanel" :disabled="user.tgChannel ? true : false">
       <img
-        v-else
+        v-if="user.tgChannel"
         src="~/assets/img/ci_check.svg"
         alt=""
         class="btn_buy_check"
       />
+      <span v-else>Приобрести</span>
     </button>
   </div>
 </template>
@@ -66,22 +66,23 @@ export default {
       this.$store.commit("popup/setBuyData", {
         title: "Купить канал",
         subtitle: "Каждый период длится 90 дней.",
-        price: this.chanelPrice,
+        price: this.chanel.discountPrice,
         type: 3,
       });
       this.$store.commit("popup/openBuy");
     },
   },
   computed: {
-    chanelPrice() {
-      return this.$store.getters["lessons/getChannelPrice"];
+    user() {
+      return this.$store.getters['login/getUser']
     },
-    tgChanel() {
-      return this.$store.state.login.user['tgChannel']
+    chanel() {
+      return this.$store.getters['lessons/getChanel']
     }
   },
   async mounted() {
     await this.$store.dispatch("lessons/getTelegramProduct");
+    await this.$store.dispatch('login/user')
   },
 };
 </script>

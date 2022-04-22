@@ -25,6 +25,7 @@
             :type="'password'"
             v-model="inputs.password"
           />
+          
           <button class="register-form__btn btn"><span>Войти</span></button>
           <div class="register-form__account-have">
             <span>Нет аккаунта? </span

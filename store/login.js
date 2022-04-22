@@ -1,7 +1,6 @@
 export const state = () => ({
   token: null,
   user: {},
-  userBalance: null,
   error: {},
   paySettings: {}
 })
@@ -12,9 +11,6 @@ export const getters = {
   },
   getUser(state) {
     return state.user
-  },
-  getBalance(state) {
-    return state.userBalance / 100
   },
   getError(state) {
     if(state.error) {
@@ -56,17 +52,17 @@ export const actions = {
         count: payload.count
       }, config)
       
-      const m = res.data.freecassa.shopId
-      const oa = res.data.freecassa.amount
-      const currency = res.data.freecassa.currency
-      const o = res.data.freecassa.payId
-      const s = res.data.freecassa.sign
+      if(payload.type === 'freecassa') {
+        const m = res.data.freecassa.shopId
+        const oa = res.data.freecassa.amount
+        const currency = res.data.freecassa.currency
+        const o = res.data.freecassa.payId
+        const s = res.data.freecassa.sign
+  
+        window.open(`https://pay.freekassa.ru/?m=${m}&oa=${oa}&currency=${currency}&o=${o}&s=${s}`)
+      }
 
-
-
-      window.open(`https://pay.freekassa.ru/?m=${m}&oa=${oa}&currency=${currency}&o=${o}&s=${s}`)
-
-      await dispatch('userBalance')
+      await dispatch('user')
       commit('clearErrors')
 
     } catch (error) {
@@ -87,7 +83,7 @@ export const actions = {
         }
       })
       // перезапрашиваем юзера
-      await dispatch('user', state.token)
+      await dispatch('user')
       //чистим ошибки
       commit('clearErrors')
 
@@ -165,7 +161,7 @@ export const actions = {
       })
       commit('setToken', res.data.access.token)
       //получаем баланс
-      await dispatch('userBalance')
+      await dispatch('user')
       //чистим ошибки
       commit('clearErrors')
     } catch (error) {
@@ -214,8 +210,7 @@ export const actions = {
         maxAge: res.access.liveTime
       })
       commit('setToken', res.access.token)
-
-      await dispatch('userBalance')
+      await dispatch('user')
       commit('clearErrors')
     } catch (error) {
       commit('setErrorMessage', error.response.data)
@@ -235,7 +230,7 @@ export const actions = {
       //пишем токен в куки
       commit('setToken', res.access.token)
       //получаем баланс
-      await dispatch('userBalance')
+      await dispatch('user')
       //чистим ошибки
       commit('clearErrors')
     } catch (error) {
@@ -243,40 +238,11 @@ export const actions = {
     }
 
   },
-  //запрос баланса
-  async userBalance({
-    state,
-    commit
-  }) {
-    try {
-      const resData = {
-        "page": 0,
-        "count": 10
-      }
-      const resConfig = {
-        headers: {
-          'Authorization': `Bearer ${state.token}`
-        }
-      }
-      //запрашиваем баланс
-      const res = await this.$axios.post('user/balance', resData, resConfig)
-      //пишем баланс в куки
-      await this.$cookies.set('balance', res.data.current, {
-        maxAge: 60 * 60 * 24 * 7
-      })
-      //пишем баланс в состоянии
-      commit('setBalance', res.data.current)
-      //чистим ошибки
-      commit('clearErrors')
-    } catch (error) {
-      commit('setErrorMessage', error.response.data)
-    }
-  },
+
   //получаем пользователя
   async user({
     state,
     commit,
-    dispatch
   }, ) {
     try {
       const user = await this.$axios.$get('user/profile/me', {
@@ -284,8 +250,8 @@ export const actions = {
           'Authorization': `Bearer ${state.token}`
         }
       })
-      await dispatch('userBalance')
       commit('setUser', user)
+
       commit('clearErrors')
     } catch (error) {
       commit('setErrorMessage', error.response.data)
@@ -301,10 +267,6 @@ export const mutations = {
     state.user = user
   },
 
-  setBalance(state, balance) {
-    state.userBalance = balance
-
-  },
   setToken(state, token) {
     state.token = token
     state.error = null

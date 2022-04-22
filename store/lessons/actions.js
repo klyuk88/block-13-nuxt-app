@@ -6,11 +6,10 @@ export default {
     try {
       const config = {
         headers: {
-          'Authorization': `Bearer ${data.token || ''}`
+          'Authorization': `Bearer ${state.lessonsToken || ''}`
         }
       }
       const res = await this.$axios.get('/courses', config)
-      console.log(res.data);
       commit('setCourses', res.data.courses)
     } catch (error) {
       console.log(error);
@@ -26,7 +25,7 @@ export default {
     try {
       const config = {
         headers: {
-          'Authorization': `Bearer ${data.token || ''}`
+          'Authorization': `Bearer ${state.lessonsToken || ''}`
         }
       }
       const courses = await this.$axios.get('/courses')
@@ -47,7 +46,7 @@ export default {
     try {
       const config = {
         headers: {
-          'Authorization': `Bearer ${this.$cookies.get('token')}`
+          'Authorization': `Bearer ${state.lessonsToken}`
         }
       }
       const res = await this.$axios.get(`/video/${data.typeVideo}/${data.elementId}`, config)
@@ -59,12 +58,13 @@ export default {
 
 //получаем первый курс
   async getCourse({
+    state,
     commit
   }, ) {
     try {
       const config = {
         headers: {
-          'Authorization': `Bearer ${this.$cookies.get('token') || ''}`
+          'Authorization': `Bearer ${state.lessonsToken || ''}`
         },
       }
       const res = await this.$axios.get('/courses', config)
@@ -79,7 +79,7 @@ export default {
     try {
       const config = {
         headers: {
-          'Authorization': `Bearer ${this.$cookies.get('token') || ''}`
+          'Authorization': `Bearer ${state.lessonsToken || ''}`
         },
       }
       await this.$axios.post('/buy', data, config)

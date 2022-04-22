@@ -7,8 +7,8 @@
           <div class="profile-btns">
             <div class="balance">
               <span class="balance-title">Мой баланс:</span>
-              <div class="balance-count" @click="topBalance">
-                <span class="balance-num">$ {{balance}}</span>
+              <div class="balance-count" @click="topBalance" v-if="user">
+                <span class="balance-num">$ {{user.balance / 100}}</span>
                 <span class="topup">Пополнить</span>
               </div>
             </div>
@@ -56,7 +56,7 @@
     </section>
     <img
       v-if="currentIndex === 1"
-      src="~/assets/img/profile/profile_live_trading_img.png"
+      src="~/assets/img/live-trading-lk.jpg"
       alt=""
       class="profile-tabs-bg"
     />
@@ -96,26 +96,25 @@ export default {
         this.currentTabContent = "the-academy";
         this.lineActive = "left";
       } else if (this.currentIndex === 1) {
-        this.currentTabContent = "live-trading";
+        this.currentTabContent = "the-live-trading";
         this.lineActive = "center";
       } else if (this.currentIndex === 2) {
-        this.currentTabContent = "private-club";
+        this.currentTabContent = "the-private-club";
         this.lineActive = "right";
       }
     },
   },
   computed: {
-    balance() {
-      return this.$store.getters['login/getBalance']
-    },
     error() {
       return this.$store.getters['login/getError']
+    },
+    user() {
+      return this.$store.getters['login/getUser']
     }
   },
   async mounted() {
-    await this.$store.dispatch('login/user', this.$cookies.get('token'))
-    
- 
+    await this.$store.dispatch('login/user')
+    console.log(this.user);
   },
 
 };

@@ -1,4 +1,5 @@
 export default () => ({
+    lessonsToken: null,
     courses: null,
     lessons: null,
     videoKey: null,

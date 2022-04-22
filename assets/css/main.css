@@ -1168,17 +1168,17 @@ select {
 }
 
 .lessons__theme-arrow {
-  opacity: 1;
-  transition: opacity 0.1s ease;
+  transition: transform 0.3 ease;
 }
 
 .lessons__theme.active .lessons__theme-arrow {
-  opacity: 0;
+  transform: rotate(-180deg);
 }
 
 .lessons__theme.active .lessons__theme-desc {
   margin-top: 20px;
   max-height: 300px;
+  padding-bottom: 15px;
 }
 
 .lessons__theme-progress {

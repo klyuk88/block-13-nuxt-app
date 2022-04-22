@@ -19,6 +19,9 @@
 <script>
 export default {
   computed: {
+    token() {
+      return this.$store.getters['login/getToken']
+    },
     errorPay() {
       return this.$store.state.popup.errorPay;
     },
@@ -57,14 +60,14 @@ export default {
       } else if (newVal.hash == "#register") {
         this.$store.commit("openRegister");
       }
-      if (newVal.query.pay === "ok") {
+      if (newVal.query.pay === "ok" && this.token) {
         this.$store.commit("popup/openSaccessPay");
         this.$store.dispatch("login/user");
       }
-      if (newVal.query.pay === "fail") {
+      if (newVal.query.pay === "fail" && this.token) {
         this.$store.commit("popup/openErrorPay");
         this.$store.dispatch("login/user");
-      }
+      } 
     },
   },
   mounted() {
@@ -73,14 +76,15 @@ export default {
     } else if (this.$route.hash == "#register") {
       this.$store.commit("openRegister");
     }
-    if (this.$route.query.pay === "ok") {
+
+    if (this.$route.query.pay === "ok" && this.token) {
       this.$store.commit("popup/openSaccessPay");
       this.$store.dispatch("login/user");
-    }
-    if (this.$route.query.pay === "fail") {
+    } 
+    if (this.$route.query.pay === "fail" && this.token) {
       this.$store.commit("popup/openErrorPay");
       this.$store.dispatch("login/user");
-    }
+    } 
   },
 };
 </script>

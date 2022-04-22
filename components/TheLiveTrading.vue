@@ -17,18 +17,27 @@
       </p>
       <!-- добавить active  -->
       <div class="live_trading_link_wrap">
+
         <input
+        v-if="user.tgChat"
           class="live_trading__link"
           type="text"
-          placeholder="Здесь будет ваша ссылка в секретный чат"
-          v-model="liveTradingLink"
+          v-model="user.tgChat"
           readonly
         />
-        <div class="live_trading_link__btn" v-clipboard:copy="liveTradingLink">
+        <input
+          v-else
+          placeholder="Здесь будет секретная сслыка"
+          class="live_trading__link"
+          type="text"
+          readonly
+        />
+        
+        <div class="live_trading_link__btn" v-clipboard:copy="user.tgChat">
           Копировать
         </div>
       </div>
-      <nuxt-link to="/live-rading">
+      <nuxt-link to="/live-trading">
         <button class="profile-live-trading-btn">
           <span>Больше информации о live trading</span>
         </button>
@@ -40,16 +49,16 @@
 export default {
   data() {
     return {
-      liveTradingLink: this.$store.getters['login/getChat'],
+      // liveTradingLink: this.$store.state.login.user['tgChat']
     };
   },
   computed: {
-    
-   
+    user() {
+      return this.$store.getters['login/getUser']
+    }
   },
-  methods: {
-   
-  },
+
+ 
 };
 </script>
 <style lang="sass" scoped>

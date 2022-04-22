@@ -13,9 +13,9 @@
       <p class="live_trading__about">
         Обучающий видео-курс прибыльному профессиональному криптотрейдингу на основе институциональных методик. Академия Block 13 формирует полное понимание механики рынка и построена так, чтобы вы научились читать график цены как открытую книгу. Фундамент курса - это концепция "Умные деньги", свечной, объемный и кластерный анализ.
       </p>
-    <div class="profile_video" id="video-block">
+    <div class="profile_video" id="video-block" v-if="lessons">
       <div class="profile_video_player">
-        <client-only>
+        <client-only v-if="lessons">
           <vue-plyr ref="plyr">
             <video controls crossorigin playsinline>
               <source size="" src="" type="video/mp4" />
@@ -46,8 +46,8 @@
           </div> -->
         </div>
       </div>
-      <div class="lesson_btn" v-if="!courseStatus" @click="openBuy">
-        <span>КУПИТЬ ВЕСЬ КУРС - {{coursePrice}}</span>
+      <div class="lesson_btn" v-if="!course.bought" @click="openBuy">
+        <span>КУПИТЬ ВЕСЬ КУРС - {{course.price.discountPrice / 100}} $</span>
       </div>
     </div>
     <!-- lessons__left-bottom -->
@@ -60,6 +60,7 @@
         <div
           class="profile_video_lessons_grid_item"
           v-for="(item, index) in lessons"
+          @click="playLesson(item, index)"
           :key="index"
           :class="{
             blocked: item.bought === false && item.price.discountPrice > 0 ? true : false,
@@ -71,7 +72,6 @@
             alt=""
             class="profile_video_lessons_grid_item__image"
             v-scroll-to="'#video-block'"
-            @click="playLesson(item, index)"
           />
           <p class="profile_video_lessons_grid_item__title">
             {{ index + 1 }}. {{ item.name }}
@@ -114,8 +114,8 @@
         <img v-else src="~/assets/img/profile/lock.svg" alt="" />
       </div>
     </div>
-    <div class="lesson_btn mob-btn-buy" v-if="!courseStatus" @click="openBuy">
-      <span>КУПИТЬ ВЕСЬ КУРС - {{ coursePrice }}</span>
+    <div class="lesson_btn mob-btn-buy" v-if="!course.bought" @click="openBuy">
+      <span>КУПИТЬ ВЕСЬ КУРС - {{ course.price.discountPrice / 100  }}$</span>
     </div>
   </div>
   
@@ -138,30 +138,20 @@ export default {
     videoKey() {
       return this.$store.getters["lessons/getVideoKey"];
     },
-    coursePrice() {
-      return this.$store.getters["lessons/getCoursePrice"];
-    },
-    courseId() {
-      return this.$store.getters["lessons/getCourseId"];
+    course() {
+      return this.$store.getters['lessons/getCourse']
     },
     courseDuration() {
       return this.$store.getters['lessons/getCourseDuration']
-    },
-    courseTheme() {
-      return this.$store.getters['lessons/getCourseTheme']
-    },
-    courseStatus() {
-      return this.$store.getters['lessons/getCourseBought']
-    },
-    
+    },    
   },
   methods: {
     openBuy() {
       this.$store.commit("popup/setBuyData", {
         title: "Купить весь курс",
         subtitle: "102 часа, 12 уроков",
-        price: this.coursePrice,
-        id: this.courseId,
+        price: this.course.price.discountPrice,
+        id: this.course.id,
         type: 1,
         course: {
           price: {}
@@ -191,16 +181,14 @@ export default {
           ],
         };
       } else {
-        return;
+        this.openBuy()
       }
     },
   },
   async mounted() {
     await this.$store.dispatch("lessons/getCourse");
     //получаем уроки c авторизацией
-    await this.$store.dispatch("lessons/getLessons", {
-      token: this.$cookies.get("token"),
-    });
+    await this.$store.dispatch("lessons/getLessons");
 
     //получаем видео первого урока
     await this.$store.dispatch("lessons/getVideoKey", {

@@ -13,9 +13,9 @@
       >
         <div class="register-form__title-inner">
           <div class="register-form__title">ПОПОЛНИТЬ КОШЕЛЕК</div>
-          <p class="balance-top-subtitle">
+          <!-- <p class="balance-top-subtitle">
             1$ = 1 монете внутреннего кошелька
-          </p>
+          </p> -->
           <button id="register-form__btn-close" @click="closePop"></button>
         </div>
         <form

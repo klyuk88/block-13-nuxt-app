@@ -1,11 +1,15 @@
-<template lang="">
-      <section class="info-pay-page">
-        <div class="container">
-        <h2>Оплата прошла успешно</h2>
-        <nuxt-link to="/profile">Перейти в ЛК</nuxt-link>
+<template>
+  <div id="register-form" class="register-form active">
+    <div class="pay-notification-overlay"></div>
+    <div id="register-form__window">
+      <div class="register-form__content">
+        <div class="register-form__title-inner">
+          <div class="register-form__title">Спасибо, Оплата прошла успешно :)</div>
         </div>
-
-    </section>
+          <nuxt-link to="/profile"><button class="register-form__btn btn"><span>Перейти в личный кабинет</span></button></nuxt-link>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {

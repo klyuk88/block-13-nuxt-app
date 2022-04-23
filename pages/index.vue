@@ -7,6 +7,8 @@
           class="intro__baner bg-set"
           :style="{ backgroundImage: `url(${introBannerBg})` }"
         >
+        <!-- вставить ссылку на видео -->
+        <!-- <video src="~/assets/ocean .mp4" class="intro-video" autoplay muted crossorigin playsinline></video> -->
           <div class="intro__shadow">
             <div class="intro__offer">
               <div class="intro__video-btn">

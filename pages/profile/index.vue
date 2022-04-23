@@ -114,7 +114,6 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('login/user')
-    console.log(this.user);
   },
 
 };

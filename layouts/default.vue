@@ -11,8 +11,6 @@
     <ProfileSettings v-if="profileSettingsShow" />
     <TopBalance v-if="topBalanceShow" />
     <BuyPopup v-if="buyPopup" />
-    <SaccessPay v-if="saccessPay" />
-    <ErrorPay v-if="errorPay" />
   </div>
 </template>
 
@@ -22,12 +20,7 @@ export default {
     token() {
       return this.$store.getters['login/getToken']
     },
-    errorPay() {
-      return this.$store.state.popup.errorPay;
-    },
-    saccessPay() {
-      return this.$store.state.popup.saccessPay;
-    },
+
     buyPopup() {
       return this.$store.state.popup.buy;
     },

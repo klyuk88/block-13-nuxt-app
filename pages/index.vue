@@ -13,7 +13,7 @@
                 <img src="~/assets/img/intro/video-btn.svg" alt="video-btn" />
               </div>
               <h1 class="intro__title section-title">
-                Исскуство видеть деньги
+                Искусство видеть деньги
               </h1>
               <span class="intro__subtitle"
                 >Бесплатный курс с новым подходом к криптовалюте и

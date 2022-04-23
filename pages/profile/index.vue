@@ -19,7 +19,7 @@
             >
               <img src="~/assets/img/profile/settings.svg" alt="" />
             </a>
-            <a href="!#" class="profile-chat profile-icon">
+            <a href="https://t.me/RobertR13" class="profile-chat profile-icon" target="_blank">
               <img src="~/assets/img/profile/chat.svg" alt="" />
             </a>
           </div>
@@ -56,7 +56,7 @@
     </section>
     <img
       v-if="currentIndex === 1"
-      src="~/assets/img/live-trading-lk.jpg"
+      src="~/assets/img/live-trade-lk.png"
       alt=""
       class="profile-tabs-bg"
     />
@@ -74,7 +74,7 @@ export default {
   middleware: "secretLock",
   data() {
     return {
-      profileTabs: ["Academy", "LIVE TRADING", "PRIVAT CLUB"],
+      profileTabs: ["Academy", "LIVE TRADING", "PRIVATE CLUB"],
       currentTabContent: "the-academy",
       currentIndex: 0,
       lineActive: "left",

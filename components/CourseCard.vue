@@ -29,7 +29,7 @@ export default {
     buyCourse() {
       this.$store.commit("popup/setBuyData", {
         title: "Купить весь курс",
-        subtitle: "102 часа, 12 уроков",
+        subtitle: `${Math.floor(this.course.duration / 60 / 60)} часа, ${this.lessons.length} уроков`,
         price: this.course.price.discountPrice,
         id: this.course.id,
         type: 1,
@@ -40,11 +40,16 @@ export default {
   computed: {
     course() {
       return this.$store.getters['lessons/getCourse']
+    },
+    lessons() {
+      return this.$store.getters['lessons/getLessons']
     }
+
 
   },
   async mounted() {
     await this.$store.dispatch("lessons/getCourse");
+    await this.$store.dispatch('lessons/getLessons')
   },
 };
 </script>

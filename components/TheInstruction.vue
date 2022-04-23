@@ -12,7 +12,7 @@
           ><span>Начать путь</span></nuxt-link
         >
       </div>
-      <div class="instruction__text-large">bloсk13</div>
+      <img src="~/assets/img/bg-logo.svg" alt="" class="bg-logo">
     </div>
   </section>
   <!-- //INSTRUCTION -->

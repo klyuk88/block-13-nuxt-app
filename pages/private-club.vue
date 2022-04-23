@@ -12,16 +12,16 @@
               <div class="intro__video-btn course">
                 <img src="~/assets/img/intro/video-btn.svg" alt="video-btn" />
               </div>
-              <h1 class="intro__title section-title">PRIVAT CLUB</h1>
+              <h1 class="intro__title section-title">Не повторяйте действия<br> крупного игрока, а станьте им
+</h1>
               <span class="intro__subtitle"
-                >Уникальный клуб для людей готовых много тратить и еще больше
-                заработать. Личными инсайдами, сигналами, советами.
+                >Место для тех, кто готов выйти на совершенно иной уровень
               </span>
-              <div class="intro__btns">
+              <!-- <div class="intro__btns">
                 <a href="#register" class="intro__btn btn"
                   ><span>Вступить</span></a
                 >
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -32,12 +32,12 @@
     <!-- ADVANTAGES -->
     <section class="advantages" id="advantages">
       <div class="container">
-        <h2 class="advantages__title section-title">PRIVAT CLUB</h2>
+        <h2 class="advantages__title section-title">PRIVATE CLUB <br>Что вы получите</h2>
         <TheCards :triggers="triggers"/>
         <div class="private-lines">
-          <a href="#login"><button class="connect-btn">
+          <nuxt-link to="/profile"><button class="connect-btn">
             <span>ПРИСОЕДИНИТСЯ</span> 
-          </button></a>
+          </button></nuxt-link>
         </div>
       </div>
       <!-- //container -->

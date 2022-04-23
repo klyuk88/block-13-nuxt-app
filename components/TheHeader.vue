@@ -38,7 +38,7 @@
                       <nuxt-link
                         to="/private-club"
                         class="header__nav-change-link"
-                        >Privat Club</nuxt-link
+                        >Private Club</nuxt-link
                       >
                     </li>
                   </ul>

@@ -1,6 +1,6 @@
 <template>
   <div class="profile_course_block">
-    <h3 class="profile_course_block__title">privat club</h3>
+    <h3 class="profile_course_block__title">private club</h3>
     <div class="profile_course_block_count">
       <client-only>
         <vue-countdown-timer

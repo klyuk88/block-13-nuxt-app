@@ -1321,13 +1321,14 @@
   padding-bottom: 50px
   @media screen and ( max-width: 960px )
     min-height: auto
-    margin-bottom: 32px
+    margin-bottom: 0
 
 
 .courses__item:hover
   background: #333336
   transition: all 0.2s ease-in
   transform: scale(1.05)
+  max-height: 861px
   z-index: 99
   .courses__item-link
     height: 450px
@@ -1585,3 +1586,50 @@ input::-webkit-credentials-auto-fill-button
     right: 0
 
 
+.info-pay-page
+    padding: 250px 0
+    color: #fff
+    background: #1b1a1b
+    text-align: center
+    height: 100vh
+
+
+.lesson_btn
+  margin-top: 30px
+
+.lessons__themes
+  overflow: hidden
+  overflow-y: scroll
+  @media screen and ( max-width: 960px )
+    margin-bottom: 50px
+    
+
+#register-form input[type="text"], #register-form input[type="password"]
+  text-transform: none
+
+
+#register-form input[type="text"]::placeholder, #register-form input[type="password"]::placeholder
+  text-transform: uppercase
+  
+
+.lesson_btn
+  del
+    color: grey
+    background: none
+    -webkit-background-clip: none
+    -webkit-text-fill-color: grey
+    background-clip: none
+    text-fill-color: none
+
+
+.instruction
+  padding: 50px 0
+  position: relative
+  overflow: hidden
+  .bg-logo
+    position: absolute
+    bottom: 0
+    left: 50%
+    transform: translate(-50%, 50%)
+  
+  

@@ -40,7 +40,7 @@
       </div>
       <nuxt-link to="/private-club">
         <button class="profile-live-trading-btn">
-          <span>Больше информации о Privite club</span>
+          <span>Больше информации о Private club</span>
         </button>
       </nuxt-link>
     </div>

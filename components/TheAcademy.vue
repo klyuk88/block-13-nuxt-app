@@ -179,6 +179,7 @@ export default {
               size: 1080,
             },
           ],
+          poster: `${this.$config.API_URL}/img/${item.logo}`
         };
       } else {
         this.openBuy()
@@ -210,6 +211,7 @@ export default {
           size: 1080,
         },
       ],
+      poster: `${this.$config.API_URL}/img/${this.lessons[0].logo}`
     };
   },
 };

@@ -124,16 +124,19 @@
                       Прогрессивное обучение профессиональному трейдингу с
                       использованием институциональных методик.
                     </p>
-                    <div class="beginner-content-steps-links-btn">
+                    <nuxt-link to="/academy">
+                      <div class="beginner-content-steps-links-btn">
                       Подробнее
                       <img src="~/assets/img/beginners/arrow.svg" alt="" />
                     </div>
+                    </nuxt-link>
+                  
                   </div>
                 </div>
 
                 <div class="beginner-content-steps-links-item">
                   <div class="beginner-content__title">
-                    <span class="steps-links__title">LIVE TRANIGN</span>
+                    <span class="steps-links__title">LIVE TRADING</span>
                   </div>
                   <div class="beginner-content-steps-item">
                     <h3 class="beginner-content-steps-item__title">
@@ -143,15 +146,18 @@
                       Торговля в режиме реального времени совместно с
                       профессиональными трейдерами.
                     </p>
-                    <div class="beginner-content-steps-links-btn">
+                    <nuxt-link to="/live-trading">
+                     <div class="beginner-content-steps-links-btn">
                       Подробнее
                       <img src="~/assets/img/beginners/arrow.svg" alt="" />
                     </div>
+                    </nuxt-link>
+                   
                   </div>
                 </div>
                 <div class="beginner-content-steps-links-item">
                   <div class="beginner-content__title">
-                    <span class="steps-links__title">PRIVAT CLUB</span>
+                    <span class="steps-links__title">PRIVATE CLUB</span>
                   </div>
                   <div class="beginner-content-steps-item">
                     <h3 class="beginner-content-steps-item__title">
@@ -161,10 +167,13 @@
                       Место для тех, кто готов выйти на совершенно иной
                       уровенья.
                     </p>
-                    <div class="beginner-content-steps-links-btn">
+                    <nuxt-link to="/private-club">
+                     <div class="beginner-content-steps-links-btn">
                       Подробнее
                       <img src="~/assets/img/beginners/arrow.svg" alt="" />
                     </div>
+                    </nuxt-link>
+                   
                   </div>
                 </div>
                 <img
@@ -235,7 +244,7 @@
 
               <div class="beginner-content-steps-links-item">
                 <div class="beginner-content__title">
-                  <span class="steps-links__title">LIVE TRANIGN</span>
+                  <span class="steps-links__title">LIVE TRADING</span>
                 </div>
                 <div class="beginner-content-steps-item">
                   <h3 class="beginner-content-steps-item__title">
@@ -256,7 +265,7 @@
               </div>
               <div class="beginner-content-steps-links-item">
                 <div class="beginner-content__title">
-                  <span class="steps-links__title">PRIVAT CLUB</span>
+                  <span class="steps-links__title">PRIVATE CLUB</span>
                 </div>
                 <div class="beginner-content-steps-item">
                   <h3 class="beginner-content-steps-item__title">

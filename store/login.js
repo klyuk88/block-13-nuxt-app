@@ -185,12 +185,21 @@ export const actions = {
   },
   //запрос на регистрацию
   async register({
-    commit
+    state,
+    commit,
+    dispatch
   }, formData) {
     try {
-      await this.$axios.$post('auth/registration', formData)
+      const res = await this.$axios.$post('auth/registration', formData)
+      this.$cookies.set('token', res.access.token, {
+        maxAge: res.access.liveTime
+      })
+      //пишем токен в куки
+      commit('setToken', res.access.token)
+      //получаем баланс
+      await dispatch('user')
+      //чистим ошибки
       commit('clearErrors')
-      //уходит код на почту
     } catch (error) {
       commit('setErrorMessage', error.response.data)
     }

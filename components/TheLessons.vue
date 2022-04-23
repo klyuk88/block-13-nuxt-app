@@ -98,7 +98,7 @@
                   v-if="course.bought"
                 />
                 <span v-else
-                  >КУПИТЬ ВЕСЬ КУРС - $ {{ course.price.discountPrice / 100 }}</span
+                  >КУПИТЬ ВЕСЬ КУРС - <del v-if="course.price.discountPercent">$ {{course.price.price / 100}}</del> $ {{ course.price.discountPrice / 100 }}</span
                 >
               </div>
             </nuxt-link>
@@ -162,6 +162,7 @@ export default {
             size: 1080,
           },
         ],
+        poster: `${this.$config.API_URL}/img/${this.lesson.logo}`
       };
     },
   },
@@ -190,6 +191,7 @@ export default {
           size: 1080,
         },
       ],
+      poster: `${this.$config.API_URL}/img/${this.lessons[0].logo}`
     };
     //слушаем загрузку мета видео и получаем продолжительность видео
     this.player.on("loadedmetadata", (event) => {

@@ -22,7 +22,7 @@
         </div>
         <ErrorNotification />
         <form
-          v-if="!sendFormOk"
+          v-if="!saccessMessage"
           class="js-form form-register-form"
           id="form-register-form"
           novalidate="true"
@@ -53,14 +53,14 @@
           </div>
           <div class="register-form__personal">
             <span>Входя в систему вы соглашаесть с нашими условиями</span>
-            <a href="#">Политика конфиденциальности</a>
+            <a href="/Политика_конфендициальности_block13_ru.pdf" target="_blank">Политика конфиденциальности</a>
             <span>и</span>
-            <a href="#">Условия использования</a>
+            <a href="/Пользовательское_соглашение_block13_ru.pdf" target="_blank">Условия использования</a>
           </div>
         </form>
 
       <!-- подтверждение регистрации -->
-        <form
+        <!-- <form
           v-if="sendFormOk"
           class="js-form form-register-form"
           id="form-register-form"
@@ -82,11 +82,11 @@
 
           <div class="register-form__personal">
             <span>Входя в систему вы соглашаесть с нашими условиями</span>
-            <a href="#">Политика конфиденциальности</a>
+            <a href="/Политика_конфендициальности_block13_ru.pdf" target="_blank">Политика конфиденциальности</a>
             <span>и</span>
-            <a href="#">Условия использования</a>
+            <a href="/Пользовательское_соглашение_block13_ru.pdf" target="_blank">Условия использования</a>
           </div>
-        </form>
+        </form> -->
       </div>
     </div>
   </div>
@@ -100,7 +100,7 @@ export default {
   data() {
     return {
       saccessMessage: null,
-      sendFormOk: false,
+      // sendFormOk: false,
       code: null,
       inputs: {
         email: null,
@@ -124,22 +124,22 @@ export default {
     async sendForm() {
       await this.$store.dispatch("login/register", this.inputs)
       if (!this.error) {
-        this.sendFormOk = true;
-      } else {
-        return;
-      }
-    },
-    async acceptRegister() {
-      await this.$store.dispatch("login/acceptRegister", {
-        code: this.code,
-        email: this.inputs.email,
-      })
-      if(!this.error) {
         this.saccessMessage = `Ваш аккаунт успешно зарегестрирован`
       } else {
         return;
       }
     },
+    // async acceptRegister() {
+    //   await this.$store.dispatch("login/acceptRegister", {
+    //     code: this.code,
+    //     email: this.inputs.email,
+    //   })
+    //   if(!this.error) {
+    //     this.saccessMessage = `Ваш аккаунт успешно зарегестрирован`
+    //   } else {
+    //     return;
+    //   }
+    // },
     openLogin() {
       this.$store.commit("openLogin");
       this.$store.commit("closeRegister");
